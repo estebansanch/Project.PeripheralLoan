@@ -1,0 +1,17 @@
+{
+  "name": "peripheralloanbackend",
+  "version": "1.0.0",
+  "description": "Backend Server for Peripheral Loan with IBM Cloud system",
+  "main": "server.ts",
+  "scripts": {
+    "start": "nodemon server.ts"
+  },
+  "author": "RanchoDevs",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
