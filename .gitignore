@@ -11,7 +11,9 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+# Backend
 .env
+src/peripheralLoanBackend/ssl_certificate.arm
 
 # IDEs and editors
 .idea/
