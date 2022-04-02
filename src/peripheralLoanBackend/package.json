@@ -1,12 +1,12 @@
 {
   "name": "peripheralloanbackend",
   "version": "1.0.0",
-  "description": "Backend Server for Peripheral Loan with IBM Cloud system",
-  "main": "server.ts",
+  "description": "Peripheral Loan Backend For IBM CLOUD DB2 ",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "RanchoDevs",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
