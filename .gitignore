@@ -6,7 +6,7 @@ node_modules/
 .pnp.js
 
 .env
-ssl_certificate.arm
+DigiCertGlobalRootCA.arm
 
 # testing
 /coverage
