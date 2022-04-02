@@ -6,6 +6,7 @@ node_modules/
 .pnp.js
 
 .env
+ssl_certificate.arm
 
 # testing
 /coverage
