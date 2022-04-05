@@ -1,9 +1,28 @@
 import React from 'react'
+import '../assets/MainPageScreen.scss';
 
 export default function MainPageScreen() {
   return (
-    <div>
-        <h1>Si entre a la main page 2</h1>
+    <div className='mainPageCont'>
+      <div className='panelTitle'>
+        <h1>Panel</h1>
+      </div>
+      <div className='panelContainers'>
+        <div className='panelContainer'>
+          <div className='left'>
+
+          </div>
+          <div className='right'>
+
+          </div>
+        </div>
+        <div className='panelContainer'>
+          
+        </div>
+        <div className='panelContainer'>
+          
+        </div>
+      </div>
     </div>
   )
 }
