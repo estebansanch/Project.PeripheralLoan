@@ -6,6 +6,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import MainPageScreen from './screens/MainPageScreen';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LoginScreen />}/>
         <Route path="/landingPage" element={<LandingPageScreen />}/>
+        <Route path="/mainPage" element={<MainPageScreen />}/>
       </Routes>
     </BrowserRouter>
   );

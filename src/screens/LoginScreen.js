@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Button, TextInput} from 'carbon-components-react';
-import '../assets/LandingPageScreen.scss'
+import '../assets/LoginScreen.scss'
 
 import axios from 'axios';
 
