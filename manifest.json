@@ -1,0 +1,7 @@
+{
+"name": "ranchodevs-peripheralAPP",
+"path": ".",
+"instances": 1,
+"memory": 512,
+"timeout": 1800
+}

@@ -1,8 +1,0 @@
----
-applications:
-- name: ranchodevs-peripheralAPP
-path: .
-instances: 1
-memory: 512MB
-disk_quota: 500MB
-timeout: 1800
