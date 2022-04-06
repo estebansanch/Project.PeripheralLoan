@@ -10,7 +10,7 @@ import {
   } from '@carbon/icons-react';
 
 export default function HomePageHeader() {
-    
+
     return(
     <HeaderContainer
         render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -46,7 +46,7 @@ export default function HomePageHeader() {
                 <SideNavItems>
                 <SideNavLink
                     renderIcon={Home32}
-                    href="">
+                    href="/mainPage">
                     Panel
                 </SideNavLink>
                 <SideNavLink
@@ -55,7 +55,7 @@ export default function HomePageHeader() {
                     Recursos
                 </SideNavLink>
                 <SideNavMenu renderIcon={DotMark32} title="DEVICES">
-                    <SideNavMenuItem href="">
+                    <SideNavMenuItem href="/devices">
                     Dispositivos
                     </SideNavMenuItem>
                     <SideNavMenuItem href="">
