@@ -2,9 +2,10 @@ import React from 'react'
 import '../assets/DevicesScreen.scss';
 import CrossRedCircle from '../assets/img/Cross_red_circle.png'
 import TickGreenCircle from '../assets/img/Tick_green_circle.png'
-import LandingPageHeader from './components/LandingPageHeader/';
+import HomePageHeader from './components/HomePageHeader';
 import { 
-    Button, 
+    Button,
+    Content, 
     DataTable, 
     TableContainer, 
     TableToolbar,
@@ -307,8 +308,10 @@ const headers = [
   ];
 
   return (
-    <div className='devicesPageCont'>
-      <LandingPageHeader />
+    <>
+    <HomePageHeader />
+    <Content>
+    <div className='devicesPageCont'>    
       <div className='pageTitle'>
         <h1>Devices</h1>
       </div>
@@ -405,7 +408,8 @@ const headers = [
       );
     }}
   </DataTable>
-    </div>
-
+  </div>
+  </Content>
+</>
   )
 }
