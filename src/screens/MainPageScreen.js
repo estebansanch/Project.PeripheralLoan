@@ -20,7 +20,7 @@ export default function MainPageScreen() {
   return (
     <>
     <HomePageHeader />
-    <Content>
+  
     <div className='mainPageCont'>
       
       <div className='pageTitle'>
@@ -95,7 +95,7 @@ export default function MainPageScreen() {
         </div>
       </div>
     </div>
-    </Content>
+    
     </>
   )
 }
