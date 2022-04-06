@@ -26,7 +26,7 @@ import {
 } from 'carbon-components-react';
 
 import {
-    TrashCan, Save, Download
+    TrashCan32, Save32, Download32
   } from '@carbon/icons-react';
 
 export default function DevicesScreen() {
@@ -309,9 +309,8 @@ const headers = [
 
   return (
     <>
-    <HomePageHeader />
-    <Content>
     <div className='devicesPageCont'>    
+      <HomePageHeader />
       <div className='pageTitle'>
         <h1>Devices</h1>
       </div>
@@ -338,19 +337,19 @@ const headers = [
             <TableBatchActions {...batchActionProps}>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                renderIcon={TrashCan}
+                renderIcon={TrashCan32}
                 >
                 Delete
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                renderIcon={Save}
+                renderIcon={Save32}
                >
                 Save
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                renderIcon={Download}
+                renderIcon={Download32}
                 >
                 Download
               </TableBatchAction>
@@ -409,7 +408,6 @@ const headers = [
     }}
   </DataTable>
   </div>
-  </Content>
 </>
   )
 }

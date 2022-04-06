@@ -11,6 +11,7 @@ import DevicesScreen from './screens/DevicesScreen';
 
 function App() {
   return (
+    <div className='AppStyle'>
     <BrowserRouter>
       <Routes>
         <Route path="/loginPage" element={<LoginScreen />}/>
@@ -19,6 +20,8 @@ function App() {
         <Route path="/devices" element={<DevicesScreen />}/>
       </Routes>
     </BrowserRouter>
+    </div>
+    
   );
 }
 

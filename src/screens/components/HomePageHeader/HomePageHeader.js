@@ -6,7 +6,7 @@ import {
   Search, SideNavMenuItem, SideNavLink, Content, 
 } from 'carbon-components-react';
 import {
- Notification, UserAvatar, DotMark, Home, App
+ Notification32, UserAvatar32, DotMark32, Home32, App32
   } from '@carbon/icons-react';
 
 export default function HomePageHeader() {
@@ -32,10 +32,10 @@ export default function HomePageHeader() {
             <HeaderGlobalBar>
                 <HeaderGlobalAction
                 aria-label="Notifications">
-                <Notification />
+                <Notification32 />
                 </HeaderGlobalAction>
                 <HeaderGlobalAction aria-label="User Avatar">
-                <UserAvatar />
+                <UserAvatar32 />
                 </HeaderGlobalAction>
             </HeaderGlobalBar>
             <SideNav
@@ -45,16 +45,16 @@ export default function HomePageHeader() {
                 onOverlayClick={onClickSideNavExpand}>
                 <SideNavItems>
                 <SideNavLink
-                    renderIcon={Home}
+                    renderIcon={Home32}
                     href="">
                     Panel
                 </SideNavLink>
                 <SideNavLink
-                    renderIcon={App}
+                    renderIcon={App32}
                     href="">
                     Recursos
                 </SideNavLink>
-                <SideNavMenu renderIcon={DotMark} title="DEVICES">
+                <SideNavMenu renderIcon={DotMark32} title="DEVICES">
                     <SideNavMenuItem href="">
                     Dispositivos
                     </SideNavMenuItem>

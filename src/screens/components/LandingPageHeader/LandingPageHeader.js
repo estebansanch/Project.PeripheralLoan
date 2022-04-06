@@ -4,7 +4,7 @@ import {
   HeaderMenuButton, HeaderMenuItem, HeaderGlobalBar, HeaderGlobalAction, 
   SkipToContent, SideNav, SideNavItems, HeaderSideNavItems,
 } from 'carbon-components-react';
-import { UserAvatar } from '@carbon/icons-react';
+import { UserAvatar32 } from '@carbon/icons-react';
 
 export default function LandingPageHeader() {
  
@@ -42,7 +42,7 @@ export default function LandingPageHeader() {
           </SideNav>
           <HeaderGlobalBar>
               <HeaderGlobalAction aria-label="User Avatar" onClick={GoLogIn}>
-                  <UserAvatar size={40} />
+                  <UserAvatar32 size={40} />
               </HeaderGlobalAction>
           </HeaderGlobalBar>
         </Header>
