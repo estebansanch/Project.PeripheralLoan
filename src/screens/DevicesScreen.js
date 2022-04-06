@@ -25,7 +25,7 @@ import {
 } from 'carbon-components-react';
 
 import {
-    TrashCan32, Save32, Download32
+    TrashCan, Save, Download
   } from '@carbon/icons-react';
 
 export default function DevicesScreen() {
@@ -335,19 +335,19 @@ const headers = [
             <TableBatchActions {...batchActionProps}>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                renderIcon={TrashCan32}
+                renderIcon={TrashCan}
                 >
                 Delete
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                renderIcon={Save32}
+                renderIcon={Save}
                >
                 Save
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                renderIcon={Download32}
+                renderIcon={Download}
                 >
                 Download
               </TableBatchAction>

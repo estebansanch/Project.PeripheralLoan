@@ -13,8 +13,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<LoginScreen />}/>
-        <Route path="/landingPage" element={<LandingPageScreen />}/>
+        <Route path="/loginPage" element={<LoginScreen />}/>
+        <Route exact path="/" element={<LandingPageScreen />}/>
         <Route path="/mainPage" element={<MainPageScreen />}/>
         <Route path="/devices" element={<DevicesScreen />}/>
       </Routes>

@@ -3,7 +3,8 @@ import '../assets/MainPageScreen.scss';
 import LandingPageHeader from './components/LandingPageHeader/';
 import {Chart, ArcElement} from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
-import { Dropdown } from 'carbon-components-react';
+import { Dropdown, Content } from 'carbon-components-react';
+import HomePageHeader from './components/HomePageHeader';
 
 export default function MainPageScreen() {
 
@@ -17,8 +18,11 @@ export default function MainPageScreen() {
   const items = ['1 day', '1 week', '1 month', '3 months', '6 months', '1 year']
 
   return (
+    <>
+    <HomePageHeader />
+    <Content>
     <div className='mainPageCont'>
-      <LandingPageHeader />
+      
       <div className='pageTitle'>
         <h1>Panel</h1>
       </div>
@@ -91,6 +95,7 @@ export default function MainPageScreen() {
         </div>
       </div>
     </div>
-
+    </Content>
+    </>
   )
 }

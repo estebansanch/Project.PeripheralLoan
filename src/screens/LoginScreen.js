@@ -15,7 +15,7 @@ export default function LoginScreen() {
     .then(response => {
       console.log(response.data.data)
       if (response.data.data.length > 0){
-        window.location.href='/landingPage';
+        window.location.href='/mainPage';
       }
       else {
         setErrorLogin(true);
