@@ -1,0 +1,5 @@
+applications:
+- name: ranchodevs-peripheralAPP
+path: .
+instances: 1
+memory: 512M
