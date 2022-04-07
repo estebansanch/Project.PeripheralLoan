@@ -54,12 +54,12 @@ export default function HomePageHeader() {
                     href="">
                     Recursos
                 </SideNavLink>
-                <SideNavMenu renderIcon={DotMark32} title="DEVICES">
-                    <SideNavMenuItem href="/devices">
-                    Dispositivos
+                <SideNavMenu renderIcon={DotMark32} title="PERIPHERALS">
+                    <SideNavMenuItem href="/peripheralList">
+                    Periféricos
                     </SideNavMenuItem>
                     <SideNavMenuItem href="">
-                    Tipos de Dispositivos
+                    Tipos de Periféricos
                     </SideNavMenuItem>
                 </SideNavMenu>
                 </SideNavItems>

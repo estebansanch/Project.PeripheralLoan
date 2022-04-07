@@ -1069,6 +1069,14 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@carbon/grid@10.17.0":
+  version "10.17.0"
+  resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-10.17.0.tgz#dc220d9e2f4094255794281080058f9aa8a025ba"
+  integrity sha512-kioI884OQeW1DKMKDolEeu38zTF7aClDB7dBWMKtofyQ/swJghzTRu0re5uIUEeyTUNTrDsW1zQhfRNqwCICyQ==
+  dependencies:
+    "@carbon/import-once" "^10.4.0"
+    "@carbon/layout" "^10.15.0"
+
 "@carbon/icon-helpers@^10.10.0":
   version "10.29.0"
   resolved "https://registry.npmjs.org/@carbon/icon-helpers/-/icon-helpers-10.29.0.tgz"
@@ -1081,6 +1089,16 @@
   dependencies:
     "@carbon/icon-helpers" "^10.10.0"
     prop-types "^15.7.2"
+
+"@carbon/import-once@^10.4.0":
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-10.7.0.tgz#3e66e1308cad78272e2d9d9ea3741dd073860263"
+  integrity sha512-KoqbfzGKjO89iUPabN6zNpXpcjxgQYgpHmesZ/DXc/zeV0PyHrnAOC8Q3J0cRPf1zYpGRHN2Tbw1ttTjonzbjg==
+
+"@carbon/layout@^10.15.0":
+  version "10.37.1"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.37.1.tgz#697ac4ba0500f55163cd84e0dc200d637fd41beb"
+  integrity sha512-iX8rWc2CkFB7W7wi5NLa3pVRVb/jRI2KrVDna3FO3X3DgNz3zoRCgN+r2c+8FEhpJWeUwds5aDzTWUuTtlOT3w==
 
 "@csstools/normalize.css@*":
   version "12.0.0"

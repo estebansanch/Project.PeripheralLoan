@@ -7,7 +7,7 @@ import {
   Route,
 } from "react-router-dom";
 import MainPageScreen from './screens/MainPageScreen';
-import DevicesScreen from './screens/DevicesScreen';
+import PeripheralsScreen from './screens/PeripheralsScreen';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path="/loginPage" element={<LoginScreen />}/>
         <Route exact path="/" element={<LandingPageScreen />}/>
         <Route path="/mainPage" element={<MainPageScreen />}/>
-        <Route path="/devices" element={<DevicesScreen />}/>
+        <Route path="/peripheralList" element={<PeripheralsScreen />}/>
       </Routes>
     </BrowserRouter>
     </div>
