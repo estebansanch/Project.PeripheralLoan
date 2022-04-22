@@ -27,7 +27,7 @@ export default function AddDeviceScreen() {
                 }}
                 >
                         <Select defaultValue="placeholder-item"
-                            labelText="Please select a Device Type."
+                            labelText="Select a Device Type."
                             id="device_type"
                             size="md"
                             className='between-lines'
@@ -57,7 +57,7 @@ export default function AddDeviceScreen() {
                         </Select>
                         <Select defaultValue="placeholder-item"
                             id="brand"
-                            labelText="Please select a Brand."
+                            labelText="Select a Brand."
                             size="md"
                             className='between-lines'
                             >
@@ -81,12 +81,12 @@ export default function AddDeviceScreen() {
                             />
                         </Select>
                         <TextInput
-                            labelText="Please type the Model."
+                            labelText="Type the Model."
                             id="model"
                             className='between-lines'
                         />
                         <TextInput
-                            labelText="Please type the Serial Number."
+                            labelText="Type the Serial Number."
                             id="serial_number"
                             className='between-lines'
                         />
