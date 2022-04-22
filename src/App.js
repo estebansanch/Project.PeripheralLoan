@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import MainPageScreen from './screens/MainPageScreen';
 import PeripheralsScreen from './screens/PeripheralsScreen';
+import AddPeripheralScreen from './screens/AddPeripheralScreen';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/" element={<LandingPageScreen />}/>
         <Route path="/mainPage" element={<MainPageScreen />}/>
         <Route path="/peripheralList" element={<PeripheralsScreen />}/>
+        <Route path="/addPeripheral" element={<AddPeripheralScreen />}/>
       </Routes>
     </BrowserRouter>
     </div>
