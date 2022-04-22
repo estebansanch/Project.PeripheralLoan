@@ -1,3 +1,5 @@
+@use '@carbon/layout';
+
 .addDeviceCont {
     background-color: rgb(237, 237, 237);
     width: 100%;
@@ -12,4 +14,18 @@
     margin-left: 50px;
     margin-top: 50px;
     margin-bottom: 15px;
+}
+
+.selector {
+    margin-bottom: layout.$spacing-05;
+    height: layout.$spacing-05;
+    margin-left: layout.$spacing-05;
+}
+
+.between-lines {
+    margin-bottom: layout.$spacing-05;
+}
+
+.between-btn {
+    margin-top: layout.$spacing-05;
 }
