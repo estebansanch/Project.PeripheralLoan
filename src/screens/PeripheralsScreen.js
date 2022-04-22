@@ -376,7 +376,7 @@ const headers = [
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 
                 size="small"
-                kind="primary">
+                kind="primary" onClick={() => {window.location.href='/addPeripheral';}}>
                 Add new
               </Button>
             </TableToolbarContent>
