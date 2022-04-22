@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/" element={<LandingPageScreen />}/>
         <Route path="/mainPage" element={<MainPageScreen />}/>
         <Route path="/peripheralList" element={<PeripheralsScreen />}/>
-        <Route path="/addPeripheral" element={<AddPeripheralScreen />}/>
+        <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
       </Routes>
     </BrowserRouter>
     </div>
