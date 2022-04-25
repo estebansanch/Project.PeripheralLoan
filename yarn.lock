@@ -7510,6 +7510,11 @@ sass-loader@^12.3.0:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
+sass-mixins@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/sass-mixins/-/sass-mixins-0.13.0.tgz#c1f7361651878082a38f778016a98ee5aae7d1a7"
+  integrity sha512-DonKuKpB2NxXtrdINycnezKupU30EX0xkM83DfEGTv6w8TKUh3z8Xxm2SB8nTBN3c+rAnBS8Fz8OUotRqitYyw==
+
 sass@1.29.0:
   version "1.29.0"
   resolved "https://registry.npmjs.org/sass/-/sass-1.29.0.tgz"

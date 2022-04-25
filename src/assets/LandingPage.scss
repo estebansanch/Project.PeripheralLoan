@@ -1,0 +1,74 @@
+@import './_mixins.scss';
+@import './overrides.scss';
+
+.landPageCont { 
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-left: 50px;
+}
+
+.landing-page__banner {
+  padding-top: 60px;
+  padding-left: 16px;
+  padding-bottom: 32px * 4;
+  @include landing-page-background;
+}
+
+.landing-page__heading {
+  font-weight: 400px;
+  font-size: 32px;
+  letter-spacing: 0px;
+  line-height: 40px;
+}
+
+//Row 2
+
+.landing-page__r2 {
+  margin-top: rem(-40px);
+}
+
+.landing-page__tab-content {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  //padding-left: px;
+}
+
+.landing-page__subheading {
+  font-weight: 600px;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 28px;
+  
+}
+
+.landing-page__p {  
+  font-weight: 600px;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 28px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+  
+
+  /*@include media-breakpoint-between((320px + 1), md) {
+    max-width: 75%;
+  }*/
+}
+
+//Row 3
+
+.landing-page__r3 {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  @include landing-page-background;
+}
+
+.landing-page__label {
+  font-weight: 600px;
+  font-size: 14px;
+  letter-spacing: 0.16px;
+  line-height: 20px;
+}
