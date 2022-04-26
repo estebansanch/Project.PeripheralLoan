@@ -2,6 +2,21 @@
   text-align: center;
 }
 
+.routeNotFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.imgIbmNotFound{
+  width: 250px;
+  height: 125px;
+  margin-bottom: 25px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
