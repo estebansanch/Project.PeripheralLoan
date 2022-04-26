@@ -14,6 +14,7 @@
     "carbon-components-react": "7.25.0",
     "carbon-icons": "7.0.7",
     "chart.js": "^3.7.1",
+    "js-cookie": "^3.0.1",
     "react": "^18.0.0",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^18.0.0",

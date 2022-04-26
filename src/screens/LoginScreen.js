@@ -2,6 +2,9 @@ import React, {useState} from 'react'
 import { Button, TextInput} from 'carbon-components-react';
 import '../assets/LoginScreen.scss'
 
+import AuthApi from '../AuthApi';
+import jsCookie from 'js-cookie';
+
 import axios from 'axios';
 
 export default function LoginScreen() {
@@ -10,12 +13,16 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState(false);
 
+  const Auth = React.useContext(AuthApi)
+
+
   async function validateLogin(){
     await axios.get('http://localhost:4000/checkLogin', {params: {username: username, password: password}})
     .then(response => {
-      console.log(response.data.data)
       if (response.data.data.length > 0){
-        window.location.href='/mainPage';
+        Auth.setAuth(true)
+        jsCookie.set("user", response.data.data[0].USERNAME)
+        jsCookie.set("role", response.data.data[0].ROLE)
       }
       else {
         setErrorLogin(true);
