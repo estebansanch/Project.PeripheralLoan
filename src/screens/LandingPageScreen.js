@@ -48,8 +48,11 @@ export default function LandingPageScreen() {
                   <div className="cds--grid cds--grid--no-gutter cds--grid--full-width">
                     <div className="cds--row landing-page__tab-content">
                       <div className="cds--col-lg-16">
-                        Service hosted via IBM's Cloud Foundry.
+                        Webapp hosted on IBM's Cloud Foundry. Allowing for a quick, consistant, 
+                        reliable, serverless, and secure connection that can help easily migrate
+                        the webapp if ever needed.
                       </div>
+                      <div className="cds--col-lg-16" href="https://www.ibm.com/cloud/cloud-foundry">Click here to learn more.</div>
                     </div>
                   </div>
                 </Tab>
