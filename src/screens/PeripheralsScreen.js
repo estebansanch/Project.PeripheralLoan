@@ -2,9 +2,10 @@ import React from 'react'
 import '../assets/DevicesScreen.scss';
 import CrossRedCircle from '../assets/img/Cross_red_circle.png'
 import TickGreenCircle from '../assets/img/Tick_green_circle.png'
-import LandingPageHeader from './components/LandingPageHeader/';
+import HomePageHeader from './components/HomePageHeader';
 import { 
-    Button, 
+    Button,
+    Content, 
     DataTable, 
     TableContainer, 
     TableToolbar,
@@ -307,8 +308,9 @@ const headers = [
   ];
 
   return (
-    <div className='devicesPageCont'>
-      <LandingPageHeader />
+    <>
+    <div className='devicesPageCont'>    
+      <HomePageHeader />
       <div className='pageTitle'>
         <h1>Devices</h1>
       </div>
@@ -342,7 +344,7 @@ const headers = [
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Save32}
-               >
+              >
                 Save
               </TableBatchAction>
               <TableBatchAction
@@ -374,7 +376,7 @@ const headers = [
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 
                 size="small"
-                kind="primary">
+                kind="primary" onClick={() => {window.location.href='/peripheralAdd';}}>
                 Add new
               </Button>
             </TableToolbarContent>
@@ -405,7 +407,7 @@ const headers = [
       );
     }}
   </DataTable>
-    </div>
-
+  </div>
+</>
   )
 }
