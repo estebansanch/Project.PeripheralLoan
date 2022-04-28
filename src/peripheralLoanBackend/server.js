@@ -115,6 +115,7 @@ app.get('/devices', function(request, response){
 
 //WIP
 app.post('/NewDevice', function(request, response){
+    const { type, brand, model, serial, state } = request.query;
     ibmdb.open(cn, async function (err,conn) {
         console.log("querying")
         if (err){
@@ -122,7 +123,7 @@ app.post('/NewDevice', function(request, response){
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
-            conn.query(`INSERT INTO LNN87839.DEVICES (ID, device_type, brand, model, serial_number, state) VALUES (Default, ?, ?, ?, ?, ?)`, function (err, data) {
+            conn.query(`INSERT INTO LNN87839.DEVICES (ID, device_type, brand, model, serial_number, state) VALUES (Default, ${type}, ${brand}, ${model}, ${serial}, ${state})`, function (err, data) {
             if (err){
                 console.log(err);
                 return response.json({success:-2, message:err});
