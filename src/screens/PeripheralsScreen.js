@@ -344,7 +344,7 @@ const headers = [
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Save32}
-               >
+              >
                 Save
               </TableBatchAction>
               <TableBatchAction
@@ -376,7 +376,7 @@ const headers = [
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 
                 size="small"
-                kind="primary">
+                kind="primary" onClick={() => {window.location.href='/peripheralAdd';}}>
                 Add new
               </Button>
             </TableToolbarContent>

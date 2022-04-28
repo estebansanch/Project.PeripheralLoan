@@ -5,6 +5,7 @@
   "dependencies": {
     "@carbon/grid": "10.17.0",
     "@carbon/icons-react": "10.22.0",
+    "@carbon/layout": "^11.1.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -13,12 +14,14 @@
     "carbon-components-react": "7.25.0",
     "carbon-icons": "7.0.7",
     "chart.js": "^3.7.1",
+    "js-cookie": "^3.0.1",
     "react": "^18.0.0",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "sass": "1.29.0",
+    "sass-mixins": "^0.13.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
