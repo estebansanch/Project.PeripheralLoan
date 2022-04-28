@@ -8,6 +8,7 @@ import {
 import {
  Notification32, UserAvatar32, DotMark32, Home32, App32
   } from '@carbon/icons-react';
+import jsCookies from 'js-cookie';
 
 export default function HomePageHeader() {
 

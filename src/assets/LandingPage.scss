@@ -1,24 +1,23 @@
 @import './_mixins.scss';
 @import './overrides.scss';
 
-.landPageCont { 
+.landing-page { 
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
+  //display: flex;
+  //flex-direction: column;
+  //padding-top: 50px;
   padding-left: 50px;
+
 }
 
 .landing-page__banner {
-  padding-top: 60px;
-  padding-left: 16px;
-  padding-bottom: 32px;
-  @include landing-page-background;
+  padding-top: 82px;
+  padding-bottom: 20px;
 }
 
 .landing-page__heading {
-  font-weight: 400px;
+  font-weight:normal;
   font-size: 32px;
   letter-spacing: 0px;
   line-height: 40px;
@@ -28,6 +27,8 @@
 
 .landing-page__r2 {
   margin-top: rem(-40px);
+  background-color: #ffffff;
+  box-sizing: content-box;
 }
 
 .landing-page__tab-content {
@@ -37,11 +38,11 @@
 }
 
 .landing-page__subheading {
-  font-weight: 600px;
+  font-weight: bold;
   font-size: 20px;
   letter-spacing: 0px;
   line-height: 28px;
-  
+  margin-top: 10px;  
 }
 
 .landing-page__p {  
@@ -51,7 +52,8 @@
   line-height: 28px;
   margin-top: 24px;
   margin-bottom: 40px;
-  
+  text-align: justify;
+  text-justify:auto;
 
   /*@include media-breakpoint-between((320px + 1), md) {
     max-width: 75%;
@@ -61,14 +63,13 @@
 //Row 3
 
 .landing-page__r3 {
-  padding-top: 48px;
-  padding-bottom: 48px;
-  @include landing-page-background;
+  padding-top: 32px;
+  //padding-bottom: 48px;
 }
 
 .landing-page__label {
-  font-weight: 600px;
-  font-size: 14px;
+  font-weight:bold;
+  font-size: 16px;
   letter-spacing: 0.16px;
   line-height: 20px;
 }
