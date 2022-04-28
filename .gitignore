@@ -11,8 +11,8 @@ package-lock1.json
 package-lock2.json
 
 
-.env
-DigiCertGlobalRootCA.arm
+# .env
+# DigiCertGlobalRootCA.arm
 
 # testing
 /coverage
