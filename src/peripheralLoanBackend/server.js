@@ -27,17 +27,14 @@ ibmdb.open(cn, function (err,conn) {
     console.log("querying")
     if (err){
         //return response.json({success:-1, message:err});
-        console.log("1")
         console.log(err)
     }
     conn.query("SELECT * FROM QGJ93840.USER ", function (err, data) {
         if (err){
             //return response.json({success:-2, message:err});
-            console.log("2")
             console.log(err)
         }
         else{
-            console.log("3")
             console.log(data)
       }
     })
@@ -73,7 +70,6 @@ app.get('/users', function(request, response){
         console.log("querying")
         if (err){
             //return response.json({success:-1, message:err});
-            console.log("1")
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
@@ -86,6 +82,55 @@ app.get('/users', function(request, response){
                 conn.close(function () {
                     console.log('done');
                     return response.json({success:1, message:'Data Received!', data:data});
+                });
+            }
+          });
+        }
+    });
+});
+
+app.get('/devices', function(request, response){
+    ibmdb.open(cn, async function (err,conn) {
+        console.log("querying")
+        if (err){
+            //return response.json({success:-1, message:err});
+            console.log(err)
+            return response.json({success:-1, message:err});
+        } else {
+            conn.query(`SELECT * FROM QGJ93840.DEVICES`, function (err, data) {
+            if (err){
+                console.log(err);
+                return response.json({success:-2, message:err});
+            }
+            else{
+                conn.close(function () {
+                    console.log('done');
+                    return response.json({success:1, message:'Data Received!', data:data});
+                });
+            }
+          });
+        }
+    });
+});
+
+//WIP
+app.post('/NewDevice', function(request, response){
+    ibmdb.open(cn, async function (err,conn) {
+        console.log("querying")
+        if (err){
+            //return response.json({success:-1, message:err});
+            console.log(err)
+            return response.json({success:-1, message:err});
+        } else {
+            conn.query(`INSERT INTO LNN87839.DEVICES (ID, device_type, brand, model, serial_number, state) VALUES (Default, ?, ?, ?, ?, ?)`, function (err, data) {
+            if (err){
+                console.log(err);
+                return response.json({success:-2, message:err});
+            }
+            else{
+                conn.close(function () {
+                    console.log('done');
+                    return response.json({success:1, message:'Data Sent!', data:data});
                 });
             }
           });
