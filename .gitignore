@@ -5,8 +5,8 @@ node_modules/
 /.pnp
 .pnp.js
 
-# .env
-# DigiCertGlobalRootCA.arm
+.env
+DigiCertGlobalRootCA.arm
 
 # testing
 /coverage
