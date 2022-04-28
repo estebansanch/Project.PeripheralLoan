@@ -30,7 +30,7 @@ ibmdb.open(cn, function (err,conn) {
         console.log("1")
         console.log(err)
     }
-    conn.query("SELECT * FROM LNN87839.USER ", function (err, data) {
+    conn.query("SELECT * FROM QGJ93840.USER ", function (err, data) {
         if (err){
             //return response.json({success:-2, message:err});
             console.log("2")
@@ -52,7 +52,7 @@ app.get('/checkLogin', function(request, response){
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
-            conn.query(`SELECT * FROM LNN87839.USER WHERE USERNAME = '${username}' and PASSWORD = '${password}'`, function (err, data) {
+            conn.query(`SELECT * FROM QGJ93840.USER WHERE USERNAME = '${username}' and PASSWORD = '${password}'`, function (err, data) {
             if (err){
                 console.log(err);
                 return response.json({success:-2, message:err});
@@ -77,7 +77,7 @@ app.get('/users', function(request, response){
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
-            conn.query(`SELECT * FROM LNN87839.USER`, function (err, data) {
+            conn.query(`SELECT * FROM QGJ93840.USER`, function (err, data) {
             if (err){
                 console.log(err);
                 return response.json({success:-2, message:err});
