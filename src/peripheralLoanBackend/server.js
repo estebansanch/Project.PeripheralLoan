@@ -109,7 +109,7 @@ app.post('/newPeripheral', function(request, response){
             var params = request.body['device_params']
             var q = "INSERT INTO QGJ93840.DEVICES" +
                     " VALUES (DEFAULT, '" + params['device_type'] + "', '" + params['brand'] + "', '" +
-                    params['model'] + "', " + params['serial_number'] + ", '" + params['state'] + "')";
+                    params['model'] + "', " + params['serial_number'] + ", DEFAULT)";
             console.log(q);
             conn.query(q, function (err, data) {
             if (err){
@@ -128,13 +128,13 @@ app.post('/newPeripheral', function(request, response){
     });
 });
 
-app.post('/newPeripheralDummy', function(request, response){
-    console.log("posting")
-    params = request.body['device_params']
-    console.log(params);
-    var q = "INSERT INTO QGJ93840.DEVICES" +
-            " VALUES (DEFAULT, '" + params['device_type'] + "', '" + params['brand'] + "', '" +
-            params['model'] + "', " + params['serial_number'] + ", '" + params['state'] + "')";
-    console.log(q);
-    return response.json({success:1, message:'Dummy data is being received!'});
-});
+// app.post('/newPeripheralDummy', function(request, response){
+//     console.log("posting")
+//     params = request.body['device_params']
+//     console.log(params);
+//     var q = "INSERT INTO QGJ93840.DEVICES" +
+//             " VALUES (DEFAULT, '" + params['device_type'] + "', '" + params['brand'] + "', '" +
+//             params['model'] + "', " + params['serial_number'] + ", '" + params['state'] + "')";
+//     console.log(q);
+//     return response.json({success:1, message:'Dummy data is being received!'});
+// });
