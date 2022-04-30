@@ -17,19 +17,40 @@
 }
 
 .landing-page__heading {
-  font-weight:normal;
+  font-weight: 400;
   font-size: 32px;
   letter-spacing: 0px;
   line-height: 40px;
+  margin-bottom: 20px;
 }
 
 //Row 2
 
 .landing-page__r2 {
   margin-top: rem(-40px);
-  background-color: #ffffff;
+  margin-left: -50px;
   box-sizing: content-box;
 }
+
+.landing-page__r2__heading {
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 24px;
+  letter-spacing: 0px;
+  line-height: 40px;
+  margin-left: 50px;
+}
+
+.landing-page__r2__content {
+  background-color: #ffffff;
+}
+
+.tabBox {
+  padding-left: 55%;
+  float: right;
+  background-color: #ededed;
+}
+
 
 .landing-page__tab-content {
   padding-top: 64px;
@@ -37,16 +58,8 @@
   //padding-left: px;
 }
 
-.landing-page__subheading {
-  font-weight: bold;
-  font-size: 20px;
-  letter-spacing: 0px;
-  line-height: 28px;
-  margin-top: 10px;  
-}
-
 .landing-page__p {  
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 20px;
   letter-spacing: 0px;
   line-height: 28px;
@@ -68,7 +81,7 @@
 }
 
 .landing-page__label {
-  font-weight:bold;
+  font-weight:600;
   font-size: 16px;
   letter-spacing: 0.16px;
   line-height: 20px;
