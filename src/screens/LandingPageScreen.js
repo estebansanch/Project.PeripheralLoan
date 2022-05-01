@@ -83,12 +83,11 @@ export default function LandingPageScreen() {
             </div>
           </div>
           <Grid className="landing-page__r3">
-            <Column lg={4}>
+            <Column lg={4} className='colStack'>
               <h3 className="landing-page__label">Resources</h3>
             </Column>
-            <Column lg={4}>Help Center</Column>
-            <Column lg={4}>Contact Us</Column>
-            <Column lg={4}>Become </Column>
+            <Column lg={4} className='colStack'>Help Center</Column>
+            <Column lg={4} className='colStack'>Contact Us</Column>
           </Grid>
         </div>
       </>
