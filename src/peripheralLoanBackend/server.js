@@ -4,8 +4,13 @@ const ibmdb = require("ibm_db");
 const async = require('async');
 const cors = require('cors');
 
+const bodyParser=require('body-parser');
+
+
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = process.env.PORT
 const host = process.env.DB_HOST
@@ -22,7 +27,7 @@ app.listen(port,
 
 let cn = "DATABASE="+dbname+";HOSTNAME="+host+";PORT="+dbport+";PROTOCOL=TCPIP;UID="+user+";PWD="+password+";Security=SSL;SSLServerCertificate=DigiCertGlobalRootCA.arm;";
 
-
+/*
 ibmdb.open(cn, function (err,conn) {
     console.log("querying")
     if (err){
@@ -42,6 +47,7 @@ ibmdb.open(cn, function (err,conn) {
       }
     })
 });
+*/
 
 app.get('/checkLogin', function(request, response){
     const { username, password } = request.query;
@@ -92,3 +98,43 @@ app.get('/users', function(request, response){
         }
     });
 });
+
+app.post('/newPeripheral', function(request, response){
+    ibmdb.open(cn, async function (err,conn) {
+        console.log("posting")
+        if (err){
+            console.log(err)
+            return response.json({success:-1, message:err});
+        } else {
+            var params = request.body['device_params']
+            var q = "INSERT INTO QGJ93840.DEVICES" +
+                    " VALUES (DEFAULT, '" + params['device_type'] + "', '" + params['brand'] + "', '" +
+                    params['model'] + "', " + params['serial_number'] + ", DEFAULT)";
+            console.log(q);
+            conn.query(q, function (err, data) {
+            if (err){
+                console.log(err);
+                return response.json({success:-2, message:err});
+            }
+            else{
+                conn.close(function () {
+                    console.log('done');
+                    return response.json({success:1, message:'Data entered!'});
+                });
+            
+            }
+          });
+        }
+    });
+});
+
+// app.post('/newPeripheralDummy', function(request, response){
+//     console.log("posting")
+//     params = request.body['device_params']
+//     console.log(params);
+//     var q = "INSERT INTO QGJ93840.DEVICES" +
+//             " VALUES (DEFAULT, '" + params['device_type'] + "', '" + params['brand'] + "', '" +
+//             params['model'] + "', " + params['serial_number'] + ", '" + params['state'] + "')";
+//     console.log(q);
+//     return response.json({success:1, message:'Dummy data is being received!'});
+// });
