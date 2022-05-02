@@ -11,6 +11,13 @@ import {
 import jsCookie from 'js-cookie';
 
 export default function HomePageHeader() {
+    
+    function LogOut() {
+        jsCookie.remove('user', { path: "/", domain: "localhost" });
+        jsCookie.remove('role', { path: "/", domain: "localhost" });
+        localStorage.clear();
+        window.location.href='/';
+    }
 
     return(
     <HeaderContainer
@@ -20,7 +27,7 @@ export default function HomePageHeader() {
             <SkipToContent />
             <HeaderMenuButton
                 aria-label="Open menu"
-            isCollapsible
+                isCollapsible
                 onClick={onClickSideNavExpand}
                 isActive={isSideNavExpanded}
             />
@@ -29,19 +36,18 @@ export default function HomePageHeader() {
             </HeaderName>
             <HeaderNavigation aria-label="IBM [Platform]">
                 <Search />
-            </HeaderNavigation>
-            <HeaderGlobalBar>
+            </HeaderNavigation >
+            <HeaderGlobalBar style={{flex:6}}>
                 <HeaderGlobalAction
                 aria-label="Notifications">
                 <Notification32 />
                 </HeaderGlobalAction >
-                <HeaderGlobalAction style={{marginBottom:30}} >
-                    <UserAvatar32 />
-                    <HeaderMenu  aria-label="Account" menuLinkName=" My Account"> 
-                        <HeaderMenuItem href="#">Account Settings</HeaderMenuItem>
-                        <HeaderMenuItem onClick={jsCookie.remove('name') && jsCookie.remove('role') }>Log off</HeaderMenuItem>
-                    </HeaderMenu>
-                </HeaderGlobalAction>
+            </HeaderGlobalBar>
+            <HeaderGlobalBar style={{marginBottom:40, marginRight:20}} >
+                <HeaderMenu  aria-label="Account" menuLinkName=" My Account"> 
+                    <HeaderMenuItem href="#">Account Settings</HeaderMenuItem>
+                    <HeaderMenuItem onClick={LogOut}>Log off</HeaderMenuItem>
+                </HeaderMenu>
             </HeaderGlobalBar>
             <SideNav
                 aria-label="Side navigation"
