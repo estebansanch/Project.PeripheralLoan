@@ -5,11 +5,6 @@ node_modules/
 /.pnp
 .pnp.js
 
-package1.json
-package2.json
-package-lock1.json
-package-lock2.json
-
 
 # .env
 # DigiCertGlobalRootCA.arm
