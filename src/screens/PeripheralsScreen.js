@@ -22,7 +22,8 @@ import {
     TableBatchAction,
     TableBatchActions,
     TableSelectAll,
-    TableSelectRow
+    TableSelectRow,
+    Pagination
 } from 'carbon-components-react';
 
 import {
@@ -403,6 +404,38 @@ const headers = [
               ))}
             </TableBody>
           </Table>
+          <Pagination
+            backwardText="Previous page"
+            forwardText="Next page"
+            itemsPerPageText="Items per page:"
+            onChange={function noRefCheck(){}}
+            page={1}
+            pageSize={10}
+            pageSizes={[
+              {
+                text: 'Ten',
+                value: 10
+              },
+              {
+                text: 'Twenty',
+                value: 20
+              },
+              {
+                text: 'Thirty',
+                value: 30
+              },
+              {
+                text: 'Forty',
+                value: 40
+              },
+              {
+                text: 'Fifty',
+                value: 50
+              }
+            ]}
+            size="md"
+            totalItems={103}
+          />
         </TableContainer>
       );
     }}
