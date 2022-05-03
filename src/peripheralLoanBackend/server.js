@@ -128,7 +128,12 @@ app.post('/newPeripheral', function(request, response){
     });
 });
 
-app.get('/getDevices', function(request, response){
+app.post('/getDevices', function(request, response){
+    var params = request.body
+    var limit = params['limit']
+    var offset = (params['page']-1) * limit
+    // var limit = 10
+    // var offset = (1-1) * limit
     ibmdb.open(cn, async function (err,conn) {
         console.log("querying")
         if (err){
@@ -137,8 +142,8 @@ app.get('/getDevices', function(request, response){
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
-            conn.query(`SELECT * FROM QGJ93840.DEVICES`, function (err, data) {
-            if (err){
+            conn.query("SELECT * FROM QGJ93840.DEVICES LIMIT "+ offset + "," + limit, function (err, data) {
+                if (err){
                 console.log(err);
                 return response.json({success:-2, message:err});
             }
