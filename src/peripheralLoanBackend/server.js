@@ -149,8 +149,35 @@ app.post('/getDevices', function(request, response){
             }
             else{
                 conn.close(function () {
+                    console.log("Using query: SELECT * FROM QGJ93840.DEVICES LIMIT "+ offset + "," + limit)
                     console.log('done');
                     return response.json({success:1, message:'Data Received!', data:data});
+                });
+            }
+          });
+        }
+    });
+});
+
+app.get('/countDevices', function(request, response){
+    ibmdb.open(cn, async function (err,conn) {
+        console.log("querying")
+        if (err){
+            //return response.json({success:-1, message:err});
+            console.log("1")
+            console.log(err)
+            return response.json({success:-1, message:err});
+        } else {
+            conn.query("SELECT COUNT(*) FROM QGJ93840.DEVICES", function (err, data) {
+                if (err){
+                console.log(err);
+                return response.json({success:-2, message:err});
+            }
+            else{
+                conn.close(function () {
+                    console.log('done');
+                    console.log(data)
+                    return response.json({success:1, message:'Data Received!', data:{"count": data[0]["1"]}});
                 });
             }
           });
