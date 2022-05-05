@@ -4,8 +4,13 @@ const ibmdb = require("ibm_db");
 const async = require('async');
 const cors = require('cors');
 
+const bodyParser=require('body-parser');
+
+
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = process.env.PORT
 const host = process.env.DB_HOST
@@ -27,18 +32,22 @@ ibmdb.open(cn, function (err,conn) {
     console.log("querying")
     if (err){
         //return response.json({success:-1, message:err});
+        console.log("1")
         console.log(err)
     }
     conn.query("SELECT * FROM QGJ93840.USER ", function (err, data) {
         if (err){
             //return response.json({success:-2, message:err});
+            console.log("2")
             console.log(err)
         }
         else{
+            console.log("3")
             console.log(data)
       }
     })
 });
+
 
 app.get('/checkLogin', function(request, response){
     const { username, password } = request.query;
@@ -70,6 +79,7 @@ app.get('/users', function(request, response){
         console.log("querying")
         if (err){
             //return response.json({success:-1, message:err});
+            console.log("1")
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
@@ -89,21 +99,57 @@ app.get('/users', function(request, response){
     });
 });
 
-app.get('/devices', function(request, response){
+app.post('/newPeripheral', function(request, response){
     ibmdb.open(cn, async function (err,conn) {
-        console.log("querying")
+        console.log("posting")
         if (err){
-            //return response.json({success:-1, message:err});
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
-            conn.query(`SELECT * FROM QGJ93840.DEVICES`, function (err, data) {
+            var params = request.body['device_params']
+            var q = "INSERT INTO QGJ93840.DEVICES" +
+                    " VALUES (DEFAULT, '" + params['device_type'] + "', '" + params['brand'] + "', '" +
+                    params['model'] + "', " + params['serial_number'] + ", DEFAULT, DEFAULT, DEFAULT, DEFAULT )";
+            console.log(q);
+            conn.query(q, function (err, data) {
             if (err){
                 console.log(err);
                 return response.json({success:-2, message:err});
             }
             else{
                 conn.close(function () {
+                    console.log('done');
+                    return response.json({success:1, message:'Data entered!'});
+                });
+            
+            }
+          });
+        }
+    });
+});
+
+app.post('/getDevices', function(request, response){
+    var params = request.body
+    var limit = params['limit']
+    var offset = (params['page']-1) * limit
+    // var limit = 10
+    // var offset = (1-1) * limit
+    ibmdb.open(cn, async function (err,conn) {
+        console.log("querying")
+        if (err){
+            //return response.json({success:-1, message:err});
+            console.log("1")
+            console.log(err)
+            return response.json({success:-1, message:err});
+        } else {
+            conn.query("SELECT * FROM QGJ93840.DEVICES LIMIT "+ offset + "," + limit, function (err, data) {
+                if (err){
+                console.log(err);
+                return response.json({success:-2, message:err});
+            }
+            else{
+                conn.close(function () {
+                    console.log("Using query: SELECT * FROM QGJ93840.DEVICES LIMIT "+ offset + "," + limit)
                     console.log('done');
                     return response.json({success:1, message:'Data Received!', data:data});
                 });
@@ -113,25 +159,25 @@ app.get('/devices', function(request, response){
     });
 });
 
-//WIP
-app.post('/NewDevice', function(request, response){
-    const { type, brand, model, serial, state } = request.query;
+app.get('/countDevices', function(request, response){
     ibmdb.open(cn, async function (err,conn) {
         console.log("querying")
         if (err){
             //return response.json({success:-1, message:err});
+            console.log("1")
             console.log(err)
             return response.json({success:-1, message:err});
         } else {
-            conn.query(`INSERT INTO QGJ93840.DEVICES (ID, device_type, brand, model, serial_number, state) VALUES (Default, ${type}, ${brand}, ${model}, ${serial}, ${state})`, function (err, data) {
-            if (err){
+            conn.query("SELECT COUNT(*) FROM QGJ93840.DEVICES", function (err, data) {
+                if (err){
                 console.log(err);
                 return response.json({success:-2, message:err});
             }
             else{
                 conn.close(function () {
                     console.log('done');
-                    return response.json({success:1, message:'Data Sent!', data:data});
+                    console.log(data)
+                    return response.json({success:1, message:'Data Received!', data:{"count": data[0]["1"]}});
                 });
             }
           });
