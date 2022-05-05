@@ -1,34 +1,61 @@
 @import './_mixins.scss';
 @import './overrides.scss';
 
-.landPageCont { 
+.landing-page { 
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
+  //display: flex;
+  //flex-direction: column;
+  //padding-top: 50px;
   padding-left: 50px;
+  background-image: url('./img/ibmBackground0.png');
+  background-size: contain;
+  color:#ffffff;
 }
 
 .landing-page__banner {
-  padding-top: 60px;
-  padding-left: 16px;
-  padding-bottom: 32px;
-  @include landing-page-background;
+  padding-top: 82px;
+  padding-bottom: 20px;
 }
 
 .landing-page__heading {
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 32px;
   letter-spacing: 0px;
   line-height: 40px;
+  margin-bottom: 20px;
 }
 
 //Row 2
 
 .landing-page__r2 {
   margin-top: rem(-40px);
+  //margin-left: -50px;
+  margin-right: 50px;;
+  box-sizing: content-box;
 }
+
+.landing-page__r2__heading {
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 24px;
+  letter-spacing: 0px;
+  line-height: 40px;
+  margin-left: 50px;
+}
+
+.landing-page__r2__content {
+  background-color: #ffffff;
+  color: #161616;
+  opacity: 80%;
+}
+
+.tabBox {
+  padding-left: 66%;
+  float: right;
+  background-color: #ededed;
+}
+
 
 .landing-page__tab-content {
   padding-top: 64px;
@@ -36,22 +63,15 @@
   //padding-left: px;
 }
 
-.landing-page__subheading {
-  font-weight: 600px;
-  font-size: 20px;
-  letter-spacing: 0px;
-  line-height: 28px;
-  
-}
-
 .landing-page__p {  
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 20px;
   letter-spacing: 0px;
   line-height: 28px;
   margin-top: 24px;
   margin-bottom: 40px;
-  
+  text-align: justify;
+  text-justify:auto;
 
   /*@include media-breakpoint-between((320px + 1), md) {
     max-width: 75%;
@@ -61,14 +81,19 @@
 //Row 3
 
 .landing-page__r3 {
-  padding-top: 48px;
-  padding-bottom: 48px;
-  @include landing-page-background;
+  padding-top: 32px;
+  padding-left: 10%;
+  //padding-bottom: 48px;
+  display: flex;
 }
 
 .landing-page__label {
-  font-weight: 600px;
-  font-size: 14px;
+  font-weight:600;
+  font-size: 16px;
   letter-spacing: 0.16px;
   line-height: 20px;
+}
+
+.colStack{
+  flex: 33%;
 }

@@ -2,14 +2,15 @@ import React from 'react';
 import {
   Header, HeaderContainer, HeaderName, HeaderNavigation,
   HeaderMenuButton, HeaderMenuItem, HeaderGlobalBar, HeaderGlobalAction, 
-  SkipToContent, SideNav, SideNavItems, HeaderSideNavItems,
+  SkipToContent, SideNav, SideNavItems, HeaderSideNavItems, HeaderMenu, HeaderPanel,
+  Switcher, SwitcherItem, SwitcherDivider
 } from 'carbon-components-react';
 import { UserAvatar32 } from '@carbon/icons-react';
 
 export default function LandingPageHeader() {
  
-  function GoLogIn() {
-    window.location.href='/loginPage';
+  function action() {
+    //window.location.href='/loginPage';
   }
 
   return(
@@ -27,7 +28,7 @@ export default function LandingPageHeader() {
           </HeaderName>
           <HeaderNavigation aria-label="Carbon Tutorial">
             <HeaderMenuItem href="/">Home</HeaderMenuItem>
-            <HeaderMenuItem href="LandWorks">How it Works</HeaderMenuItem>
+            <HeaderMenuItem href="LandWorks">How it Works</HeaderMenuItem>  
           </HeaderNavigation>
           <SideNav
             aria-label="Side navigation"
@@ -40,11 +41,9 @@ export default function LandingPageHeader() {
               </HeaderSideNavItems>
             </SideNavItems>
           </SideNav>
-          <HeaderGlobalBar>
-              <HeaderGlobalAction aria-label="User Avatar" onClick={GoLogIn}>
-                  <UserAvatar32 size={40} />
-              </HeaderGlobalAction>
-          </HeaderGlobalBar>
+          <HeaderGlobalBar style={{marginBottom:30}}>
+          <HeaderMenuItem href="/loginPage">Log In</HeaderMenuItem>
+          </HeaderGlobalBar>         
         </Header>
       )}
     />)
