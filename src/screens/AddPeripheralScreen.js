@@ -9,9 +9,40 @@ import {
     SelectItem
 } from 'carbon-components-react';
 
+import axios from 'axios';
+
 
 //Uninstall @carbon/layout if it doesn't compile
 export default function AddDeviceScreen() {
+    var dummy_state = {
+        "device_params": {
+            "device_type": "",
+            "brand": "",
+            "model": "",
+            "serial_number": "",
+            "state": ""
+        }
+    }
+    function handleInputChange(event){
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        dummy_state["device_params"][name] = value
+        console.log(dummy_state)
+    };
+
+    async function newPeripheralDummy(){
+        await axios.post('http://localhost:4000/newPeripheral', dummy_state)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+          console.log("Request attempt failed")
+          console.log(error);
+        })
+    };
+    
     return(
         <>
         <div className='addDeviceCont'> 
@@ -31,6 +62,8 @@ export default function AddDeviceScreen() {
                             id="device_type"
                             size="md"
                             className='between-lines'
+                            name="device_type"
+                            onChange={handleInputChange}
                             >
                             <SelectItem
                                 disabled
@@ -60,6 +93,8 @@ export default function AddDeviceScreen() {
                             labelText="Select a Brand."
                             size="md"
                             className='between-lines'
+                            name="brand"
+                            onChange={handleInputChange}
                             >
                             <SelectItem
                                 disabled
@@ -84,14 +119,19 @@ export default function AddDeviceScreen() {
                             labelText="Type the Model."
                             id="model"
                             className='between-lines'
+                            name="model"
+                            onChange={handleInputChange}
                         />
                         <TextInput
                             labelText="Type the Serial Number."
                             id="serial_number"
                             className='between-lines'
+                            name="serial_number"
+                            onChange={handleInputChange}
                         />
                         <Button
                         id="add_peripheral"
+                        onClick={newPeripheralDummy}
                         className='between-btn'>
                             Submit
                         </Button>
@@ -99,4 +139,5 @@ export default function AddDeviceScreen() {
         </div>
         </>
     )
+    
 }

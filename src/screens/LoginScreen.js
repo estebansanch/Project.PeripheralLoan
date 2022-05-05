@@ -34,13 +34,19 @@ export default function LoginScreen() {
     })
   }
 
+  const handleKeypress = (e) => {
+  if (e.key === 'Enter') {
+    validateLogin();
+  }
+};
+
   return (
     <div className='mainPage'>
         <div className='logInBox'>
             <img src="https://myleanacademy.com/wp-content/uploads/2020/01/logo-ibm-png-ibm-logo-png-4464.png" alt="IBM Logo" className='imgIbm'/>
             <p className='titleLogin'>Log-In With Your IBM Credentials</p>
-            <TextInput type="text" labelText="Email Address" className='inputField' value={username} onChange={e => setUsername(e.target.value)}/>
-            <TextInput type="password" labelText="Password" className='inputField' value={password} onChange={e => setPassword(e.target.value)}/>
+            <TextInput type="text" labelText="Email Address" className='inputField' value={username} onKeyPress={handleKeypress} onChange={e => setUsername(e.target.value)}/>
+            <TextInput type="password" labelText="Password" className='inputField' value={password} onKeyPress={handleKeypress} onChange={e => setPassword(e.target.value)}/>
             {errorLogin === true ? (
               <p className='errorMessage'>Your credentials are not valid, try again</p>
             ) : (
