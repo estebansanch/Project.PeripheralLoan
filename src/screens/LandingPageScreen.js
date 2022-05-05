@@ -89,6 +89,7 @@ export default function LandingPageScreen() {
             <Column lg={4} className='colStack'>Help Center</Column>
             <Column lg={4} className='colStack'>Contact Us</Column>
           </Grid>
+
         </div>
       </>
     );
