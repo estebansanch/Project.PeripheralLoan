@@ -13,8 +13,8 @@ import jsCookie from 'js-cookie';
 export default function HomePageHeader() {
     
     function LogOut() {
-        jsCookie.remove('user', { path: "/", domain: "localhost" });
-        jsCookie.remove('role', { path: "/", domain: "localhost" });
+        jsCookie.remove('user', { path: "/"});
+        jsCookie.remove('role', { path: "/"});
         localStorage.clear();
         window.location.href='/';
     }
@@ -46,7 +46,7 @@ export default function HomePageHeader() {
             <HeaderGlobalBar style={{marginBottom:40, marginRight:20}} >
                 <HeaderMenu  aria-label="Account" menuLinkName=" My Account"> 
                     <HeaderMenuItem href="#">Account Settings</HeaderMenuItem>
-                    <HeaderMenuItem onClick={LogOut}>Log off</HeaderMenuItem>
+                    <HeaderMenuItem onClick={LogOut}>Log out</HeaderMenuItem>
                 </HeaderMenu>
             </HeaderGlobalBar>
             <SideNav
