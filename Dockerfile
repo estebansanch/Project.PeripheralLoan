@@ -3,5 +3,5 @@ FROM node:12-alpine
 WORKDIR /src
 COPY . .
 RUN yarn install --production
-CMD ["yarn start"]
+ENTRYPOINT ["yarn start"]
 EXPOSE 3000
