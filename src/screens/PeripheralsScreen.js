@@ -28,7 +28,7 @@ import {
 } from 'carbon-components-react';
 
 import {
-    TrashCan32, Save32, Download32
+    TrashCan32, Save32, Download32, ShoppingCart32
   } from '@carbon/icons-react';
 
 export default function DevicesScreen() {
@@ -253,6 +253,12 @@ export default function DevicesScreen() {
         <Button>Hola</Button>
       </div>
 */
+
+async function addToList(objects) {
+
+  console.log("Se activo y se mando algo", objects)
+
+}
   
 const headers = [
     {
@@ -320,21 +326,10 @@ const headers = [
                 <TableBatchActions {...batchActionProps}>
                   <TableBatchAction
                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                    renderIcon={TrashCan32}
+                    renderIcon={ShoppingCart32}
+                    onClick={() => addToList(selectedRows)}
                     >
-                    Delete
-                  </TableBatchAction>
-                  <TableBatchAction
-                    tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                    renderIcon={Save32}
-                  >
-                    Save
-                  </TableBatchAction>
-                  <TableBatchAction
-                    tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                    renderIcon={Download32}
-                    >
-                    Download
+                    Add to list
                   </TableBatchAction>
                 </TableBatchActions>
                 <TableToolbarContent
