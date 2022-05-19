@@ -4,6 +4,7 @@ import CrossRedCircle from '../assets/img/Cross_red_circle.png'
 import TickGreenCircle from '../assets/img/Tick_green_circle.png'
 import HomePageHeader from './components/HomePageHeader';
 import axios from 'axios';
+import jsCookie from 'js-cookie';
 import { 
     Button,
     Content, 
@@ -28,7 +29,7 @@ import {
 } from 'carbon-components-react';
 
 import {
-    TrashCan32, Save32, Download32
+    TrashCan32, Save32, Download32, ShoppingCart32
   } from '@carbon/icons-react';
 
 export default function DevicesScreen() {
@@ -95,6 +96,7 @@ export default function DevicesScreen() {
                 acceptedCond: response.data.data[i].conditions_accepted ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+                deviceStatus: response.data.data[i].device_state,
                 button: <Button>Log Device Output</Button>,
               }
               array_peripherals.push(peripheral);
@@ -202,6 +204,7 @@ export default function DevicesScreen() {
                 acceptedCond: response.data.data[i].conditions_accepted ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+                deviceStatus: response.data.data[i].device_state,
                 button: <Button>Log Device Output</Button>,
               }
               array_peripherals.push(peripheral);
@@ -253,6 +256,94 @@ export default function DevicesScreen() {
         <Button>Hola</Button>
       </div>
 */
+
+async function addToList(objects) {
+  setTimeout(async() => {
+    try {
+      console.log("tamaño de objectos que se mando", objects.length)
+      console.log("Se activo y se mando algo", objects)
+      const paramsCheckAvailability = []
+      for (var i = 0; i < objects.length; i++){
+        let currentJson = {
+          "device_id": objects[i].id 
+        }
+        paramsCheckAvailability.push(currentJson)
+      }
+      console.log("params Check Device Availability", paramsCheckAvailability)
+      await axios.post('http://localhost:4000/checkDeviceAvailability', paramsCheckAvailability)
+      .then(response => {
+        setTimeout(async() => {
+          try {
+
+            console.log("send request worked")
+            console.log(response)
+            console.log("Peripherals not available", response.data.data.unavailable)
+            var unavailablePeripherals = ""
+            for (var i = 0; i < response.data.data.unavailable.length; i++){
+              if (i == response.data.data.unavailable.length - 1 || response.data.data.unavailable.length == 1){
+                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable[i]}`
+              } else {
+                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable[i]}` + ', '
+              }
+            }
+            var availablePeripherals = ""
+            for (var i = 0; i < response.data.data.available.length; i++){
+              if (i == response.data.data.available.length - 1 || response.data.data.available.length == 1){
+                availablePeripherals = availablePeripherals + `${response.data.data.available[i]}`
+              } else {
+                availablePeripherals = availablePeripherals + `${response.data.data.available[i]}` + ', '
+              }
+            }
+            console.log("unavailable devices", unavailablePeripherals)
+            if (unavailablePeripherals !== ""){
+              alert("Peripherals " + unavailablePeripherals + " are not available")
+            }
+            
+            const userID = jsCookie.get("id");
+            const paramsNewRequest = []
+            if (response.data.data.available.length !== 0){
+              for (var i = 0; i < response.data.data.available.length; i++){
+                let currentJson = {
+                  "user_id": userID,
+                  "device_id": response.data.data.available[i]
+                }
+                paramsNewRequest.push(currentJson)
+              }
+              console.log("params Send Request", paramsNewRequest)
+              await axios.post('http://localhost:4000/newRequest', paramsNewRequest)
+              .then(response => {
+                console.log("send request worked")
+                console.log(response)
+                if (availablePeripherals !== ""){
+                  alert("Peripherals " + availablePeripherals + " got requested")
+                }
+                else {
+                  alert("Any device selected got requested")
+                }
+                window.location.reload()
+              })
+              .catch(error => {
+                console.log("Request attempt to get check availability failed")
+                console.log(error);
+              })
+            }
+
+          } catch(err) {
+            console.log(err)
+          }
+        })
+
+      })
+      .catch(error => {
+        console.log("Request attempt to get check availability failed")
+        console.log(error);
+      })
+    } catch(err) {
+      console.log(err)
+    }
+  })
+
+}
   
 const headers = [
     {
@@ -282,6 +373,10 @@ const headers = [
     {
         key: 'securityAutorization',
         header: 'Secutiry Autorization',
+    },
+    {
+        key: 'deviceStatus',
+        header: 'Device Availability Status'
     },
     {
         key: 'button',
@@ -320,21 +415,10 @@ const headers = [
                 <TableBatchActions {...batchActionProps}>
                   <TableBatchAction
                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                    renderIcon={TrashCan32}
+                    renderIcon={ShoppingCart32}
+                    onClick={() => addToList(selectedRows)}
                     >
-                    Delete
-                  </TableBatchAction>
-                  <TableBatchAction
-                    tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                    renderIcon={Save32}
-                  >
-                    Save
-                  </TableBatchAction>
-                  <TableBatchAction
-                    tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
-                    renderIcon={Download32}
-                    >
-                    Download
+                    Add to list
                   </TableBatchAction>
                 </TableBatchActions>
                 <TableToolbarContent
