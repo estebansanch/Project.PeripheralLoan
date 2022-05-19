@@ -33,7 +33,7 @@ export default function LandingPageScreen() {
           <div className="landing-page__log-in">
             <h2 className="landing-page__log-in__heading">Log In To Request A Loan</h2>
             <p> Click the button below to log in using your IBM credentials.</p>
-            <Button>Log In</Button>
+            <Button className='landing-page__log-in__button' href="/loginPage">Log In</Button>
           </div>
           <div className="landing-page__r2">
           <h2 className="landing-page__r2__heading">Powered by IBM Technology</h2>
