@@ -26,6 +26,8 @@ import {
     TableSelectRow,
     Pagination } from 'carbon-components-react';
 
+
+
 export default function InfoScreen(){
     //const [isLoaded, setIsLoaded] = useState(false);
     // const [devices, setDevice] = useState(null)
@@ -40,7 +42,7 @@ export default function InfoScreen(){
     //         //setPages(Math.ceil(count / limit))
     
     //         var params = {
-    //             "device id": device_id,
+    //             "deviceID": device_id,
     //             "page": page
     //         }
     //         console.log("params:", params)
@@ -50,7 +52,7 @@ export default function InfoScreen(){
     //             console.log("length of data", response.data.data.length)
     //             let length_data = response.data.data.length;
     //             var array_peripherals = []
-    //             for (var i = device_id; i < length_data; i++){
+    //             for (var i = device_id){
     //               console.log(response.data.data[i].ID)
     //               var peripheral = {
     //                 id: response.data.data[i].ID,
@@ -128,10 +130,29 @@ export default function InfoScreen(){
                   <li>1209524707</li>
                 </ul>
               </div>
-
-
             </div>
           </div>
+
+          <div className='peripheralStateBox'>
+            <div className='stateList'>
+              <div className='titleStateCol'>
+                <ul>
+                  <li>Condición</li>
+                  <li>Disponibilidad</li>
+                  <li>Autorización</li>
+                </ul>
+              </div>
+              <div className='stateDescCol'>
+                <ul>
+                  <li>Aceptable</li>
+                  <li>En Campus</li>
+                  <li>Autorizado</li>
+                </ul>
+              </div>
+            </div>
+            <Button className='Request'>Request a Loan</Button>
+          </div>
+
         </div>
       </div>
       </>

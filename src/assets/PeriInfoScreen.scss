@@ -1,3 +1,4 @@
+//Universal Styles
 .infoPageCont{
     background-color: rgb(237, 237, 237);
     width: 100%;
@@ -8,22 +9,32 @@
     padding-left: 100px;
 }
 
+li{
+    margin-top: 10px;
+    font-size: small;
+}
+
 .summarizedContent {
     display: flex;
     margin-top: 5%;
+    margin-left: 50px;
 }
 
+//Photo Section
 .imageBox{
-    margin-right: 50px;;
+    margin-right: 50px;
 }
 
-.peripheralBanner {
+
+//Spec Section
+.peripheralBanner h2{
     padding-bottom: 5px;
     border-bottom: 2px solid black;
 }
 
-.summaryBox{
-    flex: 10%;
+.SummaryBox{
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .peripheralSum{
@@ -34,4 +45,22 @@
 .titleCol {
     margin-right: 5px;
     font-weight: 600;
+}
+
+//Conditon Section
+.peripheralStateBox{
+    margin-left:50px;
+}
+
+.stateList{
+    display: flex;
+}
+
+.titleStateCol{
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.Request{
+    margin-top: 10px;
 }
