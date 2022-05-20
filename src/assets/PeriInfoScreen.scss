@@ -4,7 +4,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 100px;
     padding-left: 100px;
 }
 
@@ -13,7 +13,25 @@
     margin-top: 5%;
 }
 
-.imagebox{
-    margin-right: 30px;
-    flex: 20%;
+.imageBox{
+    margin-right: 50px;;
+}
+
+.peripheralBanner {
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.summaryBox{
+    flex: 10%;
+}
+
+.peripheralSum{
+    padding-top: 45px;
+    display: flex;
+}
+
+.titleCol {
+    margin-right: 5px;
+    font-weight: 600;
 }

@@ -84,14 +84,14 @@ export default function InfoScreen(){
 
 
 //Cambia la imagen según instrucción
-    let imageURL = "..assets/img/test.png";
+    let imageURL = "../assets/img/monitor.png";
 
     // if (deviceType == "monitor")
-    //   imageURL = "..assets/img/monitor.jpg";
+    //   imageURL = "../assets/img/monitor.jpg";
     // else if (deviceType == "headphone")
-    //   imageURL = "..assets/img/headphones.jpg";
+    //   imageURL = "../assets/img/headphones.jpg";
     // else
-    //   imageURL = "..assets/img/keyboard.jpg";
+    //   imageURL = "../assets/img/keyboard.jpg";
 
 
     return(
@@ -101,7 +101,8 @@ export default function InfoScreen(){
         <div className='summarizedContent'>
 
           <div className='imageBox'>
-            <img className='PeripheralPhoto' src={imageURL}/>
+            <img src="https://www.pngkey.com/png/detail/492-4926560_monitor-monitr-fotoraf-png.png" 
+            id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
           </div>
           
           <div className='SummaryBox'>
@@ -111,10 +112,24 @@ export default function InfoScreen(){
             </div>
 
             <div className='peripheralSum'>
-              <ul>
-                <li><h5>Tipo de Periférico</h5> lo </li>
-                <li><h5></h5></li>
-              </ul>
+              <div className='titleCol'>
+                <ul>
+                  <li>Tipo de Dispositivo</li>
+                  <li>Marca</li>
+                  <li>Modelo</li>
+                  <li>Número de Serial</li>
+                </ul>
+              </div>
+              <div className='descCol'>
+                <ul>
+                  <li>Monitor</li>
+                  <li>SamsLGPhillips</li>
+                  <li>72050AVHDDP</li>
+                  <li>1209524707</li>
+                </ul>
+              </div>
+
+
             </div>
           </div>
         </div>
