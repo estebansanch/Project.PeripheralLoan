@@ -64,9 +64,9 @@ const Routing = () => {
       <Route path="/peripheralAdd" element={<ProtectedRoute />}>
         <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
       </Route>
-      {/* <Route path="/info" element={<ProtectedRoute />}> */}
+      <Route path="/info" element={<ProtectedRoute />}>
         <Route path="/info" element={<PeriInfoScreen />} />
-      {/* </Route> */}
+      </Route>
       <Route path="*" element={<RouteNotFound />}/>
     </Routes>
   )
