@@ -32,12 +32,6 @@ import {
     TrashCan32, Save32, Download32, ShoppingCart32
   } from '@carbon/icons-react';
 
-function openInfo(id) {
-  var deviceID = id;
-  module.exports = deviceID;
-  window.location.href='/loginPage';
-}
-
 export default function DevicesScreen() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [count, setCount] = useState(0)
@@ -46,7 +40,11 @@ export default function DevicesScreen() {
   const [current_page, setCurrentPage] = useState(1)
   const [devices, setDevices] = useState(null)
 
-  
+  function openInfo(id) {
+  // var deviceID = id;
+  // module.exports = deviceID;
+  window.location.href='/info';
+}
   /*
   function update_limit(num){
     //console.log("sending num:", num)
@@ -211,7 +209,7 @@ export default function DevicesScreen() {
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
-                button: <Button onClick={openInfo(id)}>Info</Button>,
+                button: <Button onClick={openInfo} >Info</Button>,
               }
               array_peripherals.push(peripheral);
             }
