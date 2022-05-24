@@ -3,6 +3,7 @@ import '../assets/PeriInfoScreen.scss';
 import CrossRedCircle from '../assets/img/Cross_red_circle.png'
 import TickGreenCircle from '../assets/img/Tick_green_circle.png'
 import HomePageHeader from './components/HomePageHeader';
+//import deviceID from './PeripheralsScreen';
 import axios from 'axios';
 import { 
     Button,
