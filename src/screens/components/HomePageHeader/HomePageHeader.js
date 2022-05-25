@@ -43,9 +43,9 @@ export default function HomePageHeader() {
                 <Notification32 />
                 </HeaderGlobalAction >
             </HeaderGlobalBar>
-            <HeaderGlobalBar style={{marginBottom:40, marginRight:20}} >
-                <HeaderMenu  aria-label="Account" menuLinkName=" My Account"> 
-                    <HeaderMenuItem href="#">Account Settings</HeaderMenuItem>
+            <HeaderGlobalBar >
+                <HeaderMenu style={{marginRight:20, borderWidth:40}} aria-label="Account" menuLinkName=" My Account"> 
+                    <HeaderMenuItem style={{marginTop:40}} href="#">Account Settings</HeaderMenuItem>
                     <HeaderMenuItem onClick={LogOut}>Log out</HeaderMenuItem>
                 </HeaderMenu>
             </HeaderGlobalBar>

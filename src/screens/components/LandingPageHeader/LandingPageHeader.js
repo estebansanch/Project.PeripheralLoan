@@ -26,7 +26,7 @@ export default function LandingPageHeader() {
           <HeaderName href="/" prefix="IBM">
             Peripheral Loan
           </HeaderName>
-          <HeaderNavigation aria-label="Carbon Tutorial">
+          {/* <HeaderNavigation aria-label="Carbon Tutorial">
             <HeaderMenuItem href="/">Home</HeaderMenuItem>
             <HeaderMenuItem href="LandWorks">How it Works</HeaderMenuItem>  
           </HeaderNavigation>
@@ -43,7 +43,7 @@ export default function LandingPageHeader() {
           </SideNav>
           <HeaderGlobalBar style={{marginBottom:30}}>
           <HeaderMenuItem href="/loginPage">Log In</HeaderMenuItem>
-          </HeaderGlobalBar>         
+          </HeaderGlobalBar>          */}
         </Header>
       )}
     />)

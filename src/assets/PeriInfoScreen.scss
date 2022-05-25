@@ -1,0 +1,74 @@
+//Universal Styles
+.infoPageCont{
+    min-width: 1920px;
+    max-width: fit-content;
+    background-color: rgb(237, 237, 237);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+li{
+    margin-bottom: 32px;
+    font-size: 24px;
+}
+
+.summarizedContent {
+    display: flex;
+    margin-top: 5%;
+    margin-left: 250px;
+}
+
+//Photo Section
+.imageBox{
+    margin-right: 60px;
+}
+
+
+//Spec Section
+.SummaryBox{
+    margin-left: 60px;
+    margin-right: 120px;
+}
+
+.peripheralBanner h1{
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.peripheralBanner h2{
+    font-size: 32px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.peripheralSum{
+    padding-top: 45px;
+    display: flex;
+}
+
+.titleCol {
+    margin-right: 5px;
+    font-weight: 600;
+}
+
+//Conditon Section
+.peripheralStateBox{
+    margin-left:50px;
+}
+
+.stateList{
+    display: flex;
+}
+
+.titleStateCol{
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.Request{
+    margin-top: 10px;
+}

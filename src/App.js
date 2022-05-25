@@ -16,6 +16,8 @@ import jsCookie from 'js-cookie';
 import MainPageScreen from './screens/MainPageScreen';
 import PeripheralsScreen from './screens/PeripheralsScreen';
 import AddPeripheralScreen from './screens/AddPeripheralScreen';
+import PeriInfoScreen from './screens/PeriInfoScreen';
+import GenerateQR from './screens/GenerateQR';
 
 function App() {
 
@@ -62,6 +64,12 @@ const Routing = () => {
       </Route>
       <Route path="/peripheralAdd" element={<ProtectedRoute />}>
         <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
+      </Route>
+      <Route path="/info" element={<ProtectedRoute />}>
+        <Route path="/info" element={<PeriInfoScreen />} />
+      </Route>
+      <Route path="/itemTicket" element={<ProtectedRoute />}>
+        <Route path='/itemTicket' element={<GenerateQR />} />
       </Route>
       <Route path="*" element={<RouteNotFound />}/>
     </Routes>
