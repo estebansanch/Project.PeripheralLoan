@@ -1,6 +1,7 @@
 //Universal Styles
 .infoPageCont{
-    min-width: 1080;
+    min-width: 1080px;
+    max-width: fit-content;
     background-color: rgb(237, 237, 237);
     width: 100%;
     height: 100vh;
@@ -11,8 +12,8 @@
 }
 
 li{
-    margin-top: 10px;
-    font-size: small;
+    margin-bottom: 32px;
+    font-size: 24px;
 }
 
 .summarizedContent {
@@ -23,19 +24,23 @@ li{
 
 //Photo Section
 .imageBox{
-    margin-right: 20px;
-    flex-wrap: wrap;
+    margin-right: 60px;
 }
 
 
 //Spec Section
 .SummaryBox{
-    margin-left: auto;
-    margin-right: auto;
-    flex-direction: auto;
+    margin-left: 60px;
+    margin-right: 120px;
+}
+
+.peripheralBanner h1{
+    font-size: 48px;
+    font-weight: 600;
 }
 
 .peripheralBanner h2{
+    font-size: 32px;
     padding-bottom: 5px;
     border-bottom: 2px solid black;
 }
