@@ -1,31 +1,10 @@
 import React, {useState} from 'react'
 import '../assets/PeriInfoScreen.scss';
-import CrossRedCircle from '../assets/img/Cross_red_circle.png'
-import TickGreenCircle from '../assets/img/Tick_green_circle.png'
+import MonitorSVG from '../assets/img/device.svg'
 import HomePageHeader from './components/HomePageHeader';
 //import deviceID from './PeripheralsScreen';
 import axios from 'axios';
-import { 
-    Button,
-    Content, 
-    DataTable, 
-    TableContainer, 
-    TableToolbar,
-    TableToolbarContent,
-    TableToolbarSearch,
-    TableToolbarMenu,
-    TableToolbarAction,
-    Table,
-    TableHead,
-    TableRow,
-    TableHeader,
-    TableBody,
-    TableCell,
-    TableBatchAction,
-    TableBatchActions,
-    TableSelectAll,
-    TableSelectRow,
-    Pagination } from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 
 
 
@@ -87,7 +66,6 @@ export default function InfoScreen(){
 
 
 //Cambia la imagen según instrucción
-    let imageURL = "../assets/img/monitor.png";
 
     // if (deviceType == "monitor")
     //   imageURL = "../assets/img/monitor.jpg";
@@ -104,7 +82,7 @@ export default function InfoScreen(){
         <div className='summarizedContent'>
 
           <div className='imageBox'>
-            <img src="https://www.pngkey.com/png/detail/492-4926560_monitor-monitr-fotoraf-png.png" 
+            <img src={MonitorSVG} 
             id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
           </div>
           
