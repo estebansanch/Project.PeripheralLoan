@@ -13,9 +13,9 @@ export default function itemTicket(){
                 <div className='codeQR'>
                     <QRCode  value="Testing QR Code, Hello Stan Up Meeting!!" />
                 </div>
-                <div className='tickerBanner'>
+                <div className='ticketBanner'>
                     <h1>Item Title</h1>
-                    <h2>Marca del Item</h2>
+                    <h2>Item Brand</h2>
                 </div>
 
                 <div className='ticketSum'>
@@ -42,7 +42,7 @@ export default function itemTicket(){
                     </ul>
                 </div>
             </div>
-            <Button className='Request'>Request a Loan</Button>
+            <Button className='downloadTicket'>Download Ticket</Button>
           </div>
 
             
