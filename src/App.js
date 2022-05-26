@@ -68,9 +68,9 @@ const Routing = () => {
       <Route path="/info" element={<ProtectedRoute />}>
         <Route path="/info" element={<PeriInfoScreen />} />
       </Route>
-      {/* <Route path="/itemTicket" element={<ProtectedRoute />}> */}
+      <Route path="/itemTicket" element={<ProtectedRoute />}>
         <Route path='/itemTicket' element={<GenerateQR />} />
-      {/* </Route> */}
+      </Route>
       <Route path="*" element={<RouteNotFound />}/>
     </Routes>
   )
