@@ -1,10 +1,14 @@
 import React, {useState} from 'react'
 import '../assets/PeriInfoScreen.scss';
 import MonitorSVG from '../assets/img/device.svg'
+import MouseSVG from '../assets/img/mouse.svg'
+import HeadsetSVG from '../assets/img/headset.svg'
+import KeyboardSVG from '../assets/img/keyboard.svg'
 import HomePageHeader from './components/HomePageHeader';
 //import deviceID from './PeripheralsScreen';
 import axios from 'axios';
 import { Button } from 'carbon-components-react';
+import { useLocation } from "react-router-dom";
 
 
 
@@ -75,38 +79,150 @@ export default function InfoScreen(){
     //   imageURL = "../assets/img/keyboard.jpg";
 
 
+    const location = useLocation()
+    const [peripheralInfo, setPeripheralInfo] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    React.useEffect(() => {
+      setTimeout(async() => {
+        try {
+            //setCurrentPage(page)
+            //setLimit(page_size)
+            //setPages(Math.ceil(count / limit))
+    
+            var params = {
+                "deviceID": location.state.peripheralID,
+            }
+            await axios.post('http://localhost:4000/getDeviceInfo', params)
+            .then(response => {
+                var peripheral = {
+                  id: response.data.data[0].ID,
+                  deviceType: response.data.data[0].device_type,
+                  brand: response.data.data[0].brand,
+                  model: response.data.data[0].model,
+                  serial: response.data.data[0].serial_number,
+                  acceptedCond: response.data.data[0].conditions_accepted,
+                  inCampus: response.data.data[0].in_campus,
+                  securityAutorization: response.data.data[0].Security_Auth,
+               }
+               setPeripheralInfo(peripheral);
+               console.log(peripheralInfo)
+               setIsLoaded(true)
+            })
+            .catch(error => {
+              console.log("Request attempt to get devices failed")
+              console.log(error);
+            })
+    
+          } catch(err) {
+            console.log(err)
+          }
+        })
+    }, [])
+
     return(
       <>
-      <div className="infoPageCont">
+      {isLoaded ? (
+              <div className="infoPageCont">
+              <HomePageHeader/>
+              <div className='summarizedContent'>
+      
+                <div className='imageBox'>
+
+                  {peripheralInfo.deviceType === 'monitor' ? (
+                    <img src={MonitorSVG} id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
+                  ) : (<></>)}
+
+                  {peripheralInfo.deviceType === 'headset' ? (
+                    <img src={HeadsetSVG} id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
+                  ) : (<></>)}
+
+                  {peripheralInfo.deviceType === 'keyboard' ? (
+                    <img src={KeyboardSVG} id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
+                  ) : (<></>)}
+
+                  {peripheralInfo.deviceType === 'mouse' ? (
+                    <img src={MouseSVG} id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
+                  ) : (<></>)}
+                </div>
+                
+                <div className='SummaryBox'>
+                  <div className='peripheralBanner'>
+                    <h1>{peripheralInfo.deviceType}</h1>
+                    <h2>{peripheralInfo.brand}</h2>
+                  </div>
+      
+                  <div className='peripheralSum'>
+                    <div className='titleCol'>
+                      <ul>
+                        <li>Type:</li>
+                        <li>Brand:</li>
+                        <li>Model:</li>
+                        <li>Serial #:</li>
+                      </ul>
+                    </div>
+                    <div className='descCol'>
+                      <ul>
+                        <li>{peripheralInfo.deviceType}</li>
+                        <li>{peripheralInfo.brand}</li>
+                        <li>{peripheralInfo.model}</li>
+                        <li>{peripheralInfo.serial}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+      
+                <div className='peripheralStateBox'>
+                  <div className='stateList'>
+                    <div className='titleStateCol'>
+                      <ul>
+                        <li>Condition</li>
+                        <li>Availability</li>
+                        <li>Autorization</li>
+                      </ul>
+                    </div>
+                    <div className='stateDescCol'>
+                      <ul>
+                        <li>{peripheralInfo.acceptedCond === 0 ? ('Accepted') : ('Not Accepted')}</li>
+                        <li>{peripheralInfo.inCampus === 0 ? ('Not In Campus') : ('In Campus')}</li>
+                        <li>{peripheralInfo.securityAutorization === 0 ? ('Not Autorized') : ('Autorized')}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+            </div>
+      ) : (
+        <div className="infoPageCont">
         <HomePageHeader/>
         <div className='summarizedContent'>
 
-          <div className='imageBox'>
-            <img src={MonitorSVG} 
-            id='PeripheralPhoto' alt='PeripheralPhoto' width="350" height="280" />
+          <div className='imageBox' style={{width:"350px", height:"280px"}}>
+            
           </div>
           
           <div className='SummaryBox'>
             <div className='peripheralBanner'>
-              <h1>Item Title</h1>
-              <h2>Marca del Item</h2>
+              <h1>Type</h1>
+              <h2>Model</h2>
             </div>
 
             <div className='peripheralSum'>
               <div className='titleCol'>
                 <ul>
-                  <li>Tipo de Dispositivo</li>
-                  <li>Marca</li>
-                  <li>Modelo</li>
-                  <li>Número de Serial</li>
+                  <li>Peripheral Type:</li>
+                  <li>Peripheral Brand:</li>
+                  <li>Peripheral Model:</li>
+                  <li>Peripheral Serial Number:</li>
                 </ul>
               </div>
               <div className='descCol'>
                 <ul>
-                  <li>Monitor</li>
-                  <li>SamsLGPhillips</li>
-                  <li>72050AVHDDP</li>
-                  <li>1209524707</li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
                 </ul>
               </div>
             </div>
@@ -116,24 +232,24 @@ export default function InfoScreen(){
             <div className='stateList'>
               <div className='titleStateCol'>
                 <ul>
-                  <li>Condición</li>
-                  <li>Disponibilidad</li>
-                  <li>Autorización</li>
+                  <li>Condition</li>
+                  <li>Availability</li>
+                  <li>Autorization</li>
                 </ul>
               </div>
               <div className='stateDescCol'>
                 <ul>
-                  <li>Aceptable</li>
-                  <li>En Campus</li>
-                  <li>Autorizado</li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
                 </ul>
               </div>
             </div>
-            <Button className='Request'>Request a Loan</Button>
           </div>
 
         </div>
       </div>
+      )}
       </>
     )
 }

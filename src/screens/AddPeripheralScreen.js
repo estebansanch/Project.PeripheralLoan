@@ -33,11 +33,22 @@ export default function AddDeviceScreen() {
     };
 
     async function newPeripheralDummy(){
-        await axios.post('https://rancho-back.mybluemix.net/newPeripheral', dummy_state)
+        await axios.post('http://localhost:4000/newPeripheral', dummy_state)
         .then(response => {
+            console.log(response)
             console.log(response.data)
+            if (response.data.message.error){
+                alert("Error: Perihperal Couldn't Be Added")
+            }
+            else {
+                alert('New Peripheral Added') 
+                window.location.reload()
+            }
+
+            
         })
         .catch(error => {
+          alert("Error: Peripheral Couldn't Be Added")
           console.log("Request attempt failed")
           console.log(error);
         })

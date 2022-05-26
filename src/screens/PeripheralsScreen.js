@@ -4,6 +4,7 @@ import CrossRedCircle from '../assets/img/Cross_red_circle.png'
 import TickGreenCircle from '../assets/img/Tick_green_circle.png'
 import HomePageHeader from './components/HomePageHeader';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import jsCookie from 'js-cookie';
 import { 
     Button,
@@ -44,7 +45,7 @@ export default function DevicesScreen() {
   function openInfo(id) {
   // var deviceID = id;
   // module.exports = deviceID;
-  window.location.href='/info';
+  
 }
   /*
   function update_limit(num){
@@ -84,7 +85,7 @@ export default function DevicesScreen() {
           "page": page
         }
         console.log("params:", params)
-        await axios.post('https://rancho-back.mybluemix.net/getDevices', params)
+        await axios.post('http://localhost:4000/getDevices', params)
         .then(response => {
             console.log(response.data.data)
             console.log("length of data", response.data.data.length)
@@ -102,7 +103,7 @@ export default function DevicesScreen() {
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
-                button: <Button>Log Device Output</Button>,
+                button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].ID}}>Peripheral Info</Link>,
               }
               array_peripherals.push(peripheral);
             }
@@ -177,23 +178,26 @@ export default function DevicesScreen() {
     setTimeout(async() => {
       // setIsLoading(false);
       try {
-        await axios.get('https://rancho-back.mybluemix.net/countDevices')
+        const responseCount = await axios.get('http://localhost:4000/countDevices')
         .then(response => {
             setCount(response.data.data.count)
+            return response.data.data.count
         })
         .catch(error => {
           console.log("Request attempt to get devices count failed")
           console.log(error);
         })
 
-        setPages(Math.ceil(count / limit))
+        const currentLimit = 10; 
+
+        setPages(Math.ceil(responseCount / currentLimit))
 
         var params = {
-          "limit": limit,
-          "page": current_page
+          "limit": currentLimit,
+          "page": 1
         }
         console.log("params:", params)
-        await axios.post('https://rancho-back.mybluemix.net/getDevices', params)
+        await axios.post('http://localhost:4000/getDevices', params)
         .then(response => {
             console.log(response.data.data)
             console.log("length of data", response.data.data.length)
@@ -211,13 +215,12 @@ export default function DevicesScreen() {
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
-                button: <Button onClick={openInfo} >Info</Button>,
+                button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].ID}}>Peripheral Info</Link>,
               }
               array_peripherals.push(peripheral);
             }
             console.log("array peripherals", array_peripherals)
             setDevices(array_peripherals)
-            console.log("peripherals inside request", devices)
         })
         .catch(error => {
           console.log("Request attempt to get devices failed")
@@ -276,7 +279,7 @@ async function addToList(objects) {
         paramsCheckAvailability.push(currentJson)
       }
       console.log("params Check Device Availability", paramsCheckAvailability)
-      await axios.post('https://rancho-back.mybluemix.net/checkDeviceAvailability', paramsCheckAvailability)
+      await axios.post('http://localhost:4000/checkDeviceAvailability', paramsCheckAvailability)
       .then(response => {
         setTimeout(async() => {
           try {
@@ -285,19 +288,19 @@ async function addToList(objects) {
             console.log(response)
             console.log("Peripherals not available", response.data.data.unavailable)
             var unavailablePeripherals = ""
-            for (var i = 0; i < response.data.data.unavailable.length; i++){
-              if (i === response.data.data.unavailable.length - 1 || response.data.data.unavailable.length === 1){
-                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable[i]}`
+            for (var i = 0; i < response.data.data.unavailable_SN.length; i++){
+              if (i === response.data.data.unavailable_SN.length - 1 || response.data.data.unavailable_SN.length === 1){
+                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable_SN[i]}`
               } else {
-                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable[i]}` + ', '
+                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable_SN[i]}` + ', '
               }
             }
             var availablePeripherals = ""
-            for (var z = 0; z < response.data.data.available.length; z++){
-              if (z === response.data.data.available.length - 1 || response.data.data.available.length === 1){
-                availablePeripherals = availablePeripherals + `${response.data.data.available[z]}`
+            for (var z = 0; z < response.data.data.available_SN.length; z++){
+              if (z === response.data.data.available_SN.length - 1 || response.data.data.available_SN.length === 1){
+                availablePeripherals = availablePeripherals + `${response.data.data.available_SN[z]}`
               } else {
-                availablePeripherals = availablePeripherals + `${response.data.data.available[z]}` + ', '
+                availablePeripherals = availablePeripherals + `${response.data.data.available_SN[z]}` + ', '
               }
             }
             console.log("unavailable devices", unavailablePeripherals)
@@ -316,7 +319,7 @@ async function addToList(objects) {
                 paramsNewRequest.push(currentJson)
               }
               console.log("params Send Request", paramsNewRequest)
-              await axios.post('https://rancho-back.mybluemix.net/newRequest', paramsNewRequest)
+              await axios.post('http://localhost:4000/newRequest', paramsNewRequest)
               .then(response => {
                 console.log("send request worked")
                 console.log(response)
