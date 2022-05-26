@@ -33,7 +33,7 @@ export default function AddDeviceScreen() {
     };
 
     async function newPeripheralDummy(){
-        await axios.post('http://rancho-back.mybluemix.net/newPeripheral', dummy_state)
+        await axios.post('https://rancho-back.mybluemix.net/newPeripheral', dummy_state)
         .then(response => {
             console.log(response.data)
         })

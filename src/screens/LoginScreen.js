@@ -17,7 +17,7 @@ export default function LoginScreen() {
 
 
   async function validateLogin(){
-    await axios.get('http://rancho-back.mybluemix.net/checkLogin', {params: {username: username, password: password}})
+    await axios.get('https://rancho-back.mybluemix.net/checkLogin', {params: {username: username, password: password}})
     .then(response => {
       if (response.data.data.length > 0){
         Auth.setAuth(true)

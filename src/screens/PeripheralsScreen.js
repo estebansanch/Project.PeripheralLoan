@@ -25,7 +25,8 @@ import {
     TableBatchActions,
     TableSelectAll,
     TableSelectRow,
-    Pagination
+    Pagination,
+    DataTableSkeleton
 } from 'carbon-components-react';
 
 import {
@@ -83,7 +84,7 @@ export default function DevicesScreen() {
           "page": page
         }
         console.log("params:", params)
-        await axios.post('http://rancho-back.mybluemix.net/getDevices', params)
+        await axios.post('https://rancho-back.mybluemix.net/getDevices', params)
         .then(response => {
             console.log(response.data.data)
             console.log("length of data", response.data.data.length)
@@ -175,7 +176,7 @@ export default function DevicesScreen() {
     setTimeout(async() => {
       // setIsLoading(false);
       try {
-        await axios.get('http://rancho-back.mybluemix.net/countDevices')
+        await axios.get('https://rancho-back.mybluemix.net/countDevices')
         .then(response => {
             setCount(response.data.data.count)
         })
@@ -191,7 +192,7 @@ export default function DevicesScreen() {
           "page": current_page
         }
         console.log("params:", params)
-        await axios.post('http://rancho-back.mybluemix.net/getDevices', params)
+        await axios.post('https://rancho-back.mybluemix.net/getDevices', params)
         .then(response => {
             console.log(response.data.data)
             console.log("length of data", response.data.data.length)
@@ -274,7 +275,7 @@ async function addToList(objects) {
         paramsCheckAvailability.push(currentJson)
       }
       console.log("params Check Device Availability", paramsCheckAvailability)
-      await axios.post('http://rancho-back.mybluemix.net/checkDeviceAvailability', paramsCheckAvailability)
+      await axios.post('https://rancho-back.mybluemix.net/checkDeviceAvailability', paramsCheckAvailability)
       .then(response => {
         setTimeout(async() => {
           try {
@@ -284,18 +285,18 @@ async function addToList(objects) {
             console.log("Peripherals not available", response.data.data.unavailable)
             var unavailablePeripherals = ""
             for (var i = 0; i < response.data.data.unavailable.length; i++){
-              if (i == response.data.data.unavailable.length - 1 || response.data.data.unavailable.length == 1){
+              if (i === response.data.data.unavailable.length - 1 || response.data.data.unavailable.length === 1){
                 unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable[i]}`
               } else {
                 unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable[i]}` + ', '
               }
             }
             var availablePeripherals = ""
-            for (var i = 0; i < response.data.data.available.length; i++){
-              if (i == response.data.data.available.length - 1 || response.data.data.available.length == 1){
-                availablePeripherals = availablePeripherals + `${response.data.data.available[i]}`
+            for (var z = 0; z < response.data.data.available.length; z++){
+              if (z === response.data.data.available.length - 1 || response.data.data.available.length === 1){
+                availablePeripherals = availablePeripherals + `${response.data.data.available[z]}`
               } else {
-                availablePeripherals = availablePeripherals + `${response.data.data.available[i]}` + ', '
+                availablePeripherals = availablePeripherals + `${response.data.data.available[z]}` + ', '
               }
             }
             console.log("unavailable devices", unavailablePeripherals)
@@ -306,15 +307,15 @@ async function addToList(objects) {
             const userID = jsCookie.get("id");
             const paramsNewRequest = []
             if (response.data.data.available.length !== 0){
-              for (var i = 0; i < response.data.data.available.length; i++){
+              for (var j = 0; j < response.data.data.available.length; j++){
                 let currentJson = {
                   "user_id": userID,
-                  "device_id": response.data.data.available[i]
+                  "device_id": response.data.data.available[j]
                 }
                 paramsNewRequest.push(currentJson)
               }
               console.log("params Send Request", paramsNewRequest)
-              await axios.post('http://rancho-back.mybluemix.net/newRequest', paramsNewRequest)
+              await axios.post('https://rancho-back.mybluemix.net/newRequest', paramsNewRequest)
               .then(response => {
                 console.log("send request worked")
                 console.log(response)
@@ -508,7 +509,10 @@ const headers = [
         }}
       </DataTable>
       ): (
-        <div></div>
+        <div style={{ width: '100%' }}>
+            <DataTableSkeleton headers={headers} />
+            <br />
+        </div>
       ) }
       
   </div>
