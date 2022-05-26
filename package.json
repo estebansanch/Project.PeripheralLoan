@@ -6,6 +6,7 @@
     "@carbon/grid": "10.17.0",
     "@carbon/icons-react": "10.22.0",
     "@carbon/layout": "^11.1.0",
+    "@carbon/type": "^11.3.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
