@@ -73,7 +73,7 @@ export default function DevicesScreen() {
   async function update(page, page_size) {
 
     setTimeout(async() => {
-      // setIsLoading(false);
+      setIsLoaded(false);
       try {
         setCurrentPage(page)
         setLimit(page_size)
@@ -109,6 +109,7 @@ export default function DevicesScreen() {
             console.log("array peripherals", array_peripherals)
             setDevices(array_peripherals)
             console.log("peripherals inside request", devices)
+            setIsLoaded(true)
         })
         .catch(error => {
           console.log("Request attempt to get devices failed")
@@ -479,7 +480,7 @@ const headers = [
                 backwardText="Previous page"
                 forwardText="Next page"
                 itemsPerPageText="Items per page:"
-                page={1}
+                page={current_page}
                 //onChange={function noRefCheck(){}}
                 
                 pageSize={limit}
@@ -511,6 +512,35 @@ const headers = [
       ): (
         <div style={{ width: '100%' }}>
             <DataTableSkeleton headers={headers} />
+            <Pagination
+                backwardText="Previous page"
+                forwardText="Next page"
+                itemsPerPageText="Items per page:"
+                page={current_page}
+                //onChange={function noRefCheck(){}}
+                
+                pageSize={limit}
+                pageSizes={[
+                  {
+                    text: '20',
+                    //value: update_limit(20)
+                    value: 20
+                  },
+                  {
+                    text: '15',
+                    //value: update_limit(15)
+                    value: 15
+                  },
+                  {
+                    text: '10',
+                    //value: update_limit(10)
+                    value: 10
+                  }
+                ]}
+                onChange={pages => update(pages.page, pages.pageSize)}
+                size="md"
+                totalItems={count}
+              />
             <br />
         </div>
       ) }
