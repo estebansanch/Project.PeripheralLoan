@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import jsCookie from 'js-cookie';
 import { 
     Button,
-    Content, 
     DataTable, 
     TableContainer, 
     TableToolbar,
@@ -30,8 +29,7 @@ import {
     DataTableSkeleton
 } from 'carbon-components-react';
 
-import {
-    TrashCan32, Save32, Download32, ShoppingCart32
+import {ShoppingCart32
   } from '@carbon/icons-react';
 
 export default function DevicesScreen() {

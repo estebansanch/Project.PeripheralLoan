@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import '../assets/MainPageScreen.scss';
-import LandingPageHeader from './components/LandingPageHeader/';
 import {Chart, ArcElement} from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
-import { Dropdown, Content } from 'carbon-components-react';
+import { Dropdown } from 'carbon-components-react';
 import HomePageHeader from './components/HomePageHeader';
 
 export default function MainPageScreen() {

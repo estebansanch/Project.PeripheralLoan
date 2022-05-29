@@ -1,17 +1,13 @@
 import React from 'react';
 import {
-  Header, HeaderContainer, HeaderName, HeaderNavigation,
-  HeaderMenuButton, HeaderMenuItem, HeaderGlobalBar, HeaderGlobalAction, 
-  SkipToContent, SideNav, SideNavItems, HeaderSideNavItems, HeaderMenu, HeaderPanel,
-  Switcher, SwitcherItem, SwitcherDivider
+  Header, HeaderContainer, HeaderName, HeaderMenuButton, SkipToContent,
 } from 'carbon-components-react';
-import { UserAvatar32 } from '@carbon/icons-react';
 
 export default function LandingPageHeader() {
  
-  function action() {
-    //window.location.href='/loginPage';
-  }
+  // function action() {
+  //   //window.location.href='/loginPage';
+  // }
 
   return(
     <HeaderContainer

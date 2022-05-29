@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import QRCode from "react-qr-code";
 import HomePageHeader from './components/HomePageHeader';
 import{ Button } from 'carbon-components-react/';

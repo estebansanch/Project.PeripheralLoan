@@ -2,11 +2,11 @@ import React from 'react';
 import {
   Header, HeaderContainer, HeaderName, HeaderNavigation,
   HeaderMenuButton, HeaderMenuItem, HeaderGlobalBar, HeaderGlobalAction, 
-  SkipToContent, SideNav, SideNavItems, HeaderSideNavItems, SideNavMenu,
-  Search, SideNavMenuItem, SideNavLink, Content, HeaderMenu
+  SkipToContent, SideNav, SideNavItems, SideNavMenu,
+  Search, SideNavMenuItem, SideNavLink,  HeaderMenu
 } from 'carbon-components-react';
 import {
- Notification32, UserAvatar32, DotMark32, Home32, App32
+ Notification32, DotMark32, Home32, App32
   } from '@carbon/icons-react';
 import jsCookie from 'js-cookie';
 
