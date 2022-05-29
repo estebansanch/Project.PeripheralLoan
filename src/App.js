@@ -18,6 +18,7 @@ import PeripheralsScreen from './screens/PeripheralsScreen';
 import AddPeripheralScreen from './screens/AddPeripheralScreen';
 import PeriInfoScreen from './screens/PeriInfoScreen';
 import GenerateQR from './screens/GenerateQR';
+import ReaderQR from './screens/ReadQR';
 
 function App() {
 
@@ -68,9 +69,12 @@ const Routing = () => {
       <Route path="/info" element={<ProtectedRoute />}>
         <Route path="/info" element={<PeriInfoScreen />} />
       </Route>
-      <Route path="/itemTicket" element={<ProtectedRoute />}>
+      {/* <Route path="/itemTicket" element={<ProtectedRoute />}> */}
         <Route path='/itemTicket' element={<GenerateQR />} />
-      </Route>
+      {/* </Route> */}
+      {/* <Route path="/ticketReader" element={<ProtectedRoute />}> */}
+        <Route path='/ticketReader' element={<ReaderQR />} />
+      {/* </Route> */}
       <Route path="*" element={<RouteNotFound />}/>
     </Routes>
   )

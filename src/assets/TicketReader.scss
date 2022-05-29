@@ -1,0 +1,19 @@
+.readContent{
+    min-width: 1920px;
+    max-width: fit-content;
+    background-color: rgb(237, 237, 237);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+.qr-reader-wrapper {
+    width: 10%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+  }
