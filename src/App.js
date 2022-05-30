@@ -16,12 +16,9 @@ import jsCookie from 'js-cookie';
 import MainPageScreen from './screens/MainPageScreen';
 import PeripheralsScreen from './screens/PeripheralsScreen';
 import AddPeripheralScreen from './screens/AddPeripheralScreen';
-<<<<<<< HEAD
 import PeriInfoScreen from './screens/PeriInfoScreen';
 import GenerateQR from './screens/GenerateQR';
-=======
 import RequestScreen from './screens/RequestScreen';
->>>>>>> AleFull
 
 function App() {
 
