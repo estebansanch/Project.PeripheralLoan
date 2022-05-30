@@ -72,6 +72,9 @@ export default function HomePageHeader() {
                     <SideNavMenuItem href="">
                     Tipos de Periféricos
                     </SideNavMenuItem>
+                    <SideNavMenuItem href="/requestScreen">
+                    Peripherals Requests
+                    </SideNavMenuItem>
                 </SideNavMenu>
                 </SideNavItems>
             </SideNav>
