@@ -19,6 +19,8 @@ export default function HomePageHeader() {
         window.location.href='/';
     }
 
+    const role = jsCookie.get("role");
+
     return(
     <HeaderContainer
         render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -61,21 +63,39 @@ export default function HomePageHeader() {
                     Panel
                 </SideNavLink>
                 <SideNavLink
+                    renderIcon={Home32}
+                    href="">
+                    My Peripherals Asigned
+                </SideNavLink>
+                {/* <SideNavLink
                     renderIcon={App32}
                     href="">
                     Recursos
-                </SideNavLink>
+                </SideNavLink> */}
+                {role !== '1' ? (
                 <SideNavMenu renderIcon={DotMark32} title="PERIPHERALS">
-                    <SideNavMenuItem href="/peripheralList">
-                    Periféricos
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="">
+                    {(role === '4' || role === '2') ? (
+                        <SideNavMenuItem href="/peripheralList">
+                        Periféricos
+                        </SideNavMenuItem>
+                    ): (<></>)}
+                    {/* <SideNavMenuItem href="">
                     Tipos de Periféricos
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="/requestScreen">
-                    Peripherals Requests
-                    </SideNavMenuItem>
+                    </SideNavMenuItem> */}
+                    {(role === '4' || role === '3') ? (
+                        <SideNavMenuItem href="/requestScreen">
+                        Peripherals Requests
+                        </SideNavMenuItem>
+                    ) : (<></>)}
                 </SideNavMenu>
+                ): (<></>)}
+                {role === '4' ? (
+                    <SideNavMenu renderIcon={DotMark32} title="ADMIN">
+                        <SideNavMenuItem href="">
+                        User Managment
+                        </SideNavMenuItem>
+                    </SideNavMenu>
+                ): (<></>)}
                 </SideNavItems>
             </SideNav>
             </Header>

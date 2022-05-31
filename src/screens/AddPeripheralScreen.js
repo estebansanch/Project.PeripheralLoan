@@ -37,7 +37,7 @@ export default function AddDeviceScreen() {
         .then(response => {
             console.log(response)
             console.log(response.data)
-            if (response.data.message.error){
+            if (response.data.message.error || response.data.success === -2){
                 alert("Error: Perihperal Couldn't Be Added")
             }
             else {

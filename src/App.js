@@ -53,9 +53,9 @@ function App() {
 const Routing = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<LandingPageScreen />}/>
-      <Route path="/loginPage" element={<ProtectedLogin />}>
-        <Route path="/loginPage" element={<LoginScreen />}/>
+      {/* <Route exact path="/" element={<LandingPageScreen />}/> */}
+      <Route path="/" element={<ProtectedLogin />}>
+        <Route path="/" element={<LoginScreen />}/>
       </Route>
       <Route path="/mainPage" element={<ProtectedRoute />}>
         <Route path="/mainPage" element={<MainPageScreen />}/>
