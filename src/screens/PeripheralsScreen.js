@@ -101,9 +101,8 @@ export default function DevicesScreen() {
             let length_data = response.data.data.length;
             var array_peripherals = []
             for (var i = 0; i < length_data; i++){
-              console.log(response.data.data[i].ID)
               var peripheral = {
-                id: response.data.data[i].DEVICE_ID,
+                id: `${response.data.data[i].DEVICE_ID}`,
                 deviceType: response.data.data[i].device_type,
                 brand: response.data.data[i].brand,
                 model: response.data.data[i].model,
@@ -112,7 +111,7 @@ export default function DevicesScreen() {
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
-                button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].ID}}>Peripheral Info</Link>,
+                button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].DEVICE_ID}}>Peripheral Info</Link>,
               }
               array_peripherals.push(peripheral);
             }
@@ -213,9 +212,8 @@ export default function DevicesScreen() {
             let length_data = response.data.data.length;
             var array_peripherals = []
             for (var i = 0; i < length_data; i++){
-              console.log(response.data.data[i].ID)
               var peripheral = {
-                id: response.data.data[i].DEVICE_ID,
+                id: `${response.data.data[i].DEVICE_ID}`,
                 deviceType: response.data.data[i].device_type,
                 brand: response.data.data[i].brand,
                 model: response.data.data[i].model,
@@ -224,7 +222,7 @@ export default function DevicesScreen() {
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
-                button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].ID}}>Peripheral Info</Link>,
+                button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].DEVICE_ID}}>Peripheral Info</Link>,
               }
               array_peripherals.push(peripheral);
             }
