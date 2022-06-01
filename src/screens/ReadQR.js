@@ -10,9 +10,7 @@ class QRScan extends React.Component {
   };
 
   handleScan = (data) => {
-    this.setState({
-      result: data
-    });
+      window.location.href= data;
   };
 
   handleError = (err) => {

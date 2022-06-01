@@ -91,7 +91,7 @@ export default function HomePageHeader() {
                 ): (<></>)}
                 {role === '4' ? (
                     <SideNavMenu renderIcon={DotMark32} title="ADMIN">
-                        <SideNavMenuItem href="">
+                        <SideNavMenuItem href="/userList">
                         User Managment
                         </SideNavMenuItem>
                     </SideNavMenu>
