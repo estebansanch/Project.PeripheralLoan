@@ -5,6 +5,7 @@ import MouseSVG from '../assets/img/mouse.svg'
 import HeadsetSVG from '../assets/img/headset.svg'
 import KeyboardSVG from '../assets/img/keyboard.svg'
 import HomePageHeader from './components/HomePageHeader';
+import QRCode from "react-qr-code";
 //import deviceID from './PeripheralsScreen';
 import axios from 'axios';
 import { Button } from 'carbon-components-react';
@@ -104,6 +105,7 @@ export default function InfoScreen(){
                   acceptedCond: response.data.data[0].conditions_accepted,
                   inCampus: response.data.data[0].in_campus,
                   securityAutorization: response.data.data[0].Security_Auth,
+                  qrCode: <QRCode value="/info" state={{peripheralID: response.data.data[0].ID}} />,
                }
                setPeripheralInfo(peripheral);
                console.log(peripheralInfo)
@@ -188,6 +190,7 @@ export default function InfoScreen(){
                         <li>{peripheralInfo.securityAutorization === 0 ? ('Not Autorized') : ('Autorized')}</li>
                       </ul>
                     </div>
+                    {peripheralInfo.qrCode}
                   </div>
                 </div>
       

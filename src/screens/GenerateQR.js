@@ -10,7 +10,7 @@ export default function itemTicket(){
         <HomePageHeader/>
         <div className='summedTicket'>
                 <div className='codeQR'>
-                    <QRCode  value="https://www.youtube.com/watch?v=QPZ0pIK_wsc" />
+                    <QRCode value="/itemTicket" />
                 </div>
                 <div className='ticketBanner'>
                     <h1>Item Title</h1>

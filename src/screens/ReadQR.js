@@ -34,7 +34,7 @@ export default function ReaderQR(){
               />
           </div>
 
-          <h1 className="QRScanResultState" style={{fontSize:18, width:320, height:100, marginTop:100}}
+          <h1 className="QRScanResultState"
                   rowsMax={4}
                   defaultValue={qrscan}
                   value={qrscan}
