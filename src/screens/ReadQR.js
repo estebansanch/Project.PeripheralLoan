@@ -9,7 +9,7 @@ export default function ReaderQR(){
     const handleScan = data => {
         if (data) {
             setQrscan(data)
-            window.location.href="/info"
+            window.location=data
         }
     }
     const handleError = err => {
@@ -18,10 +18,14 @@ export default function ReaderQR(){
 
     return (
       <>
-      {/* <HomePageHeader /> */}
-      <div className=".readContent">
-        <center>
-          <div style={{marginTop:30}}>
+      <HomePageHeader />
+      <div className="readContent">
+        <div className="contentWrapperQRScan">
+          <div className="contentHeader">
+            <h1>QR Scanner</h1>
+            <h2 className="scanInstruct">Aim the camera at the QR Ticket provided by the soliciter</h2>
+          </div>
+          <div className="cameraBox" >
               <QrScan
                   delay={300}
                   onError={handleError}
@@ -29,14 +33,14 @@ export default function ReaderQR(){
                   style={{ height: 240, width: 320 }}
               />
           </div>
-        </center>
 
-        <h1
-                style={{fontSize:18, width:320, height:100, marginTop:100}}
-                rowsMax={4}
-                defaultValue={qrscan}
-                value={qrscan}
-            >{qrscan}</h1>
+          <h1 className="QRScanResultState" style={{fontSize:18, width:320, height:100, marginTop:100}}
+                  rowsMax={4}
+                  defaultValue={qrscan}
+                  value={qrscan}
+              >{qrscan}</h1>
+          </div>
+        
 
       </div>
       </>
