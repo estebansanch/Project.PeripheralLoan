@@ -19,6 +19,7 @@ import AddPeripheralScreen from './screens/AddPeripheralScreen';
 import PeriInfoScreen from './screens/PeriInfoScreen';
 import GenerateQR from './screens/GenerateQR';
 import ReaderQR from './screens/ReadQR';
+import RequestScreen from './screens/RequestScreen';
 
 function App() {
 
@@ -53,9 +54,9 @@ function App() {
 const Routing = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<LandingPageScreen />}/>
-      <Route path="/loginPage" element={<ProtectedLogin />}>
-        <Route path="/loginPage" element={<LoginScreen />}/>
+      {/* <Route exact path="/" element={<LandingPageScreen />}/> */}
+      <Route path="/" element={<ProtectedLogin />}>
+        <Route path="/" element={<LoginScreen />}/>
       </Route>
       <Route path="/mainPage" element={<ProtectedRoute />}>
         <Route path="/mainPage" element={<MainPageScreen />}/>
@@ -75,6 +76,9 @@ const Routing = () => {
       {/* <Route path="/ticketReader" element={<ProtectedRoute />}> */}
         <Route path='/ticketReader' element={<ReaderQR />} />
       {/* </Route> */}
+      <Route path="/requestScreen" element={<ProtectedRoute />}>
+        <Route path="/requestScreen" element={<RequestScreen />}/>
+      </Route>
       <Route path="*" element={<RouteNotFound />}/>
     </Routes>
   )

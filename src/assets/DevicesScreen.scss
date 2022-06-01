@@ -10,7 +10,72 @@
     padding-bottom: 50px;
 }
 
+.windowRequestView {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 4;
+    transform: translate(-100px);
+    justify-content: center;
+    align-items: center;
+}
 
+.whiteBox { 
+    display: flex;
+    width: 100vh;
+    height: 50vh;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;;
+}
+
+.whiteBoxUp {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.emailInputBox {
+    margin: 10px 0px;
+}
+
+.emailInput {
+    width: 50vh;
+}
+
+.dateInput {
+    margin: 10px 0px;
+}
+
+.whiteBoxInfo {
+    font-size: 18px;
+    margin: 5px 0px;
+}
+
+.whiteBoxDown {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #e0e0e0;
+}
+
+.whiteBoxButton {
+    margin: 0px 50px;
+    width: 20vh;
+    height: 7vh;
+}
 
 .buttonInfo {
     padding: 15px 25px;

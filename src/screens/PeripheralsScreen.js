@@ -26,7 +26,10 @@ import {
     TableSelectAll,
     TableSelectRow,
     Pagination,
-    DataTableSkeleton
+    DataTableSkeleton,
+    TextInput,
+    DatePicker,
+    DatePickerInput,
 } from 'carbon-components-react';
 
 import {ShoppingCart32
@@ -38,7 +41,15 @@ export default function DevicesScreen() {
   const [pages, setPages] = useState(0)
   const [limit, setLimit] = useState(10)
   const [current_page, setCurrentPage] = useState(1)
-  const [devices, setDevices] = useState(null)
+  const [devices, setDevices] = useState([])
+  const [request, setRequest] = useState(null);
+  const [currentAvailablePeripherals, setCurrentAvailablePeripherals] = useState(null);
+  const [currentUnavailablePeripherals, setCurrentUnavailablePeripherals] = useState(null);
+  const [currentAvailablePeripherals_SN, setCurrentAvailablePeripherals_SN] = useState("");
+  const [currentUnavailablePeripherals_SN, setCurrentUnavailablePeripherals_SN] = useState("");
+  const [totalPeripheralsRequest, setTotalPeripheralsRequest] = useState(0);
+  const [requestEmailInput, setRequestEmailInput] = useState("");
+  const [requestDateInput, setRequestDateInput] = useState("");
 
   function openInfo(id) {
   // var deviceID = id;
@@ -92,7 +103,7 @@ export default function DevicesScreen() {
             for (var i = 0; i < length_data; i++){
               console.log(response.data.data[i].ID)
               var peripheral = {
-                id: response.data.data[i].ID,
+                id: response.data.data[i].DEVICE_ID,
                 deviceType: response.data.data[i].device_type,
                 brand: response.data.data[i].brand,
                 model: response.data.data[i].model,
@@ -204,7 +215,7 @@ export default function DevicesScreen() {
             for (var i = 0; i < length_data; i++){
               console.log(response.data.data[i].ID)
               var peripheral = {
-                id: response.data.data[i].ID,
+                id: response.data.data[i].DEVICE_ID,
                 deviceType: response.data.data[i].device_type,
                 brand: response.data.data[i].brand,
                 model: response.data.data[i].model,
@@ -264,6 +275,128 @@ export default function DevicesScreen() {
       </div>
 */
 
+async function windowRequest(objects) {
+  setTimeout(async() => {
+    try {
+      console.log("tamaño de objectos que se mando", objects.length)
+      console.log("Se activo y se mando algo", objects)
+      const paramsCheckAvailability = []
+      for (var i = 0; i < objects.length; i++){
+        let currentJson = {
+          "device_id": objects[i].id 
+        }
+        paramsCheckAvailability.push(currentJson)
+      }
+      console.log("params Check Device Availability", paramsCheckAvailability)
+      await axios.post('http://localhost:4000/checkDeviceAvailability', paramsCheckAvailability)
+      .then(response => {
+        setTimeout(async() => {
+          try {
+            setCurrentAvailablePeripherals(response.data.data.available)
+            setCurrentUnavailablePeripherals(response.data.data.unavailable)
+            console.log("send request worked")
+            console.log(response)
+            console.log("Peripherals not available", response.data.data.unavailable)
+            var unavailablePeripherals = ""
+            for (var i = 0; i < response.data.data.unavailable_SN.length; i++){
+              if (i === response.data.data.unavailable_SN.length - 1 || response.data.data.unavailable_SN.length === 1){
+                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable_SN[i]}`
+              } else {
+                unavailablePeripherals = unavailablePeripherals + `${response.data.data.unavailable_SN[i]}` + ', '
+              }
+            }
+            var availablePeripherals = ""
+            setTotalPeripheralsRequest(response.data.data.available_SN.length)
+            for (var z = 0; z < response.data.data.available_SN.length; z++){
+              if (z === response.data.data.available_SN.length - 1 || response.data.data.available_SN.length === 1){
+                availablePeripherals = availablePeripherals + `${response.data.data.available_SN[z]}`
+              } else {
+                availablePeripherals = availablePeripherals + `${response.data.data.available_SN[z]}` + ', '
+              }
+            }
+            setCurrentAvailablePeripherals_SN(availablePeripherals)
+            setCurrentUnavailablePeripherals_SN(unavailablePeripherals)
+          } catch(err) {
+            console.log(err)
+          }
+        })
+
+      })
+      .catch(error => {
+        console.log("Request attempt to get check availability failed")
+        console.log(error);
+      })
+    } catch(err) {
+      console.log(err)
+    }
+  })
+  setRequest(objects);
+}
+
+async function addToList2(){
+  setTimeout(async() => {
+    try {
+      console.log("ADD TO LIST 2 CURRENT EMAIL: ", requestEmailInput)
+      console.log("ADD TO LIST 2 CURRENT DATE: ", requestDateInput)
+      console.log("ADD TO LIST 2 CURRENT AVAILABLE: ", currentAvailablePeripherals)
+      console.log("ADD TO LIST 2 CURRENT UNAVAILABLE: ", currentUnavailablePeripherals)
+      console.log("ADD TO LIST 2 REQUEST: ", request)
+
+      const params = {
+        "username": requestEmailInput
+      }
+      
+      await axios.post('http://localhost:4000/userToID', params)
+      .then(response => {
+        setTimeout(async() => {
+          try {
+            console.log(response)
+
+            const paramsNewRequest = []
+            if (currentAvailablePeripherals.length !== 0){
+              for (var i = 0; i < currentAvailablePeripherals.length; i++){
+                let currentJson = {
+                  "user_id": response.data.data[0].USER_ID,
+                  "device_id": currentAvailablePeripherals[i],
+                  "return_date": requestDateInput
+                }
+                paramsNewRequest.push(currentJson)
+              }
+              await axios.post('http://localhost:4000/newRequest', paramsNewRequest)
+              .then(response => {
+
+                console.log("send request worked")
+                console.log(response)
+                if (response.data.message.error || response.data.success === -2){
+                  alert("Error: Perihperal Couldn't Be Added")
+                } else {
+                  alert("Peripherals " + currentAvailablePeripherals_SN + " got requested successfully")
+                  window.location.reload()
+                }
+              })
+              .catch(error => {
+                console.log("Add New Request Not Success")
+                console.log(error);
+              })
+            } else {
+              alert("Cannot send request with any available devices to request")
+            }
+
+          } catch (err) {
+            console.log(err)
+          }
+        })
+      }).catch(error => {
+        console.log(error)
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
+  })
+
+}
+
 async function addToList(objects) {
   setTimeout(async() => {
     try {
@@ -312,7 +445,7 @@ async function addToList(objects) {
               for (var j = 0; j < response.data.data.available.length; j++){
                 let currentJson = {
                   "user_id": userID,
-                  "device_id": response.data.data.available[j]
+                  "device_id": response.data.data.available[j],
                 }
                 paramsNewRequest.push(currentJson)
               }
@@ -350,6 +483,28 @@ async function addToList(objects) {
     }
   })
 
+}
+
+function cancelRequest() {
+  setTimeout(async () => {
+    try {
+      setRequest(null);
+      setTotalPeripheralsRequest(0);
+      setCurrentAvailablePeripherals_SN("");
+      setCurrentUnavailablePeripherals_SN("");
+      setCurrentAvailablePeripherals(null);
+      setCurrentUnavailablePeripherals(null);
+    } catch (err) {
+      console.log(err)
+    }
+  })
+}
+
+function changeDateFormat(dateValue){
+  var newDateFormat = new Date(dateValue).toISOString();
+  newDateFormat = newDateFormat.substring(0, 10);
+  newDateFormat = newDateFormat + " 17:00:00";
+  setRequestDateInput(newDateFormat);
 }
   
 const headers = [
@@ -398,6 +553,35 @@ const headers = [
       <div className='pageTitle'>
         <h1>Peripherals</h1>
       </div>
+      {request !== null ? (
+        <div className='windowRequestView'>
+          <div className='whiteBox'>
+            <div className='whiteBoxUp'>
+              <h1>Request Peripheral</h1>
+              <p className="whiteBoxInfo">Number of peripherals available to request: {totalPeripheralsRequest}</p>
+              <p className="whiteBoxInfo">Peripherals available to request: {currentAvailablePeripherals_SN === "" ? "Any" : currentAvailablePeripherals_SN}</p>
+              <p className="whiteBoxInfo">Perihperals not available to request: {currentUnavailablePeripherals_SN === "" ? "Any" : currentUnavailablePeripherals_SN}</p>
+              <div className='emailInputBox'>
+              <TextInput labelText="User Email To Send Request" className='emailInput' value={requestEmailInput} onChange={e => setRequestEmailInput(e.target.value)}></TextInput>
+              </div>
+              <div className='dateInput'>
+              <DatePicker datePickerType="single" onChange={(dateValue) => changeDateFormat(dateValue)}>
+                <DatePickerInput
+                  placeholder="mm/dd/yyyy"
+                  labelText="Select Peripheral Return Date (Hour Limit: 17:00)"
+                  id="date-picker-single"
+                  value={requestDateInput} onChange={e => setRequestDateInput(e.target.value)}
+                />
+              </DatePicker>
+              </div>
+            </div>
+            <div className='whiteBoxDown'>
+              <Button kind="secondary" className="whiteBoxButton" onClick={cancelRequest}>Cancel</Button>
+              <Button className='whiteBoxButton' onClick={addToList2}>Send Request</Button>
+            </div>
+          </div>
+        </div>
+      ): (<></>)}
       { isLoaded ? (
         <DataTable rows={devices} headers={headers} >
         {({
@@ -423,9 +607,9 @@ const headers = [
                   <TableBatchAction
                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                     renderIcon={ShoppingCart32}
-                    onClick={() => addToList(selectedRows)}
+                    onClick={() => windowRequest(selectedRows)}
                     >
-                    Add to list
+                    Make Request
                   </TableBatchAction>
                 </TableBatchActions>
                 <TableToolbarContent
