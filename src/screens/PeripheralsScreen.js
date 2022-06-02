@@ -101,6 +101,7 @@ export default function DevicesScreen() {
             let length_data = response.data.data.length;
             var array_peripherals = []
             for (var i = 0; i < length_data; i++){
+              var route = `${response.data.data[i].DEVICE_ID}`
               var peripheral = {
                 id: `${response.data.data[i].DEVICE_ID}`,
                 deviceType: response.data.data[i].device_type,

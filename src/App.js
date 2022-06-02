@@ -18,6 +18,7 @@ import PeripheralsScreen from './screens/PeripheralsScreen';
 import AddPeripheralScreen from './screens/AddPeripheralScreen';
 import PeriInfoScreen from './screens/PeriInfoScreen';
 import GenerateQR from './screens/GenerateQR';
+import ReaderQR from './screens/ReadQR';
 import RequestScreen from './screens/RequestScreen';
 import UserCreateScreen from './screens/UserCreateScreen';
 import UserListScreen from './screens/UserListScreen';
@@ -53,6 +54,8 @@ function App() {
   );
 }
 
+const role = jsCookie.get("role");
+
 const Routing = () => {
   return (
     <Routes>
@@ -66,9 +69,11 @@ const Routing = () => {
       <Route path="/myPheripherals" element={<ProtectedRoute />}>
         <Route path="/myPheripherals" element={<MyPeripheralsScreen />}/>
       </Route>
+      {(role === '4' || role === '2') ? (
       <Route path="/peripheralList" element={<ProtectedRoute />}>
         <Route path="/peripheralList" element={<PeripheralsScreen />}/>
       </Route>
+      ) : (<></>)}
       <Route path="/peripheralAdd" element={<ProtectedRoute />}>
         <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
       </Route>
@@ -77,6 +82,9 @@ const Routing = () => {
       </Route>
       <Route path="/itemTicket" element={<ProtectedRoute />}>
         <Route path='/itemTicket' element={<GenerateQR />} />
+      </Route>
+      <Route path="/ticketReader" element={<ProtectedRoute />}>
+        <Route path='/ticketReader' element={<ReaderQR />} />
       </Route>
       <Route path="/userCreate" element={<ProtectedRoute />}>
         <Route path='/userCreate' element={<UserCreateScreen />} />

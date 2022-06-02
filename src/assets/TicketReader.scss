@@ -1,0 +1,33 @@
+.readContent{
+    min-width: 1920px;
+    min-width:fit-content;
+    background-color: rgb(237, 237, 237);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 50px;
+}
+
+.contentWrapperQRScan{
+    margin-left: auto;
+    margin-right: auto;
+    width: 512px;
+    text-align: center;
+}
+
+.cameraBox{
+    height: 384px;
+    width: 512px;
+}
+
+.QRScanResultState{
+     font-size: 18px;
+     width: 320px; 
+     height: 100px; 
+     margin-top: 200px;
+     margin-left: 50px;
+}
