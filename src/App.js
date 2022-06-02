@@ -103,7 +103,7 @@ const Routing = () => {
 const ProtectedRoute = () => {
   const Auth = React.useContext(AuthApi)
   if (Auth.isLoaded) {
-    return Auth.auth ? <Outlet /> : <Navigate to="/loginPage" />
+    return Auth.auth ? <Outlet /> : <Navigate to="/" />
   }
 }
 

@@ -138,7 +138,10 @@ export default function MyPeripheralsScreen() {
                                 </div>
                             </div>
                             <div className='peripheral-qr-button'>
-                                <Button className='peri-button' onClick={() => openQr(1)}>Open QR Code</Button>
+                                <Button className='peri-button' onClick={() => openQr('1')}>Open QR Code for Scaner Page</Button>
+                            </div>
+                            <div className='peripheral-qr-button'>
+                                <Button className='peri-button' onClick={() => openQr('http://YOURPERSONALIPWHILEDOINGDEVELOPING:3000/info?id=1')}>Open QR Code for Mobile Scanner</Button>
                             </div>
                         </div>
                     </div>
