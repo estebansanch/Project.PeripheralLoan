@@ -9,6 +9,7 @@ import {
   Routes,
   Outlet
 } from "react-router-dom";
+import IBMLogo from './assets/img/ibm_logo.png';
 
 import AuthApi from './AuthApi';
 import jsCookie from 'js-cookie';
@@ -70,19 +71,41 @@ const Routing = () => {
         </Route>
         <Route path="/myPheripherals" element={<ProtectedRoute />}>
           <Route path="/myPheripherals" element={<MyPeripheralsScreen />}/>
-        </Route>
-        <Route path="/info" element={<ProtectedRoute />}>
-          <Route path="/info" element={<PeriInfoScreen />} />
-        </Route>
+        </Route> 
       </>
     )
   }
+
+  function allButNorm(){
+    if (role !== '1'){
+    return(
+        <Route path="/info" element={<ProtectedRoute />}>
+          <Route path="/info" element={<PeriInfoScreen />} />
+        </Route>
+      )
+    }
+    else{
+      return(
+        <Route path="/info" element={<ProtectedRoute />}>
+          <Route path="/info" element={<AccessDenied />} />
+        </Route>
+      )
+    }
+  }
+
 
   function adminsNfocals(){
     if (role === '4' || role === '2'){
       return(
         <Route path="/peripheralList" element={<ProtectedRoute />}>
           <Route path="/peripheralList" element={<PeripheralsScreen />}/>
+        </Route>
+      )
+    }
+    else{
+      return(
+        <Route path="/peripheralList" element={<ProtectedRoute />}>
+          <Route path="/peripheralList" element={<AccessDenied />}/>
         </Route>
       )
     }    
@@ -107,6 +130,24 @@ const Routing = () => {
         </>
       )
     }
+    else{
+      return(
+        <>
+          <Route path="/peripheralAdd" element={<ProtectedRoute />}>
+            <Route path="/peripheralAdd" element={<AccessDenied />}/>
+          </Route>
+          {/* <Route path="/itemTicket" element={<ProtectedRoute />}>
+            <Route path='/itemTicket' element={<AccessDenied />} />
+          </Route> */}
+          <Route path="/ticketReader" element={<ProtectedRoute />}>
+            <Route path='/ticketReader' element={<AccessDenied />} />
+          </Route>
+          <Route path="/requestScreen" element={<ProtectedRoute />}>
+            <Route path="/requestScreen" element={<AccessDenied />}/>
+          </Route>
+        </>
+      )
+    }
   }
 
   function adminOnly(){
@@ -122,11 +163,24 @@ const Routing = () => {
         </>
       )
     }
+    else{
+      return(
+        <>
+          <Route path="/userCreate" element={<ProtectedRoute />}>
+            <Route path='/userCreate' element={<AccessDenied />} />
+          </Route>
+          <Route path="/userList" element={<ProtectedRoute />}>
+            <Route path='/userList' element={<AccessDenied />} />
+          </Route>
+        </>
+      )
+    }
   }
 
   return (
     <Routes>
       {allAccess()}
+      {allButNorm()}
       {adminsNfocals()}
       {adminNsecurity()}
       {adminOnly()}    
@@ -152,8 +206,19 @@ const RouteNotFound = () => {
   return(
     <div className='routeNotFound'>
       <div>
-        <img src="https://myleanacademy.com/wp-content/uploads/2020/01/logo-ibm-png-ibm-logo-png-4464.png" alt="IBM Logo" className='imgIbmNotFound'/>
+        <img src={IBMLogo} alt="IBM Logo" className='imgIbmNotFound'/>
         <h1>404 NOT FOUND - URL NOT FOUND</h1>
+      </div>
+    </div>
+  )
+}
+
+const AccessDenied = () => {
+  return(
+    <div className='routeNotFound'>
+      <div>
+        <img src={IBMLogo} alt="IBM Logo" className='imgIbmNotFound'/>
+        <h1>403 - FORBIDDEN ACCESS</h1>
       </div>
     </div>
   )
