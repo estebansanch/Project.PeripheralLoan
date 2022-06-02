@@ -57,44 +57,79 @@ function App() {
 const role = jsCookie.get("role");
 
 const Routing = () => {
+  
+  function allAccess(){
+    return (
+      <>
+        {/* <Route exact path="/" element={<LandingPageScreen />}/> */}
+        <Route path="/" element={<ProtectedLogin />}>
+          <Route path="/" element={<LoginScreen />}/>
+        </Route>
+        <Route path="/mainPage" element={<ProtectedRoute />}>
+          <Route path="/mainPage" element={<MainPageScreen />}/>
+        </Route>
+        <Route path="/myPheripherals" element={<ProtectedRoute />}>
+          <Route path="/myPheripherals" element={<MyPeripheralsScreen />}/>
+        </Route>
+        <Route path="/info" element={<ProtectedRoute />}>
+          <Route path="/info" element={<PeriInfoScreen />} />
+        </Route>
+      </>
+    )
+  }
+
+  function adminsNfocals(){
+    if (role === '4' || role === '2'){
+      return(
+        <Route path="/peripheralList" element={<ProtectedRoute />}>
+          <Route path="/peripheralList" element={<PeripheralsScreen />}/>
+        </Route>
+      )
+    }    
+  }
+
+  function adminNsecurity(){
+    if (role === '4' || role === '3'){
+      return(
+        <>
+          <Route path="/peripheralAdd" element={<ProtectedRoute />}>
+            <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
+          </Route>
+          {/* <Route path="/itemTicket" element={<ProtectedRoute />}>
+            <Route path='/itemTicket' element={<GenerateQR />} />
+          </Route> */}
+          <Route path="/ticketReader" element={<ProtectedRoute />}>
+            <Route path='/ticketReader' element={<ReaderQR />} />
+          </Route>
+          <Route path="/requestScreen" element={<ProtectedRoute />}>
+            <Route path="/requestScreen" element={<RequestScreen />}/>
+          </Route>
+        </>
+      )
+    }
+  }
+
+  function adminOnly(){
+    if (role === '4'){
+      return(
+        <>
+          <Route path="/userCreate" element={<ProtectedRoute />}>
+            <Route path='/userCreate' element={<UserCreateScreen />} />
+          </Route>
+          <Route path="/userList" element={<ProtectedRoute />}>
+            <Route path='/userList' element={<UserListScreen />} />
+          </Route>
+        </>
+      )
+    }
+  }
+
   return (
     <Routes>
-      {/* <Route exact path="/" element={<LandingPageScreen />}/> */}
-      <Route path="/" element={<ProtectedLogin />}>
-        <Route path="/" element={<LoginScreen />}/>
-      </Route>
-      <Route path="/mainPage" element={<ProtectedRoute />}>
-        <Route path="/mainPage" element={<MainPageScreen />}/>
-      </Route>
-      <Route path="/myPheripherals" element={<ProtectedRoute />}>
-        <Route path="/myPheripherals" element={<MyPeripheralsScreen />}/>
-      </Route>
-      {(role === '4' || role === '2') ? (
-      <Route path="/peripheralList" element={<ProtectedRoute />}>
-        <Route path="/peripheralList" element={<PeripheralsScreen />}/>
-      </Route>
-      ) : (<></>)}
-      <Route path="/peripheralAdd" element={<ProtectedRoute />}>
-        <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
-      </Route>
-      <Route path="/info" element={<ProtectedRoute />}>
-        <Route path="/info" element={<PeriInfoScreen />} />
-      </Route>
-      <Route path="/itemTicket" element={<ProtectedRoute />}>
-        <Route path='/itemTicket' element={<GenerateQR />} />
-      </Route>
-      <Route path="/ticketReader" element={<ProtectedRoute />}>
-        <Route path='/ticketReader' element={<ReaderQR />} />
-      </Route>
-      <Route path="/userCreate" element={<ProtectedRoute />}>
-        <Route path='/userCreate' element={<UserCreateScreen />} />
-      </Route>
-      <Route path="/userList" element={<ProtectedRoute />}>
-        <Route path='/userList' element={<UserListScreen />} />
-      </Route>
-      <Route path="/requestScreen" element={<ProtectedRoute />}>
-        <Route path="/requestScreen" element={<RequestScreen />}/>
-      </Route>
+      {allAccess()}
+      {adminsNfocals()}
+      {adminNsecurity()}
+      {adminOnly()}    
       <Route path="*" element={<RouteNotFound />}/>
     </Routes>
   )
