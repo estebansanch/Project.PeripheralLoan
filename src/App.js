@@ -77,6 +77,7 @@ const Routing = () => {
       <Route path="/peripheralAdd" element={<ProtectedRoute />}>
         <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
       </Route>
+      {(role !== )}
       <Route path="/info" element={<ProtectedRoute />}>
         <Route path="/info" element={<PeriInfoScreen />} />
       </Route>
