@@ -21,6 +21,7 @@ import GenerateQR from './screens/GenerateQR';
 import RequestScreen from './screens/RequestScreen';
 import UserCreateScreen from './screens/UserCreateScreen';
 import UserListScreen from './screens/UserListScreen';
+import MyPeripheralsScreen from './screens/MyPeripheralsScreen';
 
 function App() {
 
@@ -61,6 +62,9 @@ const Routing = () => {
       </Route>
       <Route path="/mainPage" element={<ProtectedRoute />}>
         <Route path="/mainPage" element={<MainPageScreen />}/>
+      </Route>
+      <Route path="/myPheripherals" element={<ProtectedRoute />}>
+        <Route path="/myPheripherals" element={<MyPeripheralsScreen />}/>
       </Route>
       <Route path="/peripheralList" element={<ProtectedRoute />}>
         <Route path="/peripheralList" element={<PeripheralsScreen />}/>

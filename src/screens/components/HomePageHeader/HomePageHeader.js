@@ -64,7 +64,7 @@ export default function HomePageHeader() {
                 </SideNavLink>
                 <SideNavLink
                     renderIcon={Home32}
-                    href="">
+                    href="/myPheripherals">
                     My Peripherals Asigned
                 </SideNavLink>
                 {/* <SideNavLink
