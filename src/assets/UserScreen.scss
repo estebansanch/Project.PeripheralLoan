@@ -1,0 +1,125 @@
+.devicesPageCont2 {
+    background-color: rgb(237, 237, 237);
+    width: 60%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+.userListView {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.windowRequestView {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 4;
+    transform: translate(-100px);
+    justify-content: center;
+    align-items: center;
+}
+
+.whiteBox { 
+    display: flex;
+    width: 100vh;
+    height: 50vh;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;;
+}
+
+.whiteBoxUp {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.emailInputBox {
+    margin: 10px 0px;
+}
+
+.emailInput {
+    width: 50vh;
+}
+
+.dateInput {
+    margin: 10px 0px;
+}
+
+.whiteBoxInfo {
+    font-size: 18px;
+    margin: 5px 0px;
+}
+
+.whiteBoxDown {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #e0e0e0;
+}
+
+.whiteBoxButton {
+    margin: 0px 50px;
+    width: 20vh;
+    height: 7vh;
+}
+
+.buttonInfo {
+    padding: 15px 25px;
+    background-color: #1064fc;
+    text-decoration: none;
+    color: white;
+}
+
+.buttonInfo:hover {
+    background-color: #0854ec;
+}
+
+.pageTitle {
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.actionsSection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    padding: 0 100px;
+    margin-top: 10px;
+}
+
+.searchStyle {
+    width: 50vh;
+}
+
+.dataTable {
+    width: 150px;
+    background-color: transparent;
+}
+
+.iconCircle {
+    width: 2.5vh;
+    height: 2.5vh;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../assets/DevicesScreen.scss";
+import "../assets/UserScreen.scss";
 import CrossRedCircle from "../assets/img/Cross_red_circle.png";
 import TickGreenCircle from "../assets/img/Tick_green_circle.png";
 import HomePageHeader from "./components/HomePageHeader";
@@ -31,35 +31,8 @@ export default function UserListScreen() {
     const [pages, setPages] = useState(0);
     const [limit, setLimit] = useState(10);
     const [current_page, setCurrentPage] = useState(1);
-    const [devices, setDevices] = useState([]);
+    const [userData, setUserData] = useState([]);
 
-    function openInfo(id) {
-        // var deviceID = id;
-        // module.exports = deviceID;
-    }
-    /*
-      function update_limit(num){
-        //console.log("sending num:", num)
-        setLimit(num)
-        //console.log("new limit", limit)
-        setPages(Math.ceil(count / limit))
-        return num
-      };
-      */
-
-    /*
-      async function getPeripheralCount(){
-        await axios.get('http://rancho-back.mybluemix.net/countDevices')
-        .then(response => {
-            setCount(response.data.data.count)
-        })
-        .catch(error => {
-          console.log("Request attempt to get devices count failed")
-          console.log(error);
-        })
-      };
-    
-      */
 
     async function update(page, page_size) {
         setTimeout(async () => {
@@ -67,153 +40,46 @@ export default function UserListScreen() {
             try {
                 setCurrentPage(page);
                 setLimit(page_size);
-                setPages(Math.ceil(count / limit));
 
                 var params = {
                     limit: page_size,
                     page: page,
                 };
                 console.log("params:", params);
-                await axios
-                    .post("http://localhost:4000/getDevices", params)
-                    .then((response) => {
-                        console.log(response.data.data);
-                        console.log("length of data", response.data.data.length);
-                        let length_data = response.data.data.length;
-                        var array_peripherals = [];
-                        for (var i = 0; i < length_data; i++) {
-                            console.log(response.data.data[i].ID);
-                            var peripheral = {
-                                id: response.data.data[i].DEVICE_ID,
-                                deviceType: response.data.data[i].device_type,
-                                brand: response.data.data[i].brand,
-                                model: response.data.data[i].model,
-                                serial: response.data.data[i].serial_number,
-                                acceptedCond: response.data.data[i].conditions_accepted ? (
-                                    <img
-                                        src={TickGreenCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ) : (
-                                    <img
-                                        src={CrossRedCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ),
-                                inCampus: response.data.data[i].in_campus ? (
-                                    <img
-                                        src={TickGreenCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ) : (
-                                    <img
-                                        src={CrossRedCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ),
-                                securityAutorization: response.data.data[i].Security_Auth ? (
-                                    <img
-                                        src={TickGreenCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ) : (
-                                    <img
-                                        src={CrossRedCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ),
-                                deviceStatus: response.data.data[i].device_state,
-                                button: (
-                                    <Link
-                                        className="buttonInfo"
-                                        to="/info"
-                                        state={{ peripheralID: response.data.data[i].ID }}
-                                    >
-                                        Peripheral Info
-                                    </Link>
-                                ),
-                            };
-                            array_peripherals.push(peripheral);
+                await axios.post('http://localhost:4000/users', params)
+                .then(response => {
+                    var array_requests = [];
+                    for (var i = 0; i < response.data.data.length; i++){
+                        var request = {
+                            id: response.data.data[i].USER_ID,
+                            email: response.data.data[i].USERNAME,
+                            role: response.data.data[i].ROLE,
+                            button: <Button>Edit User</Button>
                         }
-                        console.log("array peripherals", array_peripherals);
-                        setDevices(array_peripherals);
-                        console.log("peripherals inside request", devices);
-                        setIsLoaded(true);
-                    })
-                    .catch((error) => {
-                        console.log("Request attempt to get devices failed");
-                        console.log(error);
-                    });
+                        array_requests.push(request);
+                    }
+                    setUserData(array_requests);
+                    console.log(response)
+                    setIsLoaded(true);
+                })
+                .catch(error => {
+                    console.log("Attempt to get request of users failed")
+                    console.log(error)
+                })
+                
             } catch (err) {
                 console.log(err);
             }
         });
     }
 
-    /*
-      async function getPeripherals(){
-        var params = {
-          "limit": limit,
-          "page": current_page
-        }
-        console.log("params:", params)
-        await axios.post('http://rancho-back.mybluemix.net/getDevices', params)
-        .then(response => {
-            console.log(response.data.data)
-            console.log("length of data", response.data.data.length)
-            let length_data = response.data.data.length;
-            var array_peripherals = []
-            for (var i = 0; i < length_data; i++){
-              console.log(response.data.data[i].ID)
-              var peripheral = {
-                id: response.data.data[i].ID,
-                deviceType: response.data.data[i].device_type,
-                brand: response.data.data[i].brand,
-                model: response.data.data[i].model,
-                serial: response.data.data[i].serial_number,
-                acceptedCond: response.data.data[i].conditions_accepted ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
-                inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
-                securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
-                button: <Button>Log Device Output</Button>,
-              }
-              array_peripherals.push(peripheral);
-            }
-            console.log("array peripherals", array_peripherals)
-            setDevices(array_peripherals)
-            
-            setIsLoaded(true);
-            if (isLoaded){
-              console.log("peripherals inside request", devices)
-            }
-        })
-        .catch(error => {
-          console.log("Request attempt to get devices failed")
-          console.log(error);
-        })
-      };
-      */
-
-    /*
-      React.useEffect(() => {
-        getPeripheralCount();
-        setPages(Math.ceil(count / limit))
-        getPeripherals()
-        console.log("peripherals", devices)
-      }, [])
-    */
     React.useEffect(() => {
         setTimeout(async () => {
             // setIsLoading(false);
             try {
-                const responseCount = await axios
-                    .get("http://localhost:4000/countDevices")
+                const responseCount = await axios.get("http://localhost:4000/countUsers")
                     .then((response) => {
+                        console.log(response.data.data.count)
                         setCount(response.data.data.count);
                         return response.data.data.count;
                     })
@@ -231,129 +97,44 @@ export default function UserListScreen() {
                     page: 1,
                 };
                 console.log("params:", params);
-                await axios
-                    .post("http://localhost:4000/getDevices", params)
-                    .then((response) => {
-                        console.log(response.data.data);
-                        console.log("length of data", response.data.data.length);
-                        let length_data = response.data.data.length;
-                        var array_peripherals = [];
-                        for (var i = 0; i < length_data; i++) {
-                            console.log(response.data.data[i].ID);
-                            var peripheral = {
-                                id: response.data.data[i].DEVICE_ID,
-                                deviceType: response.data.data[i].device_type,
-                                brand: response.data.data[i].brand,
-                                model: response.data.data[i].model,
-                                serial: response.data.data[i].serial_number,
-                                acceptedCond: response.data.data[i].conditions_accepted ? (
-                                    <img
-                                        src={TickGreenCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ) : (
-                                    <img
-                                        src={CrossRedCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ),
-                                inCampus: response.data.data[i].in_campus ? (
-                                    <img
-                                        src={TickGreenCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ) : (
-                                    <img
-                                        src={CrossRedCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ),
-                                securityAutorization: response.data.data[i].Security_Auth ? (
-                                    <img
-                                        src={TickGreenCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ) : (
-                                    <img
-                                        src={CrossRedCircle}
-                                        alt="iconCircle"
-                                        className="iconCircle"
-                                    />
-                                ),
-                                deviceStatus: response.data.data[i].device_state,
-                                button: (
-                                    <Link
-                                        className="buttonInfo"
-                                        to="/info"
-                                        state={{ peripheralID: response.data.data[i].ID }}
-                                    >
-                                        Peripheral Info
-                                    </Link>
-                                ),
-                            };
-                            array_peripherals.push(peripheral);
+                await axios.post('http://localhost:4000/users', params)
+                .then(response => {
+                    var array_requests = [];
+                    for (var i = 0; i < response.data.data.length; i++){
+                        var request = {
+                            id: response.data.data[i].USER_ID,
+                            email: response.data.data[i].USERNAME,
+                            role: response.data.data[i].ROLE,
+                            button: <Button>Edit User</Button>
                         }
-                        console.log("array peripherals", array_peripherals);
-                        setDevices(array_peripherals);
-                    })
-                    .catch((error) => {
-                        console.log("Request attempt to get devices failed");
-                        console.log(error);
-                    });
+                        array_requests.push(request);
+                    }
+                    setUserData(array_requests);
+                    console.log(response)
+                    setIsLoaded(true);
+                })
+                .catch(error => {
+                    console.log("Attempt to get request of users failed")
+                    console.log(error)
+                })
 
-                setIsLoaded(true);
             } catch (err) {
                 console.log(err);
             }
         });
     }, []);
 
-    /*
-      React.useEffect(() => {
-        setIsLoaded(false);
-        console.log("current page:", current_page)
-        console.log("limit:", limit)
-        getPeripherals()
-        setIsLoaded(true);
-      }, [current_page, limit])
-    
-      React.useEffect(() => {
-        console.log("devices", devices)
-      }, [devices])
-    
-    */
-
-    /*
-            <div className='pageTitle'>
-              <h1>Devices</h1>
-            </div>
-            <div className='actionsSection'>
-              <Search
-                  size="lg"
-                  id="search-1"
-                  value={searchDevice} 
-                  onChange={e => setSearchDevice(e.target.value)}
-                  className='searchStyle'
-              />
-              <Button>Hola</Button>
-            </div>
-      */
-
-
     return (
         <>
-            <div className="devicesPageCont">
+        <div className="userListView">
+
+            <div className="devicesPageCont2">
                 <HomePageHeader />
                 <div className="pageTitle">
                     <h1>Users</h1>
                 </div>
                 {isLoaded ? (
-                    <DataTable rows={rows} headers={headers}>
+                    <DataTable rows={userData} headers={headers}>
                         {({
                             rows,
                             headers,
@@ -497,6 +278,7 @@ export default function UserListScreen() {
                     </div>
                 )}
             </div>
+        </div>
         </>
     );
 }
@@ -505,16 +287,8 @@ export default function UserListScreen() {
 
 const headers = [
     {
-        key: "userName",
-        header: "Username",
-    },
-    {
         key: "email",
         header: "Email",
-    },
-    {
-        key: "userSerial",
-        header: "Serial",
     },
     {
         key: 'role',
@@ -523,32 +297,5 @@ const headers = [
     {
         key: "button",
         header: "",
-    },
-];
-
-const rows = [
-    {
-        id: 'a',
-        userName: 'Admin IBM',
-        email: 'admin@ibm.com',
-        userSerial: 'ZWDTHTQCA00028BN',
-        role: '4',
-        button: <Button>Edit</Button>,
-    },
-    {
-        id: 'b',
-        userName: 'Security IBM',
-        email: 'security@ibm.com',
-        userSerial: 'ZWDTHTQCA00028BN',
-        role: '3',
-        button: <Button>Edit</Button>,
-    },
-    {
-        id: 'c',
-        userName: 'User IBM',
-        email: 'user@ibm.com',
-        userSerial: 'ZWDTHTQCA00028BN',
-        role: '1',
-        button: <Button>Edit</Button>,
     },
 ];

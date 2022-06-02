@@ -16,12 +16,10 @@ import axios from 'axios';
 //Uninstall @carbon/layout if it doesn't compile
 export default function UserCreateScreen() {
     var dummy_state = {
-        "device_params": {
-            "device_type": "",
-            "brand": "",
-            "model": "",
-            "serial_number": "",
-            "state": ""
+        "user_params": {
+            "username": "",
+            "password": "",
+            "role": ""
         }
     }
     function handleInputChange(event){
@@ -29,7 +27,7 @@ export default function UserCreateScreen() {
         const value = target.value;
         const name = target.name;
 
-        dummy_state["device_params"][name] = value
+        dummy_state["user_params"][name] = value
         console.log(dummy_state)
     };
 
@@ -70,51 +68,50 @@ export default function UserCreateScreen() {
                 }}
                 >
                         <TextInput
-                            labelText="Name."
-                            //id="model"
-                            className='between-lines'
-                            //name="model"
-                            onChange={handleInputChange}
-                        />
-                        <TextInput
                             labelText="Email."
-                            //id="serial_number"
+                            id="username"
                             className='between-lines'
-                            //name="serial_number"
+                            name="username"
                             onChange={handleInputChange}
                         />
                         <TextInput
-                            labelText="Serial."
-                            //id="serial_number"
+                            labelText="Password."
+                            id="password"
                             className='between-lines'
-                            //name="serial_number"
+                            name="password"
                             onChange={handleInputChange}
                         />
-                        <fieldset>
-                            <legend>Is Admin?</legend>
-                            <Checkbox 
-                                id="checkbox-admin" /
+                        <Select defaultValue="placeholder-item"
+                            id="role"
+                            labelText="Select a Role."
+                            size="md"
+                            className='between-lines'
+                            name="role"
+                            onChange={handleInputChange}
                             >
-                        </fieldset>
-                        <fieldset>
-                            <legend>Permits</legend>
-                            <Checkbox 
-                                labelText='Register Check-In' 
-                                id="checkbox-checkin" /
-                            >
-                            <Checkbox 
-                                labelText='Register Check-Out' 
-                                id="checkbox-checkout" /
-                            >
-                            <Checkbox 
-                                labelText='Security' 
-                                id="checkbox-security" /
-                            >
-                            <Checkbox 
-                                labelText='Report' 
-                                id="checkbox-report" /
-                            >
-                        </fieldset>
+                            <SelectItem
+                                disabled
+                                hidden
+                                text="Choose a role"
+                                value="placeholder-item"
+                            />
+                            <SelectItem
+                                text="Normal User"
+                                value="1"
+                            />
+                            <SelectItem
+                                text="Focal"
+                                value="2"
+                            />
+                            <SelectItem
+                                text="Security"
+                                value="3"
+                            />
+                            <SelectItem
+                                text="Admin"
+                                value="4"
+                            />
+                        </Select>
                         <Button
                         id="create_user"
                         onClick={newUserDummy}
