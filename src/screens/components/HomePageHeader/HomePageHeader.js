@@ -86,6 +86,12 @@ export default function HomePageHeader() {
                         <SideNavMenuItem href="/requestScreen">
                         Peripherals Requests
                         </SideNavMenuItem>
+                       
+                    ) : (<></>)}
+                    {(role === '4' || role === '3') ? (
+                        <SideNavMenuItem href="/ticketReader">
+                            Scan Peripheral QR Code
+                        </SideNavMenuItem>
                     ) : (<></>)}
                 </SideNavMenu>
                 ): (<></>)}

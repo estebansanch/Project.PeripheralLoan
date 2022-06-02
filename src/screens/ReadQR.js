@@ -9,7 +9,7 @@ export default function ReaderQR(){
     const handleScan = data => {
         if (data) {
             setQrscan(data)
-            window.location=data
+           window.location.href = `http://localhost:3000/info?id=${data}`;
         }
     }
     const handleError = err => {
@@ -30,7 +30,6 @@ export default function ReaderQR(){
                   delay={300}
                   onError={handleError}
                   onScan={handleScan}
-                  style={{ height: 240, width: 320 }}
               />
           </div>
 

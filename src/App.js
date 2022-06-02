@@ -53,6 +53,8 @@ function App() {
   );
 }
 
+const role = jsCookie.get("role");
+
 const Routing = () => {
   return (
     <Routes>
@@ -63,21 +65,23 @@ const Routing = () => {
       <Route path="/mainPage" element={<ProtectedRoute />}>
         <Route path="/mainPage" element={<MainPageScreen />}/>
       </Route>
+      {(role === '4' || role === '2') ? (
       <Route path="/peripheralList" element={<ProtectedRoute />}>
         <Route path="/peripheralList" element={<PeripheralsScreen />}/>
       </Route>
+      ) : (<></>)}
       <Route path="/peripheralAdd" element={<ProtectedRoute />}>
         <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
       </Route>
       <Route path="/info" element={<ProtectedRoute />}>
         <Route path="/info" element={<PeriInfoScreen />} />
       </Route>
-      {/* <Route path="/itemTicket" element={<ProtectedRoute />}> */}
+      <Route path="/itemTicket" element={<ProtectedRoute />}>
         <Route path='/itemTicket' element={<GenerateQR />} />
-      {/* </Route> */}
-      {/* <Route path="/ticketReader" element={<ProtectedRoute />}> */}
+      </Route>
+      <Route path="/ticketReader" element={<ProtectedRoute />}>
         <Route path='/ticketReader' element={<ReaderQR />} />
-      {/* </Route> */}
+      </Route>
       <Route path="/userCreate" element={<ProtectedRoute />}>
         <Route path='/userCreate' element={<UserCreateScreen />} />
       </Route>
