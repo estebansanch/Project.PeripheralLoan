@@ -33,13 +33,11 @@ export default function InfoScreen(){
               var params = {
                 "deviceID": IdFromURL
               }
-              console.log("If 1", IdFromURL)
             }
             else {
               var params = {
                 "deviceID": location.state.peripheralID,
               }
-              console.log("Else 2")
             }
             console.log("Param sent: ", params)
             await axios.post('http://localhost:4000/getDeviceInfo', params)
@@ -140,9 +138,15 @@ export default function InfoScreen(){
                       </ul>
                     </div>
                   </div>
-                    <div className="infoQRCode">
-                      {peripheralInfo.qrCode}
-                    </div>
+                  <div className='infoButtonBox'>
+                    {peripheralInfo.inCampus === 0 ? (
+                    <Button className='inNoutButton'>Register Return</Button>) :
+                     (<Button className='inNoutButton'>Register Exit</Button>)}
+                     <Button className='delistPeriButton'>Remove from Inventory</Button>
+                  </div>
+                  <div className="infoQRCode">
+                    {peripheralInfo.qrCode}
+                  </div>
                 </div>
       
               </div>
