@@ -8,38 +8,35 @@ import KeyboardSVG from '../assets/img/keyboard.svg'
 import HomePageHeader from './components/HomePageHeader'
 import { 
     Button,
-    DataTable, 
-    TableContainer, 
-    TableToolbar,
-    TableToolbarContent,
-    TableToolbarSearch,
-    TableToolbarMenu,
-    TableToolbarAction,
-    Table,
-    TableHead,
-    TableRow,
-    TableHeader,
-    TableBody,
-    TableCell,
-    Pagination,
-    DataTableSkeleton,
-    Dropdown
 } from 'carbon-components-react';
 
 import QRCode from "react-qr-code";
-
-
+import jsCookie from 'js-cookie';
+const userID = jsCookie.get("id");
 
 export default function MyPeripheralsScreen() {
 
-    const [isLoaded, setIsLoaded] = useState(true);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [qrData, setQrData] = useState(-1);
+    const [userData, setUserData] = useState([]);
 
     React.useEffect(() => {
         setTimeout(async() => {
           // setIsLoading(false);
           try {
-              const hola = "hola";
+              console.log("USERID: ", userID)
+              const params = {
+                  "userID": userID
+              }
+              await axios.post('http://localhost:4000/getUserRequests', params)
+              .then(response => {
+                console.log(response)
+                setUserData(response.data.data)
+                setIsLoaded(true)
+              })
+              .catch(error => {
+                  console.log(error)
+              })
     
           } catch(err) {
             console.log(err)
@@ -113,38 +110,58 @@ export default function MyPeripheralsScreen() {
                     <h1>My Peripherals Asigned</h1>
                 </div>
                 {isLoaded ? (
+
                     <div className='peripherals-assigned-view'>
-                        <div className='peripheral-item'>
-                            <div className='peripheral-img-view'>
-                                <img src={MonitorSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img'/>
-                            </div>
-                            <div className='peripheral-type-view'>
-                                <p className='peripheral-type'>Monitor</p>
-                            </div>
-                            <div className='peripheral-info-view'>
-                                <div className='peripheral-info-view-left'>
-                                    <ul>
-                                        <li className='peripheral-info'>Brand: </li>
-                                        <li className='peripheral-info'>Model: </li>
-                                        <li className='peripheral-info'>Serial: </li>
-                                    </ul>
+                        {userData.map((data) => (             
+                            <div className='peripheral-item'>
+                                <div className='peripheral-img-view'>
+                                    {data.device_type === 'monitor' ? (
+                                        <img src={MonitorSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
+                                    ) : (<></>)}
+
+                                    {data.device_type === 'headset' ? (
+                                        <img src={HeadsetSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
+                                    ) : (<></>)}
+
+                                    {data.device_type === 'keyboard' ? (
+                                        <img src={KeyboardSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
+                                    ) : (<></>)}
+                                    {data.device_type === 'mouse' ? (
+                                        <img src={MouseSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
+                                    ) : (<></>)}
                                 </div>
-                                <div className='peripheral-info-view-rigth'>
-                                    <ul>
-                                        <li className='peripheral-info'>apple</li>
-                                        <li className='peripheral-info'>Pro Mouse</li>
-                                        <li className='peripheral-info'>1412972</li>
-                                    </ul>
+                                <div className='peripheral-type-view'>
+                                    <p className='peripheral-type'>{data.device_type}</p>
+                                </div>
+                                <div className='peripheral-info-view'>
+                                    <div className='peripheral-info-section'>
+                                        <p className='peripheral-info-left'>Brand:</p>
+                                        <p className='peripheral-info-right'>{data.brand}</p>
+                                    </div>
+                                    <div className='peripheral-info-section'>
+                                        <p className='peripheral-info-left'>Model:</p>
+                                        <p className='peripheral-info-right'>{data.model}</p>
+                                    </div>
+                                    <div className='peripheral-info-section'>
+                                        <p className='peripheral-info-left'>Serial:</p>
+                                        <p className='peripheral-info-right'>{data.serial_number}</p>
+                                    </div>
+                                    <div className='peripheral-info-section'>
+                                        <p className='peripheral-info-left-special'>Return Date:</p>
+                                        <p className='peripheral-info-right'>{data.RETURN_DATE.substring(0, 16)}</p>
+                                    </div>
+                                </div>
+                                <div className='peripheral-qr-button'>
+                                    <Button className='peri-button' onClick={() => openQr(`${data.DEVICE_ID}`)}>Open QR Code for Scaner Page</Button>
+                                </div>
+                                <div className='peripheral-qr-button'>
+                                    <Button className='peri-button' onClick={() => openQr(`http://YOURPERSONALIPWHILEDOINGDEVELOPING:3000/info?id=${data.DEVICE_ID}`)}>Open QR Code for Mobile Scanner</Button>
                                 </div>
                             </div>
-                            <div className='peripheral-qr-button'>
-                                <Button className='peri-button' onClick={() => openQr('1')}>Open QR Code for Scaner Page</Button>
-                            </div>
-                            <div className='peripheral-qr-button'>
-                                <Button className='peri-button' onClick={() => openQr('http://YOURPERSONALIPWHILEDOINGDEVELOPING:3000/info?id=1')}>Open QR Code for Mobile Scanner</Button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+                    
+
                 ) : (
                     <div>
 
