@@ -6,19 +6,23 @@ import {
   Search, SideNavMenuItem, SideNavLink,  HeaderMenu
 } from 'carbon-components-react';
 import {
- Notification32, DotMark32, Home32, App32
+ NotificationNew32, Notification32, DotMark32, Home32, User32
   } from '@carbon/icons-react';
 import jsCookie from 'js-cookie';
+import "./homepage.scss";
 
 export default function HomePageHeader() {
     
-    function LogOut() {
-        jsCookie.remove('user', { path: "/"});
-        jsCookie.remove('role', { path: "/"});
+
+    function signOut() {
+        jsCookie.remove('user', { path: "/" });
+        jsCookie.remove('role', { path: "/" });
+        jsCookie.remove('username', { path: "/" });
         localStorage.clear();
         window.location.href='/';
     }
-
+    
+    const userName = jsCookie.get("user");
     const role = jsCookie.get("role");
 
     return(
@@ -39,17 +43,32 @@ export default function HomePageHeader() {
             <HeaderNavigation aria-label="IBM [Platform]">
                 <Search />
             </HeaderNavigation >
-            <HeaderGlobalBar style={{flex:6}}>
-                <HeaderGlobalAction
-                aria-label="Notifications">
-                <Notification32 />
-                </HeaderGlobalAction >
-            </HeaderGlobalBar>
             <HeaderGlobalBar >
-                <HeaderMenu style={{marginRight:20, borderWidth:40}} aria-label="Account" menuLinkName=" My Account"> 
-                    <HeaderMenuItem style={{marginTop:40}} href="#">Account Settings</HeaderMenuItem>
-                    <HeaderMenuItem onClick={LogOut}>Log out</HeaderMenuItem>
-                </HeaderMenu>
+                <HeaderNavigation aria-label='Global Header Navigation' className='glblHeaderNav'>
+                    <HeaderMenu menuLinkName='' aria-label={'Notifications'}
+                    renderMenuContent={() => {
+                        return (
+                            <Notification32 className='Notifications' />
+                        );
+                    }}>
+                    </HeaderMenu>
+                    <HeaderMenu menuLinkName='' aria-label={'UserName'}
+                    renderMenuContent={() => {
+                        return(
+                            <>
+                                <User32 className='userIcon' />
+                                <div className='userName'>{userName}</div>
+                            </>
+                        );
+                    }}>
+                        <HeaderMenuItem aria-label='Account Settings'>
+                            Account Settings
+                        </HeaderMenuItem>
+                        <HeaderMenuItem aria-label='Sign Out' onClick={signOut}>
+                            Sign Out
+                        </HeaderMenuItem>
+                    </HeaderMenu>
+                </HeaderNavigation>
             </HeaderGlobalBar>
             <SideNav
                 aria-label="Side navigation"
