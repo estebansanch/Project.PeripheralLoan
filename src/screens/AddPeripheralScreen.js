@@ -96,7 +96,7 @@ export default function AddDeviceScreen() {
                             />
                             <SelectItem
                                 text="Keyboard"
-                                value="Keyboard"
+                                value="keyboard"
                             />
                         </Select>
                         <Select defaultValue="placeholder-item"

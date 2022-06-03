@@ -34,8 +34,8 @@
 .peripheral-item {
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 60vh;
+    width: 28vw;
+    height: 80vh;
     background-color: white;
     margin: 20px 20px;
     border-radius: 15px;
@@ -63,21 +63,41 @@
 
 .peripheral-info-view {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    text-align: center;
+    width: 80%;
     height: 30%;
+    margin: 10px 0px;
 }
 
 .peripheral-info {
-    font-size: 1.8vw;
+    font-size: 1.5vw;
     margin: 10px 0;
 }
 
-.peripheral-info-view-left {
-    margin-right: 5%;
+.peripheral-info-left {
+    font-size: 1.2vw;
+    margin: 10px 0;
+    margin-right: 10px;
+}
 
+.peripheral-info-left-special {
+    font-size: 1.2vw;
+    margin: 10px 0;
+    margin-right: 10px;
+    color: red;
+}
+
+.peripheral-info-right {
+    font-size: 1.2vw;
+    margin: 10px 0;
+}
+
+.peripheral-info-section {
+    display: flex;
+    flex-direction: row;
 }
 
 .peripheral-qr-button {
