@@ -24,6 +24,7 @@ import RequestScreen from './screens/RequestScreen';
 import UserCreateScreen from './screens/UserCreateScreen';
 import UserListScreen from './screens/UserListScreen';
 import MyPeripheralsScreen from './screens/MyPeripheralsScreen';
+import EditUserScreen from './screens/EditUserScreen';
 
 function App() {
 
@@ -97,16 +98,26 @@ const Routing = () => {
   function adminsNfocals(){
     if (role === '4' || role === '2'){
       return(
+        <>
+        <Route path="/peripheralAdd" element={<ProtectedRoute />}>
+          <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
+        </Route>
         <Route path="/peripheralList" element={<ProtectedRoute />}>
           <Route path="/peripheralList" element={<PeripheralsScreen />}/>
         </Route>
+        </>
       )
     }
     else{
       return(
+        <>
+        <Route path="/peripheralAdd" element={<ProtectedRoute />}>
+          <Route path="/peripheralAdd" element={<AccessDenied />}/>
+        </Route>
         <Route path="/peripheralList" element={<ProtectedRoute />}>
           <Route path="/peripheralList" element={<AccessDenied />}/>
         </Route>
+        </>
       )
     }    
   }
@@ -115,9 +126,6 @@ const Routing = () => {
     if (role === '4' || role === '3'){
       return(
         <>
-          <Route path="/peripheralAdd" element={<ProtectedRoute />}>
-            <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
-          </Route>
           {/* <Route path="/itemTicket" element={<ProtectedRoute />}>
             <Route path='/itemTicket' element={<GenerateQR />} />
           </Route> */}
@@ -160,6 +168,9 @@ const Routing = () => {
           <Route path="/userList" element={<ProtectedRoute />}>
             <Route path='/userList' element={<UserListScreen />} />
           </Route>
+          <Route path="/editUser" element={<ProtectedRoute />}>
+            <Route path='/editUser' element={<EditUserScreen />} />
+          </Route>
         </>
       )
     }
@@ -171,6 +182,9 @@ const Routing = () => {
           </Route>
           <Route path="/userList" element={<ProtectedRoute />}>
             <Route path='/userList' element={<AccessDenied />} />
+          </Route>
+          <Route path="/editUser" element={<ProtectedRoute />}>
+            <Route path='/editUser' element={<AccessDenied />} />
           </Route>
         </>
       )

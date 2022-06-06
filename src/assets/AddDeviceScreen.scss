@@ -10,11 +10,34 @@
     padding-left: 100px;
 }
 
+.editUserScreen {
+    background-color: rgb(237, 237, 237);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.all-forms {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .pageTitle {
     margin-left: 50px;
     margin-top: 50px;
     margin-bottom: 15px;
 }
+
+.pageTitleEdit {
+    margin-left: 150px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 
 .selector {
     margin-bottom: layout.$spacing-05;
@@ -24,6 +47,10 @@
 
 .between-lines {
     margin-bottom: layout.$spacing-05;
+}
+
+.roleSelection {
+    width: 18vw;
 }
 
 .between-btn {

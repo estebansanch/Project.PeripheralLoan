@@ -54,7 +54,7 @@ export default function UserListScreen() {
                             id: response.data.data[i].USER_ID,
                             email: response.data.data[i].USERNAME,
                             role: response.data.data[i].ROLE,
-                            button: <Button>Edit User</Button>
+                            button: <Link className='buttonInfo' to="/editUser" state={{userID: response.data.data[i].USER_ID, username: response.data.data[i].USERNAME}}>Edit User</Link>
                         }
                         array_requests.push(request);
                     }
@@ -105,7 +105,7 @@ export default function UserListScreen() {
                             id: response.data.data[i].USER_ID,
                             email: response.data.data[i].USERNAME,
                             role: response.data.data[i].ROLE,
-                            button: <Button>Edit User</Button>
+                            button: <Link className='buttonInfo' to="/editUser" state={{userID: response.data.data[i].USER_ID, username: response.data.data[i].USERNAME}}>Edit User</Link>
                         }
                         array_requests.push(request);
                     }
