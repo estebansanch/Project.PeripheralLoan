@@ -22,6 +22,8 @@ import {
     Dropdown
 } from 'carbon-components-react';
 
+import { Link } from "react-router-dom";
+
 export default function RequestScreen() {
 
     const [requestInfo, setRequestInfo] = useState([]);
@@ -202,7 +204,7 @@ export default function RequestScreen() {
                     for(var i = 0; i < response.data.data.length; i++){
                         console.log("REQUEST ID: ", response.data.data[i].REQUEST_ID)
                         const id = response.data.data[i].REQUEST_ID;
-                        const user_email = response.data.data[i].USERNAME;
+                        const user_email = <Link className='buttonInfoRequestRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;
                         const deviceType = response.data.data[i].device_type;
                         const brand = response.data.data[i].brand;
                         const model = response.data.data[i].model;
@@ -241,8 +243,7 @@ export default function RequestScreen() {
                     for(var i = 0; i < response.data.data.length; i++){
                         console.log("REQUEST ID: ", response.data.data[i].REQUEST_ID)
                         const id = response.data.data[i].REQUEST_ID;
-                        const user_email = response.data.data[i].USERNAME;
-                        const deviceType = response.data.data[i].device_type;
+                        const user_email = <Link className='buttonInfoRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;                        const deviceType = response.data.data[i].device_type;
                         const brand = response.data.data[i].brand;
                         const model = response.data.data[i].model;
                         const serial = response.data.data[i].serial_number;
@@ -315,8 +316,7 @@ export default function RequestScreen() {
                         for(var i = 0; i < response.data.data.length; i++){
                             console.log("REQUEST ID: ", response.data.data[i].REQUEST_ID)
                             const id = `${response.data.data[i].REQUEST_ID}`;
-                            const user_email = response.data.data[i].USERNAME;
-                            const deviceType = response.data.data[i].device_type;
+                            const user_email = <Link className='buttonInfoRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;                            const deviceType = response.data.data[i].device_type;
                             const brand = response.data.data[i].brand;
                             const model = response.data.data[i].model;
                             const serial = response.data.data[i].serial_number;
@@ -354,8 +354,7 @@ export default function RequestScreen() {
                         for(var i = 0; i < response.data.data.length; i++){
                             console.log("REQUEST ID: ", response.data.data[i].REQUEST_ID)
                             const id = `${response.data.data[i].REQUEST_ID}`;
-                            const user_email = response.data.data[i].USERNAME;
-                            const deviceType = response.data.data[i].device_type;
+                            const user_email = <Link className='buttonInfoRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;                            const deviceType = response.data.data[i].device_type;
                             const brand = response.data.data[i].brand;
                             const model = response.data.data[i].model;
                             const serial = response.data.data[i].serial_number;
@@ -425,7 +424,7 @@ export default function RequestScreen() {
                 for(var i = 0; i < response.data.data.length; i++){
                     console.log("REQUEST ID: ", response.data.data[i].REQUEST_ID)
                     const id = `${response.data.data[i].REQUEST_ID}`;
-                    const user_email = response.data.data[i].USERNAME;
+                    const user_email = <Link className='buttonInfoRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;                    
                     const deviceType = response.data.data[i].device_type;
                     const brand = response.data.data[i].brand;
                     const model = response.data.data[i].model;

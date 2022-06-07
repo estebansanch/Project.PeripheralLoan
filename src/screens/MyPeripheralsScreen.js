@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import '../assets/myPheripheralsScreen.scss'
 import axios from 'axios'
+import { useLocation } from "react-router-dom";
 import MonitorSVG from '../assets/img/device.svg'
 import MouseSVG from '../assets/img/mouse.svg'
 import HeadsetSVG from '../assets/img/headset.svg'
@@ -15,6 +16,8 @@ import jsCookie from 'js-cookie';
 const userID = jsCookie.get("id");
 
 export default function MyPeripheralsScreen() {
+    
+    const location = useLocation();
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [qrData, setQrData] = useState(-1);
@@ -24,19 +27,40 @@ export default function MyPeripheralsScreen() {
         setTimeout(async() => {
           // setIsLoading(false);
           try {
-              console.log("USERID: ", userID)
-              const params = {
-                  "userID": userID
+              console.log(location.state.USERNAME)
+              if (location.state.USERNAME) {
+                const params = {
+                    "userID": location.state.USERID
+                }
+                await axios.post('http://localhost:4000/getUserRequests', params)
+                .then(response => {
+                  console.log(response)
+                  if (response.data.data.length !== 0) {
+                    setUserData(response.data.data)
+                  }
+                  else {
+                      setUserData([])
+                  }
+                  setIsLoaded(true)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+              }else {
+                console.log("USERID: ", userID)
+                const params = {
+                    "userID": userID
+                }
+                await axios.post('http://localhost:4000/getUserRequests', params)
+                .then(response => {
+                  console.log(response)
+                  setUserData(response.data.data)
+                  setIsLoaded(true)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
               }
-              await axios.post('http://localhost:4000/getUserRequests', params)
-              .then(response => {
-                console.log(response)
-                setUserData(response.data.data)
-                setIsLoaded(true)
-              })
-              .catch(error => {
-                  console.log(error)
-              })
     
           } catch(err) {
             console.log(err)
@@ -107,7 +131,11 @@ export default function MyPeripheralsScreen() {
             <div className='myPheriperalsScreenView'>
                 <HomePageHeader />
                 <div className='pageTitle'>
-                    <h1>My Peripherals Asigned</h1>
+                    {location.state.USERNAME ? (
+                        <h1>Peripherals Asigned to user: {location.state.USERNAME}</h1>
+                    ) : (
+                        <h1>My Peripherals Asigned</h1>
+                    )}
                 </div>
                 {isLoaded ? (
 

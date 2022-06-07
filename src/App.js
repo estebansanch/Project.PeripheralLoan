@@ -70,8 +70,8 @@ const Routing = () => {
         <Route path="/mainPage" element={<ProtectedRoute />}>
           <Route path="/mainPage" element={<MainPageScreen />}/>
         </Route>
-        <Route path="/myPheripherals" element={<ProtectedRoute />}>
-          <Route path="/myPheripherals" element={<MyPeripheralsScreen />}/>
+        <Route path="/myPeripherals" element={<ProtectedRoute />}>
+          <Route path="/myPeripherals" element={<MyPeripheralsScreen />}/>
         </Route> 
       </>
     )

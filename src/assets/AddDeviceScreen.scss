@@ -16,7 +16,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 100px;
+    padding-left: 100px;
 }
 
 .all-forms {
@@ -32,13 +33,6 @@
     margin-bottom: 15px;
 }
 
-.pageTitleEdit {
-    margin-left: 150px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-
 .selector {
     margin-bottom: layout.$spacing-05;
     height: layout.$spacing-05;
@@ -47,10 +41,6 @@
 
 .between-lines {
     margin-bottom: layout.$spacing-05;
-}
-
-.roleSelection {
-    width: 18vw;
 }
 
 .between-btn {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import '../assets/AddDeviceScreen.scss';
 import HomePageHeader from './components/HomePageHeader';
 import { 
@@ -18,11 +18,21 @@ import { useLocation } from "react-router-dom";
 
 //Uninstall @carbon/layout if it doesn't compile
 export default function EditUserScreen() {
+
+    const location = useLocation();
+
+    const [selectedRole, setSelectedRole] = useState(false)
+    const [userEmail, setUserEmail] = useState("");
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [columnData, setColumnData] = useState("");
+    const [changeData, setChangeData] = useState("");
+    const [userActualID, setUserActualID] = useState(location.state.userID);
+    console.log(location)
     var dummy_state = {
         "user_params": {
-            "username": "",
-            "password": "",
-            "role": ""
+            "column": "",
+            "change": "",
+            "userID": `${location.state.userID}`
         }
     }
     function handleInputChange(event){
@@ -30,181 +40,172 @@ export default function EditUserScreen() {
         const value = target.value;
         const name = target.name;
 
+        if (name === "column") {
+            setColumnData(value)
+            if (value === "ROLE") {
+                setSelectedRole(true)
+            }
+            else {
+                setSelectedRole(false)
+            }
+        }
+
+        if (name === "change") {
+            setChangeData(value)
+        } else {
+            setChangeData("");
+        }
+
+        console.log(name)
         dummy_state["user_params"][name] = value
+
         console.log(dummy_state)
     };
 
-    async function changeEmail(){
-        await axios.post('http://localhost:4000/newUser', dummy_state)
+    async function changeUserInfo(){
+        var params = {
+            "user_params": {
+                "column": columnData,
+                "change": changeData,
+                "userID": userActualID
+            }
+        }
+        console.log(params)
+        await axios.post('http://localhost:4000/editUserInfo', params)
         .then(response => {
             console.log(response)
             console.log(response.data)
             if (response.data.message.error || response.data.success === -2){
-                alert("Error: User Couldn't Be Created")
+                alert("Error: User Couldn't Be Edited")
             }
             else {
-                alert('New User Created') 
+                alert('User Edited Successfully') 
                 window.location.reload()
             }
 
             
         })
         .catch(error => {
-          alert("Error: User Couldn't Be Created")
+          alert("Error: User request change data not working")
           console.log("Request attempt failed")
           console.log(error);
         })
     };
 
-    async function changePassword(){
-        await axios.post('http://localhost:4000/newUser', dummy_state)
-        .then(response => {
-            console.log(response)
-            console.log(response.data)
-            if (response.data.message.error || response.data.success === -2){
-                alert("Error: User Couldn't Be Created")
-            }
-            else {
-                alert('New User Created') 
-                window.location.reload()
-            }
+    React.useEffect(() => {
+        setTimeout(async () => {
+            // setIsLoading(false);
+            try {
+                await axios.post("http://localhost:4000/IDTouser", {"id": location.state.userID})
+                .then(response => {
+                    console.log(response)
+                    setUserEmail(response.data.data[0].USERNAME)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                setIsLoaded(true)
 
-            
-        })
-        .catch(error => {
-          alert("Error: User Couldn't Be Created")
-          console.log("Request attempt failed")
-          console.log(error);
-        })
-    };
-
-    async function changeRole(){
-        await axios.post('http://localhost:4000/newUser', dummy_state)
-        .then(response => {
-            console.log(response)
-            console.log(response.data)
-            if (response.data.message.error || response.data.success === -2){
-                alert("Error: User Couldn't Be Created")
+            } catch (err) {
+                console.log(err);
             }
-            else {
-                alert('New User Created') 
-                window.location.reload()
-            }
-
-            
-        })
-        .catch(error => {
-          alert("Error: User Couldn't Be Created")
-          console.log("Request attempt failed")
-          console.log(error);
-        })
-    };
-
-    const location = useLocation();
+        });
+    }, []);
     
     return(
         <>
         <div className='editUserScreen'> 
         <HomePageHeader />
             <div className='pageTitleEdit'>
-                <h1>Edit User {location.state.username}:</h1>
+                {isLoaded ? (
+                    <h1>Edit User {userEmail}:</h1>
+                ) : (
+                    <h1>Edit User :</h1>
+                )}
+                
             </div>
-            <div className='all-forms'>
-                <div className='section-form'>
-                    <FormGroup
+            <FormGroup
                     className="selector"                    
-                    legendId="add-user-id"
-                    style={{
-                        maxWidth: '400px'
-                    }}
-                    >
-                            <TextInput
-                                labelText="Edit Email."
-                                id="username"
-                                className='between-lines roleSelection'
-                                name="username"
-                                onChange={handleInputChange}
-                            />
-                            <Button
-                            id="change_useremail"
-                            onClick={changeEmail}
-                            className='between-btn'>
-                                Update
-                            </Button>
-                    </FormGroup>
-                </div>
-
-                <div className='section-form'>
-                    <FormGroup
-                    className="selector"                    
-                    legendId="add-user-id"
-                    style={{
-                        maxWidth: '400px'
-                    }}
-                    >
-                            <TextInput
-                                labelText="Edit Password."
-                                id="password"
-                                className='between-lines roleSelection'
-                                name="password"
-                                onChange={handleInputChange}
-                            />
-                            <Button
-                            id="change_userpassword"
-                            onClick={changePassword}
-                            className='between-btn'>
-                                Update
-                            </Button>
-                    </FormGroup>
-                </div>
-                <div className='section-form'>
-                    <FormGroup
-                    className="selector"                    
-                    legendId="add-user-id"
+                    legendId="editUserInfo"
                     style={{
                         maxWidth: '400px'
                     }}
                     >
                             <Select defaultValue="placeholder-item"
-                                id="role"
-                                labelText="Edit Role."
+                                id="column"
+                                labelText="Select Which Value To Edit."
                                 size="md"
-                                className='between-lines roleSelection'
-                                name="role"
+                                className='between-lines roleSelec Email.tion'
+                                name="column"
                                 onChange={handleInputChange}
                                 >
                                 <SelectItem
                                     disabled
                                     hidden
-                                    text="Choose a role"
+                                    text="Choose a value"
                                     value="placeholder-item"
                                 />
                                 <SelectItem
-                                    text="Normal User"
-                                    value="1"
+                                    text="Email"
+                                    value="USERNAME"
                                 />
                                 <SelectItem
-                                    text="Focal"
-                                    value="2"
+                                    text="Password"
+                                    value="PASSWORD"
                                 />
                                 <SelectItem
-                                    text="Security"
-                                    value="3"
-                                />
-                                <SelectItem
-                                    text="Admin"
-                                    value="4"
+                                    text="Role"
+                                    value="ROLE"
                                 />
                             </Select>
+                            {!selectedRole ? (
+                                <TextInput
+                                labelText="Edit Selected Value."
+                                id="change"
+                                className='between-lines roleSelection'
+                                name="change"
+                                onChange={handleInputChange}
+                                />
+                            ):(
+                                <Select defaultValue="placeholder-item"
+                                    id="change"
+                                    labelText="Select a Role."
+                                    size="md"
+                                    className='between-lines'
+                                    name="change"
+                                    onChange={handleInputChange}
+                                    >
+                                    <SelectItem
+                                        disabled
+                                        hidden
+                                        text="Choose a role"
+                                        value="placeholder-item"
+                                    />
+                                    <SelectItem
+                                        text="Normal User"
+                                        value="1"
+                                    />
+                                    <SelectItem
+                                        text="Focal"
+                                        value="2"
+                                    />
+                                    <SelectItem
+                                        text="Security"
+                                        value="3"
+                                    />
+                                    <SelectItem
+                                        text="Admin"
+                                        value="4"
+                                    />
+                                </Select>
+                            )}
                             <Button
                             id="change_userrole"
-                            onClick={changeRole}
+                            onClick={changeUserInfo}
                             className='between-btn'>
                                 Update
                             </Button>
                     </FormGroup>
-                </div>
-            </div>
         </div>
         </>
     )
