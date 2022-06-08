@@ -10,6 +10,7 @@ import QRCode from "react-qr-code";
 import axios from 'axios';
 import { Button } from 'carbon-components-react';
 import { useLocation } from "react-router-dom";
+import jsCookie from 'js-cookie';
 
 
 
@@ -17,6 +18,8 @@ export default function InfoScreen(){
     const location = useLocation()   
     const [peripheralInfo, setPeripheralInfo] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
+
+    const role = jsCookie.get("role");
 
     React.useEffect(() => {
       setTimeout(async() => {
@@ -40,7 +43,7 @@ export default function InfoScreen(){
               }
             }
             console.log("Param sent: ", params)
-            await axios.post('http://localhost:4000/getDeviceInfo', params)
+            await axios.post('https://rancho-back.mybluemix.net/getDeviceInfo', params)
             .then(response => {
               var route = `${response.data.data[0].DEVICE_ID}`  
               var peripheral = {
@@ -55,7 +58,7 @@ export default function InfoScreen(){
                   qrCode: <QRCode value={route} />,
                }
                setPeripheralInfo(peripheral);
-               console.log(peripheralInfo)
+               console.log(peripheral)
                setIsLoaded(true)
             })
             .catch(error => {
@@ -68,6 +71,107 @@ export default function InfoScreen(){
           }
         })
     }, [])
+
+    async function registerExit() {
+      setTimeout(async () => {
+        try {
+          const search = location.search; // returns the URL query String
+          const params2 = new URLSearchParams(search); 
+          const IdFromURL = params2.get('id');
+          if (location.state === null){
+            var params = {
+              "device_id": IdFromURL
+            }
+          }
+          else {
+            var params = {
+              "device_id": location.state.peripheralID,
+            }
+          }
+          await axios.post('https://rancho-back.mybluemix.net/registerExit', params)
+          .then(response => {
+            console.log("RESPONSE REGISTER EXIT", response)
+            if (response.data.message.error || response.data.success === -2) {
+              alert("Register Exit Not Successful")
+            }
+            else {
+              alert("Register Exit Successful")
+              window.location.reload()
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        } catch(error) {
+          console.log(error)
+        }
+      })
+    }
+
+    async function registerReturn() {
+      setTimeout(async () => {
+        try {
+          const search = location.search; // returns the URL query String
+          const params2 = new URLSearchParams(search); 
+          const IdFromURL = params2.get('id');
+          if (location.state === null){
+            var params = {
+              "device_id": IdFromURL
+            }
+          }
+          else {
+            var params = {
+              "device_id": location.state.peripheralID,
+            }
+          }
+          await axios.post('https://rancho-back.mybluemix.net/registerReturn', params)
+          .then(response => {
+            console.log("RESPONSE REGISTER RETURN", response)
+            if (response.data.message.error || response.data.success === -2) {
+              alert("Register Return Not Successful")
+            }
+            else {
+              alert("Register Return Successful")
+              window.location.reload()
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        } catch(error) {
+          console.log(error)
+        }
+      })
+    }
+
+    async function removeFromInventory() {
+      setTimeout(async () => {
+        try {
+          const search = location.search; // returns the URL query String
+          const params2 = new URLSearchParams(search); 
+          const IdFromURL = params2.get('id');
+          if (location.state === null){
+            var params = {
+              "device_id": IdFromURL
+            }
+          }
+          else {
+            var params = {
+              "device_id": location.state.peripheralID,
+            }
+          }
+          await axios.post('https://rancho-back.mybluemix.net/registerExit', params)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        } catch(error) {
+          console.log(error)
+        }
+      })
+    }
 
     return(
       <>
@@ -132,17 +236,36 @@ export default function InfoScreen(){
                     </div>
                     <div className='stateDescCol'>
                       <ul>
-                        <li>{peripheralInfo.acceptedCond === 0 ? ('Accepted') : ('Not Accepted')}</li>
-                        <li>{peripheralInfo.inCampus === 0 ? ('Not In Campus') : ('In Campus')}</li>
-                        <li>{peripheralInfo.securityAutorization === 0 ? ('Not Autorized') : ('Autorized')}</li>
+                        <li>{peripheralInfo.acceptedCond ? ('Accepted') : ('Not Accepted')}</li>
+                        <li>{peripheralInfo.inCampus ? ('In Campus') : ('Not In Campus')}</li>
+                        <li>{peripheralInfo.securityAutorization ? ('Autorized') : ('Not Autorized')}</li>
                       </ul>
                     </div>
                   </div>
                   <div className='infoButtonBox'>
-                    {peripheralInfo.inCampus === 0 ? (
-                    <Button className='inNoutButton'>Register Return</Button>) :
-                     (<Button className='inNoutButton'>Register Exit</Button>)}
-                     <Button className='delistPeriButton'>Remove from Inventory</Button>
+                     {(role === '3' || role === '4') ? (
+                       <>
+
+                      {peripheralInfo.acceptedCond? (
+                        <>
+                          {!peripheralInfo.inCampus ? (
+                          <Button className='inNoutButton' onClick={registerReturn}>Register Return</Button>
+                        ) : (
+                          <Button className='inNoutButton' onClick={registerExit}>Register Exit</Button>
+                        )}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      </>
+                     ) : (
+                       <></>
+                     )}
+                     {role === '4' ? (
+                       <Button className='delistPeriButton' onClick={removeFromInventory}>Remove from Inventory</Button>
+                     ) : (
+                       <></>
+                     )}
                   </div>
                   <div className="infoQRCode">
                     {peripheralInfo.qrCode}

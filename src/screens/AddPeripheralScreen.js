@@ -33,7 +33,7 @@ export default function AddDeviceScreen() {
     };
 
     async function newPeripheralDummy(){
-        await axios.post('http://localhost:4000/newPeripheral', dummy_state)
+        await axios.post('https://rancho-back.mybluemix.net/newPeripheral', dummy_state)
         .then(response => {
             console.log(response)
             console.log(response.data)
@@ -99,33 +99,13 @@ export default function AddDeviceScreen() {
                                 value="keyboard"
                             />
                         </Select>
-                        <Select defaultValue="placeholder-item"
+                        <TextInput
+                            labelText="Type the Brand."
                             id="brand"
-                            labelText="Select a Brand."
-                            size="md"
                             className='between-lines'
                             name="brand"
                             onChange={handleInputChange}
-                            >
-                            <SelectItem
-                                disabled
-                                hidden
-                                text="Choose a brand"
-                                value="placeholder-item"
-                            />
-                            <SelectItem
-                                text="Vorago"
-                                value="vorago"
-                            />
-                            <SelectItem
-                                text="Apple"
-                                value="apple"
-                            />
-                            <SelectItem
-                                text="Samsung"
-                                value="samsung"
-                            />
-                        </Select>
+                        />
                         <TextInput
                             labelText="Type the Model."
                             id="model"

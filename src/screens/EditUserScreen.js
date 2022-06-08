@@ -71,7 +71,7 @@ export default function EditUserScreen() {
             }
         }
         console.log(params)
-        await axios.post('http://localhost:4000/editUserInfo', params)
+        await axios.post('https://rancho-back.mybluemix.net/editUserInfo', params)
         .then(response => {
             console.log(response)
             console.log(response.data)
@@ -96,7 +96,7 @@ export default function EditUserScreen() {
         setTimeout(async () => {
             // setIsLoading(false);
             try {
-                await axios.post("http://localhost:4000/IDTouser", {"id": location.state.userID})
+                await axios.post("https://rancho-back.mybluemix.net/IDTouser", {"id": location.state.userID})
                 .then(response => {
                     console.log(response)
                     setUserEmail(response.data.data[0].USERNAME)

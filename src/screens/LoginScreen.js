@@ -18,13 +18,13 @@ export default function LoginScreen() {
 
 
   async function validateLogin(){
-    await axios.get('http://localhost:4000/checkLogin', {params: {username: username, password: password}})
+    await axios.get('https://rancho-back.mybluemix.net/checkLogin', {params: {username: username, password: password}})
     .then(response => {
-      if (response.data.data.length > 0){
-        Auth.setAuth(true)
-        jsCookie.set("id", response.data.data[0].USER_ID)
-        jsCookie.set("user", response.data.data[0].USERNAME)
-        jsCookie.set("role", response.data.data[0].ROLE)
+      if (response.data.data.valid){
+          Auth.setAuth(true)
+          jsCookie.set("id", response.data.data.USER_ID)
+          jsCookie.set("user", response.data.data.USERNAME)
+          jsCookie.set("role", response.data.data.ROLE)
       }
       else {
         setErrorLogin(true);

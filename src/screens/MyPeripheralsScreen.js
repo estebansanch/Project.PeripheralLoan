@@ -17,22 +17,47 @@ const userID = jsCookie.get("id");
 
 export default function MyPeripheralsScreen() {
     
-    const location = useLocation();
+    const [location, setLocation] = useState(useLocation());
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [qrData, setQrData] = useState(-1);
     const [userData, setUserData] = useState([]);
+    const [isMyPeripheral, setIsMyPeripheral] = useState();
+
+    async function getMyPeripherals () {
+        setTimeout(async() => {
+            // setIsLoading(false);
+            try {
+                setIsMyPeripheral(true);
+                console.log("USERID: ", userID)
+                const params = {
+                    "userID": userID
+                }
+                await axios.post('https://rancho-back.mybluemix.net/getUserRequests', params)
+                .then(response => {
+                console.log(response)
+                setUserData(response.data.data)
+                setIsLoaded(true)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            } catch(err) {
+              console.log(err)
+            }
+          });
+    }
 
     React.useEffect(() => {
         setTimeout(async() => {
           // setIsLoading(false);
           try {
-              console.log(location.state.USERNAME)
-              if (location.state.USERNAME) {
+              if (location.state !== null) {
+                setIsMyPeripheral(false);
                 const params = {
                     "userID": location.state.USERID
                 }
-                await axios.post('http://localhost:4000/getUserRequests', params)
+                await axios.post('https://rancho-back.mybluemix.net/getUserRequests', params)
                 .then(response => {
                   console.log(response)
                   if (response.data.data.length !== 0) {
@@ -47,11 +72,12 @@ export default function MyPeripheralsScreen() {
                     console.log(error)
                 })
               }else {
+                setIsMyPeripheral(true);
                 console.log("USERID: ", userID)
                 const params = {
                     "userID": userID
                 }
-                await axios.post('http://localhost:4000/getUserRequests', params)
+                await axios.post('https://rancho-back.mybluemix.net/getUserRequests', params)
                 .then(response => {
                   console.log(response)
                   setUserData(response.data.data)
@@ -130,33 +156,36 @@ export default function MyPeripheralsScreen() {
             )}
             <div className='myPheriperalsScreenView'>
                 <HomePageHeader />
-                <div className='pageTitle'>
-                    {location.state.USERNAME ? (
-                        <h1>Peripherals Asigned to user: {location.state.USERNAME}</h1>
-                    ) : (
-                        <h1>My Peripherals Asigned</h1>
-                    )}
-                </div>
                 {isLoaded ? (
-
+                    <>
+                    <div className='pageTitle'>
+                        {!isMyPeripheral ? (
+                            <div className='header-title-to-user'>
+                                <h1>Peripherals Assigned to user: {location.state.USERNAME}</h1>
+                                <Button className='button-change-user' onClick={() => {setLocation(null); setIsMyPeripheral(true); getMyPeripherals()}}>Return to My Personal Peripherals</Button>
+                            </div>
+                        ) : (
+                            <h1>My Peripherals Assigned</h1>
+                        )}
+                    </div>
                     <div className='peripherals-assigned-view'>
                         {userData.map((data) => (             
                             <div className='peripheral-item'>
                                 <div className='peripheral-img-view'>
                                     {data.device_type === 'monitor' ? (
                                         <img src={MonitorSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
-                                    ) : (<></>)}
+                                        ) : (<></>)}
 
                                     {data.device_type === 'headset' ? (
                                         <img src={HeadsetSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
-                                    ) : (<></>)}
+                                        ) : (<></>)}
 
                                     {data.device_type === 'keyboard' ? (
                                         <img src={KeyboardSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
-                                    ) : (<></>)}
+                                        ) : (<></>)}
                                     {data.device_type === 'mouse' ? (
                                         <img src={MouseSVG} id='PeripheralPhoto' alt='PeripheralPhoto' className='peripheral-img' />
-                                    ) : (<></>)}
+                                        ) : (<></>)}
                                 </div>
                                 <div className='peripheral-type-view'>
                                     <p className='peripheral-type'>{data.device_type}</p>
@@ -183,12 +212,13 @@ export default function MyPeripheralsScreen() {
                                     <Button className='peri-button' onClick={() => openQr(`${data.DEVICE_ID}`)}>Open QR Code for Scaner Page</Button>
                                 </div>
                                 <div className='peripheral-qr-button'>
-                                    <Button className='peri-button' onClick={() => openQr(`http://YOURPERSONALIPWHILEDOINGDEVELOPING:3000/info?id=${data.DEVICE_ID}`)}>Open QR Code for Mobile Scanner</Button>
+                                    <Button className='peri-button' onClick={() => openQr(`https://rancho-back.mybluemix.net/info?id=${data.DEVICE_ID}`)}>Open QR Code for Mobile Scanner</Button>
                                 </div>
                             </div>
                         ))}
                     </div>
                     
+                </>
 
                 ) : (
                     <div>
@@ -198,8 +228,8 @@ export default function MyPeripheralsScreen() {
 
             </div>
         </>
-    )
-}
+        )
+    }
 
 
 

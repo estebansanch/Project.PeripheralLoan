@@ -197,14 +197,14 @@ export default function RequestScreen() {
             console.log("params:", params)
             console.log("CURRENT STATUS UPDATE: ", currentStatus)
             if (currentStatus === "Pending") {
-                await axios.post('http://localhost:4000/getRequests', params)
+                await axios.post('https://rancho-back.mybluemix.net/getRequests', params)
                 .then(response => {
                     console.log(response)
                     var array_requests = [];
                     for(var i = 0; i < response.data.data.length; i++){
                         console.log("REQUEST ID: ", response.data.data[i].REQUEST_ID)
                         const id = response.data.data[i].REQUEST_ID;
-                        const user_email = <Link className='buttonInfoRequestRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;
+                        const user_email = <Link className='buttonInfoRequest' to="/myPeripherals" state={{USERNAME: response.data.data[i].USERNAME, USERID: response.data.data[i].USER_ID}}>{response.data.data[i].USERNAME}</Link>;
                         const deviceType = response.data.data[i].device_type;
                         const brand = response.data.data[i].brand;
                         const model = response.data.data[i].model;
@@ -236,7 +236,7 @@ export default function RequestScreen() {
                     console.log(error)
                 })
             } else {
-                await axios.post('http://localhost:4000/getRequests', params)
+                await axios.post('https://rancho-back.mybluemix.net/getRequests', params)
                 .then(response => {
                     console.log(response)
                     var array_requests = [];
@@ -289,7 +289,7 @@ export default function RequestScreen() {
                 setIsLoaded(false);
                 setCurrentStatus(statusSelect.selectedItem); 
                 console.log("STATUS SELECT CHANGE: ", statusSelect)
-                const responseCount = await axios.post('http://localhost:4000/countRequests', {"STATUS": statusSelect.selectedItem})
+                const responseCount = await axios.post('https://rancho-back.mybluemix.net/countRequests', {"STATUS": statusSelect.selectedItem})
                 .then(response => {
                     setCount(response.data.data.count)
                     return response.data.data.count
@@ -309,7 +309,7 @@ export default function RequestScreen() {
                     "page": 1
                 }
                 if (statusSelect.selectedItem === "Pending") {
-                    await axios.post('http://localhost:4000/getRequests', params)
+                    await axios.post('https://rancho-back.mybluemix.net/getRequests', params)
                     .then(response => {
                         console.log(response)
                         var array_requests = [];
@@ -347,7 +347,7 @@ export default function RequestScreen() {
                         console.log(error)
                     })
                 } else {
-                    await axios.post('http://localhost:4000/getRequests', params)
+                    await axios.post('https://rancho-back.mybluemix.net/getRequests', params)
                     .then(response => {
                         console.log(response)
                         var array_requests = [];
@@ -395,7 +395,7 @@ export default function RequestScreen() {
         setTimeout(async() => {
           // setIsLoading(false);
           try {
-            const responseCount = await axios.post('http://localhost:4000/countRequests', {"STATUS": "Pending"})
+            const responseCount = await axios.post('https://rancho-back.mybluemix.net/countRequests', {"STATUS": "Pending"})
             .then(response => {
                 setCount(response.data.data.count)
                 return response.data.data.count
@@ -417,7 +417,7 @@ export default function RequestScreen() {
             }
             console.log("params:", params)
 
-            await axios.post('http://localhost:4000/getRequests', params)
+            await axios.post('https://rancho-back.mybluemix.net/getRequests', params)
             .then(response => {
                 console.log("RESPONSE GET DATA: ", response)
                 var array_requests = [];
@@ -469,7 +469,7 @@ export default function RequestScreen() {
             try {
                 console.log("Request accepted")
                 console.log("Request Accept Data: ", id)
-                await axios.post('http://localhost:4000/acceptRequest', {"request_id": id, "device_id": device_id})
+                await axios.post('https://rancho-back.mybluemix.net/acceptRequest', {"request_id": id, "device_id": device_id})
                 .then(response => {
                     console.log(response)
                     if (response.data.message.error || response.data.success === -2){
@@ -494,7 +494,7 @@ export default function RequestScreen() {
             try {
                 console.log("Request rejected")
                 console.log("Request Reject Data: ", id)
-                await axios.post('http://localhost:4000/rejectRequest', {"request_id": id, "device_id": device_id})
+                await axios.post('https://rancho-back.mybluemix.net/rejectRequest', {"request_id": id, "device_id": device_id})
                 .then(response => {
                     console.log(response)
                     if (response.data.message.error || response.data.success === -2){

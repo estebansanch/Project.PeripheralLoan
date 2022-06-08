@@ -94,7 +94,7 @@ export default function DevicesScreen() {
           "page": page
         }
         console.log("params:", params)
-        await axios.post('http://localhost:4000/getDevices', params)
+        await axios.post('https://rancho-back.mybluemix.net/getDevices', params)
         .then(response => {
             console.log(response.data.data)
             console.log("length of data", response.data.data.length)
@@ -187,7 +187,7 @@ export default function DevicesScreen() {
     setTimeout(async() => {
       // setIsLoading(false);
       try {
-        const responseCount = await axios.get('http://localhost:4000/countDevices')
+        const responseCount = await axios.get('https://rancho-back.mybluemix.net/countDevices')
         .then(response => {
             setCount(response.data.data.count)
             return response.data.data.count
@@ -206,7 +206,7 @@ export default function DevicesScreen() {
           "page": 1
         }
         console.log("params:", params)
-        await axios.post('http://localhost:4000/getDevices', params)
+        await axios.post('https://rancho-back.mybluemix.net/getDevices', params)
         .then(response => {
             console.log(response.data.data)
             console.log("length of data", response.data.data.length)
@@ -287,7 +287,7 @@ async function windowRequest(objects) {
         paramsCheckAvailability.push(currentJson)
       }
       console.log("params Check Device Availability", paramsCheckAvailability)
-      await axios.post('http://localhost:4000/checkDeviceAvailability', paramsCheckAvailability)
+      await axios.post('https://rancho-back.mybluemix.net/checkDeviceAvailability', paramsCheckAvailability)
       .then(response => {
         setTimeout(async() => {
           try {
@@ -345,7 +345,7 @@ async function addToList2(){
         "username": requestEmailInput
       }
       
-      await axios.post('http://localhost:4000/userToID', params)
+      await axios.post('https://rancho-back.mybluemix.net/userToID', params)
       .then(response => {
         setTimeout(async() => {
           try {
@@ -361,7 +361,7 @@ async function addToList2(){
                 }
                 paramsNewRequest.push(currentJson)
               }
-              await axios.post('http://localhost:4000/newRequest', paramsNewRequest)
+              await axios.post('https://rancho-back.mybluemix.net/newRequest', paramsNewRequest)
               .then(response => {
 
                 console.log("send request worked")
@@ -409,7 +409,7 @@ async function addToList(objects) {
         paramsCheckAvailability.push(currentJson)
       }
       console.log("params Check Device Availability", paramsCheckAvailability)
-      await axios.post('http://localhost:4000/checkDeviceAvailability', paramsCheckAvailability)
+      await axios.post('https://rancho-back.mybluemix.net/checkDeviceAvailability', paramsCheckAvailability)
       .then(response => {
         setTimeout(async() => {
           try {
@@ -449,7 +449,7 @@ async function addToList(objects) {
                 paramsNewRequest.push(currentJson)
               }
               console.log("params Send Request", paramsNewRequest)
-              await axios.post('http://localhost:4000/newRequest', paramsNewRequest)
+              await axios.post('https://rancho-back.mybluemix.net/newRequest', paramsNewRequest)
               .then(response => {
                 console.log("send request worked")
                 console.log(response)

@@ -99,9 +99,6 @@ const Routing = () => {
     if (role === '4' || role === '2'){
       return(
         <>
-        <Route path="/peripheralAdd" element={<ProtectedRoute />}>
-          <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
-        </Route>
         <Route path="/peripheralList" element={<ProtectedRoute />}>
           <Route path="/peripheralList" element={<PeripheralsScreen />}/>
         </Route>
@@ -111,9 +108,6 @@ const Routing = () => {
     else{
       return(
         <>
-        <Route path="/peripheralAdd" element={<ProtectedRoute />}>
-          <Route path="/peripheralAdd" element={<AccessDenied />}/>
-        </Route>
         <Route path="/peripheralList" element={<ProtectedRoute />}>
           <Route path="/peripheralList" element={<AccessDenied />}/>
         </Route>
@@ -171,6 +165,9 @@ const Routing = () => {
           <Route path="/editUser" element={<ProtectedRoute />}>
             <Route path='/editUser' element={<EditUserScreen />} />
           </Route>
+          <Route path="/peripheralAdd" element={<ProtectedRoute />}>
+            <Route path="/peripheralAdd" element={<AddPeripheralScreen />}/>
+          </Route>
         </>
       )
     }
@@ -185,6 +182,9 @@ const Routing = () => {
           </Route>
           <Route path="/editUser" element={<ProtectedRoute />}>
             <Route path='/editUser' element={<AccessDenied />} />
+          </Route>
+          <Route path="/peripheralAdd" element={<ProtectedRoute />}>
+            <Route path="/peripheralAdd" element={<AccessDenied />}/>
           </Route>
         </>
       )

@@ -46,7 +46,7 @@ export default function UserListScreen() {
                     page: page,
                 };
                 console.log("params:", params);
-                await axios.post('http://localhost:4000/users', params)
+                await axios.post('https://rancho-back.mybluemix.net/users', params)
                 .then(response => {
                     var array_requests = [];
                     for (var i = 0; i < response.data.data.length; i++){
@@ -77,7 +77,7 @@ export default function UserListScreen() {
         setTimeout(async () => {
             // setIsLoading(false);
             try {
-                const responseCount = await axios.get("http://localhost:4000/countUsers")
+                const responseCount = await axios.get("https://rancho-back.mybluemix.net/countUsers")
                     .then((response) => {
                         console.log(response.data.data.count)
                         setCount(response.data.data.count);
@@ -97,7 +97,7 @@ export default function UserListScreen() {
                     page: 1,
                 };
                 console.log("params:", params);
-                await axios.post('http://localhost:4000/users', params)
+                await axios.post('https://rancho-back.mybluemix.net/users', params)
                 .then(response => {
                     var array_requests = [];
                     for (var i = 0; i < response.data.data.length; i++){

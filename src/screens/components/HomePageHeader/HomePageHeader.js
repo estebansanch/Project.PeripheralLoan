@@ -15,9 +15,9 @@ export default function HomePageHeader() {
     
 
     function signOut() {
-        jsCookie.remove('user', { path: "/" });
+        jsCookie.remove('id', { path: "/" });
         jsCookie.remove('role', { path: "/" });
-        jsCookie.remove('username', { path: "/" });
+        jsCookie.remove('user', { path: "/" });
         localStorage.clear();
         window.location.href='/';
     }

@@ -83,6 +83,15 @@
     margin-right: 10px;
 }
 
+.header-title-to-user {
+    display: flex;
+    flex-direction: row;
+}
+
+.button-change-user {
+    margin-left: 25px;
+}
+
 .peripheral-info-left-special {
     font-size: 1.2vw;
     margin: 10px 0;

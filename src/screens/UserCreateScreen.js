@@ -32,7 +32,7 @@ export default function UserCreateScreen() {
     };
 
     async function newUserDummy(){
-        await axios.post('http://localhost:4000/newUser', dummy_state)
+        await axios.post('https://rancho-back.mybluemix.net/newUser', dummy_state)
         .then(response => {
             console.log(response)
             console.log(response.data)
