@@ -231,14 +231,14 @@ export default function InfoScreen(){
                       <ul>
                         <li>Condition</li>
                         <li>Availability</li>
-                        <li>Autorization</li>
+                        <li>Authorization</li>
                       </ul>
                     </div>
                     <div className='stateDescCol'>
                       <ul>
                         <li>{peripheralInfo.acceptedCond ? ('Accepted') : ('Not Accepted')}</li>
                         <li>{peripheralInfo.inCampus ? ('In Campus') : ('Not In Campus')}</li>
-                        <li>{peripheralInfo.securityAutorization ? ('Autorized') : ('Not Autorized')}</li>
+                        <li>{peripheralInfo.securityAutorization ? ('Authorized') : ('Not Authorized')}</li>
                       </ul>
                     </div>
                   </div>
@@ -315,7 +315,7 @@ export default function InfoScreen(){
                 <ul>
                   <li>Condition</li>
                   <li>Availability</li>
-                  <li>Autorization</li>
+                  <li>Authorization</li>
                 </ul>
               </div>
               <div className='stateDescCol'>

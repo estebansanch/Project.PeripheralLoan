@@ -110,7 +110,7 @@ export default function DevicesScreen() {
                 serial: response.data.data[i].serial_number,
                 acceptedCond: response.data.data[i].conditions_accepted ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
-                securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+                securityauthorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
                 button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].DEVICE_ID}}>Peripheral Info</Link>,
               }
@@ -155,7 +155,7 @@ export default function DevicesScreen() {
             serial: response.data.data[i].serial_number,
             acceptedCond: response.data.data[i].conditions_accepted ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
             inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
-            securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+            securityauthorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
             button: <Button>Log Device Output</Button>,
           }
           array_peripherals.push(peripheral);
@@ -221,7 +221,7 @@ export default function DevicesScreen() {
                 serial: response.data.data[i].serial_number,
                 acceptedCond: response.data.data[i].conditions_accepted ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 inCampus: response.data.data[i].in_campus ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
-                securityAutorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+                securityauthorization: response.data.data[i].Security_Auth ? <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/> : <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
                 deviceStatus: response.data.data[i].device_state,
                 button: <Link className='buttonInfo' to="/info" state={{peripheralID: response.data.data[i].DEVICE_ID}}>Peripheral Info</Link>,
               }
@@ -532,8 +532,8 @@ const headers = [
         header: 'In Campus?',
     },
     {
-        key: 'securityAutorization',
-        header: 'Secutiry Autorization',
+        key: 'securityauthorization',
+        header: 'Secutiry Authorization',
     },
     {
         key: 'deviceStatus',
@@ -746,7 +746,7 @@ const rows = [
       serial: 'ZWDTHTQCA00028BN',
       acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
       inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-      securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+      securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
       button: <Button>Log Device Output</Button>,
     },
     {
@@ -757,7 +757,7 @@ const rows = [
       serial: 'ZWDTHTQCA00028BN',
       acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
       inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-      securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+      securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
       button: <Button>Log Device Output</Button>,
     },
     {
@@ -768,7 +768,7 @@ const rows = [
       serial: 'ZWDTHTQCA00028BN',
       acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
       inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-      securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+      securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
       button: <Button>Log Device Output</Button>,
     },
     {
@@ -779,7 +779,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -790,7 +790,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -801,7 +801,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -812,7 +812,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -823,7 +823,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -834,7 +834,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -845,7 +845,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -856,7 +856,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -867,7 +867,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -878,7 +878,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -889,7 +889,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -900,7 +900,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -911,7 +911,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -922,7 +922,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -933,7 +933,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -944,7 +944,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       {
@@ -955,7 +955,7 @@ const rows = [
         serial: 'ZWDTHTQCA00028BN',
         acceptedCond: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         inCampus: <img src={TickGreenCircle} alt="iconCircle" className='iconCircle'/>,
-        securityAutorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
+        securityauthorization: <img src={CrossRedCircle} alt="iconCircle" className='iconCircle'/>,
         button: <Button>Log Device Output</Button>,
       },
       

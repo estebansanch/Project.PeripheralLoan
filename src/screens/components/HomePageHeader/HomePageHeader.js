@@ -95,7 +95,7 @@ export default function HomePageHeader() {
                 <SideNavMenu renderIcon={DotMark32} title="PERIPHERALS">
                     {(role === '4' || role === '2') ? (
                         <SideNavMenuItem href="/peripheralList">
-                        Periféricos
+                        Peripherals
                         </SideNavMenuItem>
                     ): (<></>)}
                     {/* <SideNavMenuItem href="">
