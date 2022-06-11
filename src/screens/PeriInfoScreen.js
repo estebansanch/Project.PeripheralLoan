@@ -45,7 +45,7 @@ export default function InfoScreen(){
             console.log("Param sent: ", params)
             await axios.post('https://rancho-back.mybluemix.net/getDeviceInfo', params)
             .then(response => {
-              var route = `${response.data.data[0].DEVICE_ID}`  
+              var route = `${location.pathname}?id=${response.data.data[0].DEVICE_ID}` 
               var peripheral = {
                   id: response.data.data[0].DEVICE_ID,
                   deviceType: response.data.data[0].device_type,

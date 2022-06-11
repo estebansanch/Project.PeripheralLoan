@@ -9,7 +9,7 @@ export default function ReaderQR(){
     const handleScan = data => {
         if (data) {
             setQrscan(data)
-           window.location.href = `http://localhost:3000/info?id=${data}`;
+           window.location.href = data;
         }
     }
     const handleError = err => {
